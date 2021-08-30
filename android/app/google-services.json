@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "305072997566",
+    "project_id": "convene-6b9e3",
+    "storage_bucket": "convene-6b9e3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:305072997566:android:e45c4b68846e9fb9bd4aef",
+        "android_client_info": {
+          "package_name": "com.example.conveneapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "305072997566-h8tohpiedka0ooefai07mqpcq06t9u88.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.conveneapp",
+            "certificate_hash": "3b5f4a120ca19b515aee3757fa26035b1a908254"
+          }
+        },
+        {
+          "client_id": "305072997566-1n2mdi4fkrcf2r3aaup36hl0h751rp0m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAHWiyNOTdVq2QbH2VM3pW770ewhpgXCjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "305072997566-1n2mdi4fkrcf2r3aaup36hl0h751rp0m.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
