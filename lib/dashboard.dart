@@ -1,4 +1,5 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
+import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -11,10 +12,25 @@ class Dashboard extends ConsumerStatefulWidget {
 
 class _DashboardState extends ConsumerState<Dashboard> {
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Hi Tadas"),
+        title: ref.watch(currentUserController).when(
+          data: (data) {
+            return Text("Hi ${data.name}");
+          },
+          loading: () {
+            return const Text("loading");
+          },
+          error: (error, stack) {
+            return const Text("error");
+          },
+        ),
         actions: [
           IconButton(
             onPressed: () => AuthApi().signOut(),

@@ -1,16 +1,19 @@
-class User {
+class LocalUser {
   final String uid;
   final String email;
+  final String? name;
 
-  const User(this.uid, this.email);
+  const LocalUser({required this.uid, required this.email, this.name});
 
-  User copyWith({
+  LocalUser copyWith({
     String? uid,
     String? email,
+    String? name,
   }) {
-    return User(
-      uid ?? this.uid,
-      email ?? this.email,
+    return LocalUser(
+      uid: uid ?? this.uid,
+      email: email ?? this.email,
+      name: name ?? this.name,
     );
   }
 }

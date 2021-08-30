@@ -6,10 +6,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 const String nullUid = "nouser";
 const String nullEmail = "nouser";
 
-final currentUserController = StreamProvider<User>((ref) {
-  return AuthApi().currentUser().map((user) => User(
-        user?.uid ?? nullUid,
-        user?.email ?? nullEmail,
+final currentUserController = StreamProvider<LocalUser>((ref) {
+  return AuthApi().currentUser().map((user) => LocalUser(
+        uid: user?.uid ?? nullUid,
+        email: user?.email ?? nullEmail,
+        name: user?.displayName,
       ));
 });
 

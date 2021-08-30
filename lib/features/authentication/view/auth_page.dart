@@ -1,7 +1,9 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
+import 'package:conveneapp/apis/firebase/user.dart';
 import 'package:conveneapp/core/button.dart';
 import 'package:conveneapp/core/text.dart';
 import 'package:conveneapp/theme/palette.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class AuthPage extends StatelessWidget {
@@ -50,7 +52,14 @@ class GoogleButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BigButton(
-      onPressed: () => AuthApi().signIn(),
+      onPressed: () async {
+        UserCredential user = await AuthApi().signIn();
+        await UserApi().addUser(
+          uid: user.user!.uid,
+          email: user.user!.email!,
+          name: user.user!.displayName,
+        );
+      },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
         child: Row(
