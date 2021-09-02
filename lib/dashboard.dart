@@ -1,5 +1,6 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
+import 'package:conveneapp/features/search/view/search.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -44,7 +45,9 @@ class _DashboardState extends ConsumerState<Dashboard> {
         child: Text("dashboard"),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.push(context, MaterialPageRoute(builder: (context) => const SearchPage()));
+        },
         child: const Icon(Icons.add),
       ),
     );

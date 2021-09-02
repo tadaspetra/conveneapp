@@ -21,6 +21,7 @@ environment:
   sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
+  books_finder: ^4.1.0
   cloud_firestore: ^2.5.1
   cupertino_icons: ^1.0.2
   firebase_auth: ^3.1.0
