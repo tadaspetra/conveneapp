@@ -39,7 +39,17 @@ class _AppState extends ConsumerState<AppNavigator> {
             case AuthState.notAuthenticated:
               return const AuthPage();
             case AuthState.authenticated:
-              return const Dashboard();
+              return ref.watch(currentUserController).when(
+                data: (data) {
+                  return Dashboard(user: data);
+                },
+                loading: () {
+                  return const LoadingPage();
+                },
+                error: (error, stack) {
+                  return const AuthPage();
+                },
+              );
           }
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingPage();

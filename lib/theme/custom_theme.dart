@@ -7,7 +7,6 @@ class CustomTheme {
     final theme = Theme.of(context);
     return ThemeData(
       primaryColor: Palette.niceBlack,
-      accentColor: Palette.niceBlack,
       scaffoldBackgroundColor: Palette.niceWhite,
       primaryTextTheme: theme.primaryTextTheme.apply(
         displayColor: Palette.niceBlack,
@@ -30,11 +29,8 @@ class CustomTheme {
             displayColor: Palette.niceBlack,
             bodyColor: Palette.niceBlack,
           ),
-      textButtonTheme: TextButtonThemeData(
-        style: TextButton.styleFrom(
-          backgroundColor: Palette.niceBlack,
-        ),
-      ),
+      colorScheme:
+          ColorScheme.fromSwatch().copyWith(secondary: Palette.niceBlack),
     );
   }
 }
