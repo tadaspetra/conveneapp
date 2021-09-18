@@ -24,6 +24,7 @@ dependencies:
   books_finder: ^4.1.0
   cloud_firestore: ^2.5.1
   cupertino_icons: ^1.0.2
+  firebase_analytics: ^8.3.2
   firebase_auth: ^3.1.0
   firebase_core: ^1.6.0
   flutter:
