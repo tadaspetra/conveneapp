@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-824293458/android.cloud_firestore.iml" filepath="$PROJECT_DIR$/.idea/modules/-824293458/android.cloud_firestore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1967088489/android.firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/1967088489/android.firebase_auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1428384227/android.firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/1428384227/android.firebase_core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1559126326/android.google_sign_in.iml" filepath="$PROJECT_DIR$/.idea/modules/1559126326/android.google_sign_in.iml" />
+    </modules>
+  </component>
+</project>
