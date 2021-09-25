@@ -14,11 +14,11 @@
       },
       "oauth_client": [
         {
-          "client_id": "305072997566-4uund672ftr2prsdubqjehp99fh8koa8.apps.googleusercontent.com",
+          "client_id": "305072997566-plakbrmv12skesgc4m31fnm25vrkgvql.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.convene.conveneapp",
-            "certificate_hash": "927f1b68265ae4a7aec18a578c1fe06337cbae7a"
+            "certificate_hash": "516d2698660a8cc976b2093f47335917e672180a"
           }
         },
         {
