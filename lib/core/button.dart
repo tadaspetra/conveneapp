@@ -5,7 +5,8 @@ class BigButton extends StatelessWidget {
   final Widget child;
   final VoidCallback? onPressed;
 
-  const BigButton({Key? key, required this.child, required this.onPressed}) : super(key: key);
+  const BigButton({Key? key, required this.child, required this.onPressed})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
