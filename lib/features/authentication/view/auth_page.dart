@@ -10,7 +10,8 @@ import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
 class AuthPage extends StatelessWidget {
   final bool appleSignInAvailable;
-  const AuthPage({Key? key, required this.appleSignInAvailable}) : super(key: key);
+  const AuthPage({Key? key, required this.appleSignInAvailable})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -79,9 +80,11 @@ class GoogleButton extends StatelessWidget {
             name: user.user!.displayName,
           );
         } on PlatformException catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message.toString())));
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e.message.toString())));
         } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e.toString())));
         }
       },
       child: Padding(
