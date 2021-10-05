@@ -16,7 +16,7 @@ class BookCard extends ConsumerWidget {
     TextEditingController currentPage =
         TextEditingController(text: book.currentPage.toString());
 
-    bool isStringANumber(String string) {
+    bool isStringANumber(String? string) {
       // Null or empty string is not a number
       if (string == null || string.isEmpty) {
         return false;
