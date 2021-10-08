@@ -46,6 +46,3 @@ jobs:
 
       - name: Run Tests
         run: flutter test
-
-      - name: Build iOS App
-        run: flutter build ios --no-codesign
