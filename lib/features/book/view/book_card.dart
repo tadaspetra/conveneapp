@@ -138,9 +138,9 @@ class BookCard extends ConsumerWidget {
                                         currentPage:
                                             int.parse(currentPage.text)));
                             return data.uid;
-                          }, loading: () {
+                          }, loading: (user) {
                             return currentPage.text;
-                          }, error: (err, stack) {
+                          }, error: (err, stack, user) {
                             return "0";
                           });
                         }),

@@ -22,7 +22,7 @@ class CurrentBookList extends StateNotifier<AsyncValue<List<BookModel>>> {
       final List<BookModel> books = await BookApi().getCurrentBooks(uid: uid);
       state = AsyncData(books);
     } catch (e, st) {
-      throw AsyncError<Exception>(e, st);
+      throw AsyncError<Exception>(e, stackTrace: st);
     }
   }
 
@@ -32,7 +32,7 @@ class CurrentBookList extends StateNotifier<AsyncValue<List<BookModel>>> {
       final List<BookModel> books = await BookApi().getCurrentBooks(uid: uid);
       state = AsyncData(books);
     } catch (e, st) {
-      throw AsyncError<Exception>(e, st);
+      throw AsyncError<Exception>(e, stackTrace: st);
     }
   }
 
@@ -42,7 +42,7 @@ class CurrentBookList extends StateNotifier<AsyncValue<List<BookModel>>> {
       final List<BookModel> books = await BookApi().getCurrentBooks(uid: uid);
       state = AsyncData(books);
     } catch (e, st) {
-      throw AsyncError<Exception>(e, st);
+      throw AsyncError<Exception>(e, stackTrace: st);
     }
   }
 
@@ -52,7 +52,7 @@ class CurrentBookList extends StateNotifier<AsyncValue<List<BookModel>>> {
       final List<BookModel> books = await BookApi().getCurrentBooks(uid: uid);
       state = AsyncData(books);
     } catch (e, st) {
-      throw AsyncError<Exception>(e, st);
+      throw AsyncError<Exception>(e, stackTrace: st);
     }
   }
 
@@ -62,7 +62,7 @@ class CurrentBookList extends StateNotifier<AsyncValue<List<BookModel>>> {
       final List<BookModel> books = await BookApi().getCurrentBooks(uid: uid);
       state = AsyncData(books);
     } catch (e, st) {
-      throw AsyncError<Exception>(e, st);
+      throw AsyncError<Exception>(e, stackTrace: st);
     }
   }
 }

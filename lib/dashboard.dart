@@ -109,13 +109,14 @@ class _DashboardState extends ConsumerState<Dashboard> {
       body: CustomScrollView(
         slivers: [
           ref.watch(currentBooksController(widget.user.uid)).when(
-            error: (Object error, StackTrace? stackTrace) {
+            error: (Object error, StackTrace? stackTrace,
+                AsyncData<List<BookModel>>? bookList) {
               return SliverList(
                 delegate: SliverChildListDelegate(
                     [const Text("Error retrieving books")]),
               );
             },
-            loading: () {
+            loading: (AsyncValue<List<BookModel>>? bookList) {
               return SliverList(
                 delegate: SliverChildListDelegate(
                     [const Center(child: CircularProgressIndicator())]),
@@ -224,10 +225,10 @@ class _DashboardState extends ConsumerState<Dashboard> {
                     .read(currentBooksController(data.uid).notifier)
                     .addBook(book: bookToAdd);
               },
-              loading: () {
+              loading: (user) {
                 return const Text("loading");
               },
-              error: (error, stack) {
+              error: (error, stack, user) {
                 return const Text("error");
               },
             );

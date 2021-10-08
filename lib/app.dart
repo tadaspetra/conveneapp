@@ -62,10 +62,10 @@ class _AppState extends ConsumerState<AppNavigator> {
                 data: (data) {
                   return Dashboard(user: data);
                 },
-                loading: () {
+                loading: (user) {
                   return const LoadingPage();
                 },
-                error: (error, stack) {
+                error: (error, stack, user) {
                   return FutureBuilder(
                     future: _appleSignInAvailable,
                     builder:
