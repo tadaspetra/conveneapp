@@ -6,10 +6,6 @@
 name: Flutter
 
 on:
-  push:
-    branches:
-      - main
-      - release
   pull_request:
     branches:
       - main
@@ -46,3 +42,6 @@ jobs:
 
       - name: Run Tests
         run: flutter test
+
+      - name: Build iOS App
+        run: flutter build ios --no-codesign
