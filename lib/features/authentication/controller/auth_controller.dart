@@ -24,10 +24,10 @@ final authStateController = Provider<AuthState>((ref) {
         return AuthState.authenticated;
       }
     },
-    loading: () {
+    loading: (user) {
       return AuthState.unknown;
     },
-    error: (err, stack) {
+    error: (err, stack, user) {
       return AuthState.notAuthenticated;
     },
   );

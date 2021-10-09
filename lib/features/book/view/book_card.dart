@@ -16,6 +16,25 @@ class BookCard extends ConsumerWidget {
     TextEditingController currentPage =
         TextEditingController(text: book.currentPage.toString());
 
+    bool isStringANumber(String? string) {
+      // Null or empty string is not a number
+      if (string == null || string.isEmpty) {
+        return false;
+      }
+
+      // Try to parse input string to number.
+      // Both integer and double work.
+      // Use int.tryParse if you want to check integer only.
+      // Use double.tryParse if you want to check double only.
+      final number = num.tryParse(string);
+
+      if (number == null) {
+        return false;
+      }
+
+      return true;
+    }
+
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
       padding: const EdgeInsets.all(10.0),
@@ -95,7 +114,6 @@ class BookCard extends ConsumerWidget {
                     width: 40,
                     child: TextField(
                         textAlign: TextAlign.center,
-                        keyboardType: TextInputType.number,
                         controller: currentPage,
                         decoration:
                             const InputDecoration.collapsed(hintText: "#"),
@@ -103,6 +121,15 @@ class BookCard extends ConsumerWidget {
                             decoration: TextDecoration.underline,
                             decorationColor: Palette.niceDarkGrey),
                         onSubmitted: (string) {
+                          if (!isStringANumber(string)) {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(
+                                content: Text(
+                                    "You need to enter a number for Current Page value"),
+                              ),
+                            );
+                            return;
+                          }
                           ref.read(currentUserController).when(data: (data) {
                             ref
                                 .read(currentBooksController(data.uid).notifier)
@@ -111,9 +138,9 @@ class BookCard extends ConsumerWidget {
                                         currentPage:
                                             int.parse(currentPage.text)));
                             return data.uid;
-                          }, loading: () {
-                            return "0";
-                          }, error: (err, stack) {
+                          }, loading: (user) {
+                            return currentPage.text;
+                          }, error: (err, stack, user) {
                             return "0";
                           });
                         }),
