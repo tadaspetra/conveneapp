@@ -5,9 +5,13 @@ import 'package:conveneapp/core/text.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
 class AuthPage extends StatelessWidget {
-  const AuthPage({Key? key}) : super(key: key);
+  final bool appleSignInAvailable;
+  const AuthPage({Key? key, required this.appleSignInAvailable})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -15,28 +19,43 @@ class AuthPage extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: const [
-            Spacer(),
-            Image(
+          children: [
+            const Spacer(),
+            const Image(
               image: AssetImage("assets/wordsconvene.png"),
               height: 50,
             ),
-            Spacer(),
-            Padding(
+            const Spacer(),
+            const Padding(
               padding: EdgeInsets.all(30.0),
               child: Image(
                 image: AssetImage("assets/reading.png"),
               ),
             ),
-            Spacer(
+            const Spacer(
               flex: 2,
             ),
-            CustomText(text: "Start your reading journey here"),
-            SizedBox(
+            const CustomText(text: "Start your reading journey here"),
+            const SizedBox(
               height: 30,
             ),
-            GoogleButton(),
-            Spacer()
+            const GoogleButton(),
+            if (appleSignInAvailable)
+              const SizedBox(
+                height: 20,
+              ),
+            if (appleSignInAvailable)
+              AppleSignInButton(
+                onPressed: () async {
+                  User user = await AuthApi().signInWithApple();
+                  await UserApi().addUser(
+                    uid: user.uid,
+                    email: user.email,
+                    name: user.displayName,
+                  );
+                },
+              ),
+            const Spacer()
           ],
         ),
       ),
@@ -53,12 +72,20 @@ class GoogleButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return BigButton(
       onPressed: () async {
-        UserCredential user = await AuthApi().signIn();
-        await UserApi().addUser(
-          uid: user.user!.uid,
-          email: user.user!.email!,
-          name: user.user!.displayName,
-        );
+        try {
+          UserCredential user = await AuthApi().signIn();
+          await UserApi().addUser(
+            uid: user.user!.uid,
+            email: user.user!.email!,
+            name: user.user!.displayName,
+          );
+        } on PlatformException catch (e) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e.message.toString())));
+        } catch (e) {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(e.toString())));
+        }
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),

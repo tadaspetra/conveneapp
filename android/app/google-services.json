@@ -14,11 +14,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "305072997566-4uund672ftr2prsdubqjehp99fh8koa8.apps.googleusercontent.com",
+          "client_id": "305072997566-o71erj6g50hae9t9mka8kj27cvs8sv7t.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.convene.conveneapp",
-            "certificate_hash": "927f1b68265ae4a7aec18a578c1fe06337cbae7a"
+            "certificate_hash": "75167e14251f31e3226a6601572e9eb104ef289f"
+          }
+        },
+        {
+          "client_id": "305072997566-plakbrmv12skesgc4m31fnm25vrkgvql.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.convene.conveneapp",
+            "certificate_hash": "516d2698660a8cc976b2093f47335917e672180a"
           }
         },
         {
