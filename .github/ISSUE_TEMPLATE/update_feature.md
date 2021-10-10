@@ -1,6 +1,6 @@
 ---
-name: Feature request
-about: Suggest an idea for this project
+name: Update Feature
+about: Suggest an udpate for this project
 title: "[UPDATE]"
 labels: update
 assignees: tadaspetra
