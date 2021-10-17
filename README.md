@@ -32,17 +32,17 @@ Code reviewers will be expected to assign themselves to any code reviews that th
 * Reviewer gets 1 point for finding a bug during a review
 
 Total point summary
-|Task|Points|
-|-|-|
-|Accepted Proposal|1|
-|Bug found during review|1|
-|Large Feature|4|
-|Medium Feature|3|
-|Small Feature|2|
-|Large Bug Fix|3|
-|Medium Bug Fix|2|
-|Small Bug Fix|1|
+|Task Type|Task|Points|
+|-|-|-|
+|AP|Accepted Proposal|1|
+|BF|Bug Found (during review)|1|
+|LF|Large Feature|4|
+|MF|Medium Feature|3|
+|SF|Small Feature|2|
+|LB|Large Bug Fix|3|
+|MB|Medium Bug Fix|2|
+|SB|Small Bug Fix|1|
 
-Current Points will be recorded in points.md
+Current Points will be recorded in points.md, and must be updated during your task or by me for AP and BF.
 
 All points are subject to change, and sometimes there might be tasks that will have to overrule the point system. 
