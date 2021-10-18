@@ -1,7 +1,6 @@
 import 'dart:convert';
-
 class BookModel {
-  final String id;
+  final String? id;
   final String title;
   final List<String> authors;
   final int pageCount;
@@ -10,7 +9,7 @@ class BookModel {
   final DateTime? dateCompleted;
 
   BookModel({
-    required this.id,
+    this.id,
     required this.title,
     required this.authors,
     required this.pageCount,
@@ -58,13 +57,14 @@ class BookModel {
       authors: List<String>.from(map['authors']),
       pageCount: map['pageCount'] ?? 0,
       coverImage: map['coverImage'],
-      currentPage: map['currentPage'],
-      dateCompleted: DateTime.fromMillisecondsSinceEpoch(map['dateCompleted']),
+      currentPage: map['currentPage'] ?? 0,
+      dateCompleted: map['dateCompleted'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(map['dateCompleted'])
+          : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory BookModel.fromJson(String source) =>
-      BookModel.fromMap(json.decode(source));
+  factory BookModel.fromJson(String source) => BookModel.fromMap(json.decode(source));
 }
