@@ -1,6 +1,6 @@
 import 'dart:convert';
 class BookModel {
-  final String? id;
+  final String id;
   final String title;
   final List<String> authors;
   final int pageCount;
@@ -9,7 +9,7 @@ class BookModel {
   final DateTime? dateCompleted;
 
   BookModel({
-    this.id,
+    required this.id,
     required this.title,
     required this.authors,
     required this.pageCount,
