@@ -1,7 +1,6 @@
 ---
 name: Design
 about: Design Updates
-title: "[DESIGN]"
 labels: design
 assignees: tadaspetra
 
