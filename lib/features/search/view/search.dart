@@ -35,8 +35,7 @@ class _SearchPageState extends State<SearchPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16.0),
                     child: TextField(
-                      decoration: const InputDecoration.collapsed(
-                          hintText: "Search Book"),
+                      decoration: const InputDecoration.collapsed(hintText: "Search Book"),
                       controller: bookController,
                       onSubmitted: (_) async {
                         searchText = bookController.text;
@@ -97,8 +96,7 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: BooksFinderApi().searchBooks(search),
-      builder: (BuildContext context,
-          AsyncSnapshot<List<SearchBookModel>> booklist) {
+      builder: (BuildContext context, AsyncSnapshot<List<SearchBookModel>> booklist) {
         if (booklist.connectionState == ConnectionState.done) {
           if (booklist.hasData) {
             return Expanded(
