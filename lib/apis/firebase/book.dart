@@ -9,9 +9,9 @@ final CollectionReference users = FirebaseFirestore.instance.collection('users')
 class BookApi {
   Future<List<BookModel>> getCurrentBooks({required String uid}) async {
     try {
-      final books = await users.doc(uid).collection("currentBooks").orderBy("title").get();
-      List<BookModel> _books = books.docs.map((e) => BookModel.fromMap(e.data()).copyWith(id: e.id)).toList();
-      return _books;
+      final bookMap = await users.doc(uid).collection("currentBooks").orderBy("title").get();
+      List<BookModel> books = bookMap.docs.map((b) => BookModel.fromMap(b.data()).copyWith(id: b.id)).toList();
+      return books;
     } catch (e) {
       log(e.toString());
       throw (e);
