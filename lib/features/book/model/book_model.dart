@@ -65,6 +65,5 @@ class BookModel {
 
   String toJson() => json.encode(toMap());
 
-  factory BookModel.fromJson(String source) =>
-      BookModel.fromMap(json.decode(source));
+  factory BookModel.fromJson(String source) => BookModel.fromMap(json.decode(source));
 }
