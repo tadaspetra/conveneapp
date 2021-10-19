@@ -49,4 +49,4 @@ jobs:
           FCI_KEYSTORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
           FCI_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
           FCI_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
-          FCI_KEYSTORE_PATH: my-release-key.keystore
+          FCI_KEYSTORE_PATH: ../my-release-key.keystore
