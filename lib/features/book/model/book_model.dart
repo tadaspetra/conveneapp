@@ -59,9 +59,7 @@ class BookModel {
       pageCount: map['pageCount'] ?? 0,
       coverImage: map['coverImage'],
       currentPage: map['currentPage'] ?? 0,
-      dateCompleted: map['dateCompleted'] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map['dateCompleted'])
-          : null,
+      dateCompleted: map['dateCompleted'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dateCompleted']) : null,
     );
   }
 
