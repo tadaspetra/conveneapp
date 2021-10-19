@@ -1,6 +1,7 @@
 import 'dart:convert';
+
 class BookModel {
-  final String? id;
+  final String id;
   final String title;
   final List<String> authors;
   final int pageCount;
@@ -9,7 +10,7 @@ class BookModel {
   final DateTime? dateCompleted;
 
   BookModel({
-    this.id,
+    required this.id,
     required this.title,
     required this.authors,
     required this.pageCount,
@@ -52,7 +53,7 @@ class BookModel {
 
   factory BookModel.fromMap(Map<String, dynamic> map) {
     return BookModel(
-      id: map['id'],
+      id: map['id'] ?? "",
       title: map['title'],
       authors: List<String>.from(map['authors']),
       pageCount: map['pageCount'] ?? 0,
