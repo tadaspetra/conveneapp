@@ -9,6 +9,14 @@ class BookModel {
   final int currentPage;
   final DateTime? dateCompleted;
 
+  static const idKey = 'id';
+  static const titleKey = 'title';
+  static const authorsKey = 'authors';
+  static const pageCountKey = 'pageCount';
+  static const coverImageKey = 'coverImage';
+  static const currentPageKey = 'currentPage';
+  static const dateCompletedKey = 'dateCompleted';
+
   BookModel({
     required this.id,
     required this.title,
@@ -41,25 +49,25 @@ class BookModel {
 
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
-      'title': title,
-      'authors': authors,
-      'pageCount': pageCount,
-      'coverImage': coverImage,
-      'currentPage': currentPage,
-      'dateCompleted': dateCompleted,
+      idKey: id,
+      titleKey: title,
+      authorsKey: authors,
+      pageCountKey: pageCount,
+      coverImageKey: coverImage,
+      currentPageKey: currentPage,
+      dateCompletedKey: dateCompleted,
     };
   }
 
   factory BookModel.fromMap(Map<String, dynamic> map) {
     return BookModel(
-      id: map['id'] ?? "",
-      title: map['title'],
-      authors: List<String>.from(map['authors']),
-      pageCount: map['pageCount'] ?? 0,
-      coverImage: map['coverImage'],
-      currentPage: map['currentPage'] ?? 0,
-      dateCompleted: map['dateCompleted'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dateCompleted']) : null,
+      id: map[idKey] ?? "",
+      title: map[titleKey],
+      authors: List<String>.from(map[authorsKey]),
+      pageCount: map[pageCountKey] ?? 0,
+      coverImage: map[coverImageKey],
+      currentPage: map[currentPageKey] ?? 0,
+      dateCompleted: map[dateCompletedKey] != null ? DateTime.fromMillisecondsSinceEpoch(map[dateCompletedKey]) : null,
     );
   }
 
