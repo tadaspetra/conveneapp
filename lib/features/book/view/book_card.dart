@@ -13,8 +13,7 @@ class BookCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TextEditingController currentPage =
-        TextEditingController(text: book.currentPage.toString());
+    TextEditingController currentPage = TextEditingController(text: book.currentPage.toString());
 
     bool isStringANumber(String? string) {
       // Null or empty string is not a number
@@ -68,8 +67,7 @@ class BookCard extends ConsumerWidget {
                 ),
           Expanded(
             child: Padding(
-              padding:
-                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -115,17 +113,14 @@ class BookCard extends ConsumerWidget {
                     child: TextField(
                         textAlign: TextAlign.center,
                         controller: currentPage,
-                        decoration:
-                            const InputDecoration.collapsed(hintText: "#"),
+                        decoration: const InputDecoration.collapsed(hintText: "#"),
                         style: const TextStyle(
-                            decoration: TextDecoration.underline,
-                            decorationColor: Palette.niceDarkGrey),
+                            decoration: TextDecoration.underline, decorationColor: Palette.niceDarkGrey),
                         onSubmitted: (string) {
                           if (!isStringANumber(string)) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text(
-                                    "You need to enter a number for Current Page value"),
+                                content: Text("You need to enter a number for Current Page value"),
                               ),
                             );
                             return;
@@ -133,10 +128,7 @@ class BookCard extends ConsumerWidget {
                           ref.read(currentUserController).when(data: (data) {
                             ref
                                 .read(currentBooksController(data.uid).notifier)
-                                .updateBook(
-                                    book: book.copyWith(
-                                        currentPage:
-                                            int.parse(currentPage.text)));
+                                .updateBook(book: book.copyWith(currentPage: int.parse(currentPage.text)));
                             return data.uid;
                           }, loading: (user) {
                             return currentPage.text;
