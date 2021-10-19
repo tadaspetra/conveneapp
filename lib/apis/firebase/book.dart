@@ -11,7 +11,6 @@ class BookApi {
     final List<BookModel> _books = [];
     final books = await users.doc(uid).collection("currentBooks").orderBy("title").get();
 
-    //FIX
     try {
       books.docs.map((e) {
         _books.add(BookModel.fromMap(e.data()));
