@@ -4,7 +4,6 @@ import 'package:conveneapp/features/authentication/model/user.dart';
 final CollectionReference users = FirebaseFirestore.instance.collection('users');
 
 class UserApi {
-
   Future<LocalUser> getUser({required String uid}) async {
     DocumentSnapshot docSnapshot = await users.doc(uid).get();
     return LocalUser(

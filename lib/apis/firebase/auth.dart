@@ -28,7 +28,6 @@ class AuthApi {
   }
 
   Future<void> signOut() async {
-    
     // Will signout the user's google account if logged in via google
     await GoogleSignIn().signOut();
 
