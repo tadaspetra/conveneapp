@@ -43,5 +43,10 @@ jobs:
       - name: Run Tests
         run: flutter test
 
-      - name: Build iOS App
-        run: flutter build ios --no-codesign
+      - name: flutter build appbundle
+        run: flutter build appbundle
+        env:
+          FCI_KEYSTORE_PASSWORD: ${{ secrets.STORE_PASSWORD }}
+          FCI_KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+          FCI_KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          FCI_KEYSTORE_PATH: my-release-key.keystore
