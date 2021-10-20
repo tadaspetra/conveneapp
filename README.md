@@ -46,3 +46,5 @@ Total point summary
 Current Points will be recorded in points.md, and must be updated during your task or by me for AP and BF.
 
 All points are subject to change, and sometimes there might be tasks that will have to overrule the point system. 
+
+## Emulator Configuration

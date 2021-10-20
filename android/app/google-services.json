@@ -1,57 +1,42 @@
 {
   "project_info": {
-    "project_number": "305072997566",
-    "project_id": "convene-6b9e3",
-    "storage_bucket": "convene-6b9e3.appspot.com"
+    "project_number": "889205848089",
+    "project_id": "conveane",
+    "storage_bucket": "conveane.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:305072997566:android:6b11bc903b2eb641bd4aef",
+        "mobilesdk_app_id": "1:889205848089:android:079b58076b54ba48085288",
         "android_client_info": {
           "package_name": "com.convene.conveneapp"
         }
       },
       "oauth_client": [
         {
-          "client_id": "305072997566-o71erj6g50hae9t9mka8kj27cvs8sv7t.apps.googleusercontent.com",
+          "client_id": "889205848089-jnqugl21j1t0krlvj1jq091iguhuf4jj.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.convene.conveneapp",
-            "certificate_hash": "75167e14251f31e3226a6601572e9eb104ef289f"
+            "certificate_hash": "ec48b62d481ae9d57b595b91b780623e79746f2a"
           }
         },
         {
-          "client_id": "305072997566-plakbrmv12skesgc4m31fnm25vrkgvql.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.convene.conveneapp",
-            "certificate_hash": "516d2698660a8cc976b2093f47335917e672180a"
-          }
-        },
-        {
-          "client_id": "305072997566-1n2mdi4fkrcf2r3aaup36hl0h751rp0m.apps.googleusercontent.com",
+          "client_id": "889205848089-0g3q328trfgpurg8o363oc60m4il5ckg.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAHWiyNOTdVq2QbH2VM3pW770ewhpgXCjo"
+          "current_key": "AIzaSyBq8eiP7CS0tbpXFb5_-o-a2ggS9nHjRZI"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "305072997566-1n2mdi4fkrcf2r3aaup36hl0h751rp0m.apps.googleusercontent.com",
+              "client_id": "889205848089-0g3q328trfgpurg8o363oc60m4il5ckg.apps.googleusercontent.com",
               "client_type": 3
-            },
-            {
-              "client_id": "305072997566-9kebm4iklfcumvmjhvubdfl7bfi1pndh.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "com.example.conveneapp"
-              }
             }
           ]
         }
