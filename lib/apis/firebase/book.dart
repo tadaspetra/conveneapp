@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
