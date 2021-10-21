@@ -74,8 +74,8 @@ mkdir backend && cd backend
 
 2. run `firebase login` and login with your associated account. Skip if you are already logged in
 
-1. run `firebase init` please follow the flow to initialize your project. From the first propmt make sure to select `firestore` and `emulators`.
-   Once you reach the emulator propmt select the `authentication,firestore` (we can install others later if we require them).
+1. run `firebase init` please follow the flow to initialize your project. From the first prompt make sure to select `firestore` and `emulators`.
+   Once you reach the emulator prompt select the `authentication,firestore` (we can install others later if we require them).
 
 After you have finished the initialization you will see a file called `firebase.json` you would see some thing like this
 
