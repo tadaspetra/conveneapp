@@ -59,6 +59,7 @@ flutter:
     - assets/wordsconvene.png
     - assets/google.png
     - assets/reading.png
+    - configs/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see
