@@ -22,6 +22,6 @@ doc/api/
 /.fvm
 /.vscode/settings.json
 .flutter-plugins
-/configs
+/configs/emulator_config.json
 ./history
 .flutter-plugins-dependencies
