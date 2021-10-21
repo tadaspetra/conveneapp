@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conveneapp/config_reader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -24,7 +26,7 @@ class EnvironmentConfig {
 /// - awaiting this in `prod` wont affect the performance of the app
 Future<void> setUpMain(String env) async {
   if (env == EnvironmentConfig.dev) {
-    print('dev');
+    log('dev');
     WidgetsFlutterBinding.ensureInitialized();
     await Firebase.initializeApp();
     final ConfigReader configReader = ConfigReader();
