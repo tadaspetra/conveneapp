@@ -58,11 +58,11 @@ All points are subject to change, and sometimes there might be tasks that will h
 
 ## Firebase Emulator Configuration
 
-There are many ways around for this the one which will be listed below is efficent in my POV.
+There are many ways around for this the one which will be listed below is efficient in my POV.
 
-### Initialise a Firebase project
+### Initialize a Firebase project
 
-This step is important, if u already have an initialisation ready with the emulators u can skip this.
+This step is important, if u already have an initialization ready with the emulators u can skip this.
 
 #### Terminal
 
@@ -77,7 +77,7 @@ mkdir backend && cd backend
 1. run `firebase init` please follow the flow to initialize your project. From the first propmt make sure to select `firestore` and `emulators`.
    Once you reach the emulator propmt select the `authentication,firestore` (we can install others later if we require them).
 
-After you have finished the initialisation you will see a file called `firebase.json` you would see some thing like this
+After you have finished the initialization you will see a file called `firebase.json` you would see some thing like this
 
 ```json
 {
@@ -154,12 +154,12 @@ Adding the host as `0.0.0.0` will set the emulators to your network ip ex. (192.
 
 #### Starting the app
 
-- If you are using `vscode` as your editior goto your debug pannel , you will see two new launch configs
+- If you are using `vscode` as your editor goto your debug panel , you will see two new launch configs
 
-  1. `Conveneapp Production` this points to your original firebase project so running this will not connect to your firebase emualtors
-  1. `Conveneapp Development` runnig this will use the firebase emulators.
+  1. `Conveneapp Production` this points to your original firebase project so running this will not connect to your firebase emulators
+  1. `Conveneapp Development` running this will use the firebase emulators.
 
-- If your are using other editors to make use of the firebase emualtors your have to add the following as arguments for your `--dart-define=ENV=DEV`
+- If your are using other editors to make use of the firebase emulators your have to add the following as arguments for your `--dart-define=ENV=DEV`
 - If you are using terminal `flutter run --dart-define=ENV=DEV`
 
-If you start the app without the provided args this will point to your producation database.
+If you start the app without the provided args this will point to your production database.
