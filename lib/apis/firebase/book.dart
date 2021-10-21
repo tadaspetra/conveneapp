@@ -6,33 +6,10 @@ final CollectionReference users = FirebaseFirestore.instance.collection('users')
 
 class BookApi {
   Future<List<BookModel>> getCurrentBooks({required String uid}) async {
-    final List<BookModel> _books = [];
-    final books = await users.doc(uid).collection("currentBooks").orderBy("title").get();
-
-    for (final book in books.docs) {
-      _books.add(
-        BookModel(
-          id: book.id,
-          authors: List<String>.from(book["authors"]),
-          coverImage: book["coverImage"],
-          currentPage: book.data()['currentPage'] ?? 0,
-          pageCount: book["pageCount"],
-          title: book["title"],
-        ),
-      );
-    }
-
-    // TODO: why does this not work?
-    // try {
-    //   books.docs.map((e) {
-    //     _books.add(BookModel.fromMap(e.data()));
-    //   });
-    // } catch (e) {
-    //   print(e);
-    // }
-    // print(_books);
-
-    return _books;
+    //TODO: #37 Handle the error where method is called.
+    final bookMap = await users.doc(uid).collection("currentBooks").orderBy("title").get();
+    List<BookModel> books = bookMap.docs.map((b) => BookModel.fromMap(b.data()).copyWith(id: b.id)).toList();
+    return books;
   }
 
   Future<void> finishBook({required BookModel book, required String uid}) async {

@@ -5,6 +5,7 @@ import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
 class AuthApi {
   final _firebaseAuth = FirebaseAuth.instance;
+  final _googleSignIn = GoogleSignIn();
 
   Stream<User?> currentUser() {
     return FirebaseAuth.instance.authStateChanges();
@@ -12,7 +13,7 @@ class AuthApi {
 
   Future<UserCredential> signIn() async {
     // Trigger the authentication flow
-    final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
+    final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
     // Obtain the auth details from the request
     final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
@@ -28,6 +29,9 @@ class AuthApi {
   }
 
   Future<void> signOut() async {
+    // Will signout the user's google account if logged in via google
+    await _googleSignIn.signOut();
+
     // Once signed in, return the UserCredential
     await _firebaseAuth.signOut();
   }

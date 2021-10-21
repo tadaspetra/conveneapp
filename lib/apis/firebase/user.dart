@@ -14,9 +14,9 @@ class UserApi {
   }
 
   Future<void> addUser({required String uid, String? email, String? name}) async {
-    await users.doc(uid).update({
+    await users.doc(uid).set({
       'email': email ?? FieldValue.delete(),
       'name': name ?? FieldValue.delete(),
-    });
+    }, SetOptions(merge: true));
   }
 }
