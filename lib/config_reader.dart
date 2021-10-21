@@ -12,10 +12,10 @@ class ConfigReader {
   final Map<String, dynamic> _config = {};
   Future<void> initializeConfigReader() async {
     try {
-      final configurationOptions = await rootBundle.loadString('configs/emulator_config.json');
-      final jsonValue = jsonDecode(configurationOptions) as Map<String, dynamic>;
+      final configOptions = await rootBundle.loadString('configs/emulator_config.json');
+      final jsonValue = jsonDecode(configOptions) as Map<String, dynamic>;
       _config.addAll(jsonValue);
-    } on Exception catch (_) {
+    } catch (_) {
       throw const NoEmulatorConfigException();
     }
   }
