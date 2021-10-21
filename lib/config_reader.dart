@@ -16,7 +16,7 @@ class ConfigReader {
       final jsonValue = jsonDecode(configurationOpitons) as Map<String, dynamic>;
       _config.addAll(jsonValue);
     } on Exception catch (_) {
-      print('initializeConfigReader | Error | No emulator_config.json found using defaults');
+      throw const NoEmulatorConfigException();
     }
   }
 
@@ -35,5 +35,13 @@ class ConfigReader {
   ///- builds platform specific hosts
   String _buildIp() {
     return Platform.isAndroid ? '10.0.2.2' : 'localhost';
+  }
+}
+
+class NoEmulatorConfigException implements Exception {
+  const NoEmulatorConfigException();
+  @override
+  String toString() {
+    return 'initializeConfigReader | Error | No emulator_config.json found using defaults';
   }
 }
