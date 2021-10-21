@@ -12,14 +12,11 @@ class ConfigReader {
   final Map<String, dynamic> _config = {};
   Future<void> initializeConfigReader() async {
     try {
-      final configurationOpitons =
-          await rootBundle.loadString('configs/emulator_config.json');
-      final jsonValue =
-          jsonDecode(configurationOpitons) as Map<String, dynamic>;
+      final configurationOpitons = await rootBundle.loadString('configs/emulator_config.json');
+      final jsonValue = jsonDecode(configurationOpitons) as Map<String, dynamic>;
       _config.addAll(jsonValue);
     } on Exception catch (_) {
-      print(
-          'initializeConfigReader | Error | No emulator_config.json found using defaults');
+      print('initializeConfigReader | Error | No emulator_config.json found using defaults');
     }
   }
 
@@ -29,13 +26,11 @@ class ConfigReader {
 
   /// - if this is not provided default will be used `9099` which firebase
   /// emulators use by default
-  int get authenticationPort =>
-      int.tryParse(_config['auth_port'].toString()) ?? 9099;
+  int get authenticationPort => int.tryParse(_config['auth_port'].toString()) ?? 9099;
 
   /// - if this is not provided default will be used `8080` which firebase
   /// emulators use by default
-  int get firestorePort =>
-      int.tryParse(_config['firestore_port'].toString()) ?? 8080;
+  int get firestorePort => int.tryParse(_config['firestore_port'].toString()) ?? 8080;
 
   ///- builds platform specific hosts
   String _buildIp() {
