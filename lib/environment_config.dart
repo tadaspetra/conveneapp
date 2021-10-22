@@ -33,7 +33,7 @@ Future<void> setUpMain(String env) async {
     await configReader.initializeConfigReader();
     const nHostEmulator = EnvironmentConfig.nHostEmulator;
     await Firebase.initializeApp(
-        options: FirebaseOptions(
+        options: const FirebaseOptions(
       apiKey: nHostEmulator,
       appId: nHostEmulator,
       projectId: nHostEmulator,
