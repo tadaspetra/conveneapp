@@ -18,6 +18,7 @@ class EnvironmentConfig {
 
   /// - develomment enviroment
   static const String dev = "DEV";
+  static const nHostEmulator = 'ns=emulatorsui';
 }
 
 /// HACK: this can used to run logics depending on different environment
@@ -26,9 +27,16 @@ Future<void> setUpMain(String env) async {
   if (env == EnvironmentConfig.dev) {
     print('dev');
     WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
     final ConfigReader configReader = ConfigReader();
     await configReader.initializeConfigReader();
+    const nHostEmulator = EnvironmentConfig.nHostEmulator;
+    await Firebase.initializeApp(
+        options: FirebaseOptions(
+      apiKey: nHostEmulator,
+      appId: nHostEmulator,
+      projectId: nHostEmulator,
+      messagingSenderId: nHostEmulator,
+    ));
     await FirebaseAuth.instance.useAuthEmulator(
       configReader.getIp,
       configReader.authenticationPort,
