@@ -16,7 +16,8 @@ class AuthApi {
     final GoogleSignInAccount? googleUser = await _googleSignIn.signIn();
 
     // Obtain the auth details from the request
-    final GoogleSignInAuthentication googleAuth = await googleUser!.authentication;
+    final GoogleSignInAuthentication googleAuth =
+        await googleUser!.authentication;
 
     // Create a new credential
     final credential = GoogleAuthProvider.credential(
@@ -36,9 +37,11 @@ class AuthApi {
     await _firebaseAuth.signOut();
   }
 
-  Future<User> signInWithApple({List<Scope> scopes = const [Scope.email, Scope.fullName]}) async {
+  Future<User> signInWithApple(
+      {List<Scope> scopes = const [Scope.email, Scope.fullName]}) async {
     // 1. perform the sign-in request
-    final result = await TheAppleSignIn.performRequests([AppleIdRequest(requestedScopes: scopes)]);
+    final result = await TheAppleSignIn.performRequests(
+        [AppleIdRequest(requestedScopes: scopes)]);
     // 2. check the result
     switch (result.status) {
       case AuthorizationStatus.authorized:
@@ -46,13 +49,17 @@ class AuthApi {
         final oAuthProvider = OAuthProvider('apple.com');
         final credential = oAuthProvider.credential(
           idToken: String.fromCharCodes(appleIdCredential.identityToken!),
-          accessToken: String.fromCharCodes(appleIdCredential.authorizationCode!),
+          accessToken:
+              String.fromCharCodes(appleIdCredential.authorizationCode!),
         );
-        final userCredential = await _firebaseAuth.signInWithCredential(credential);
+        final userCredential =
+            await _firebaseAuth.signInWithCredential(credential);
         final firebaseUser = userCredential.user!;
         if (scopes.contains(Scope.fullName)) {
           final fullName = appleIdCredential.fullName;
-          if (fullName != null && fullName.givenName != null && fullName.familyName != null) {
+          if (fullName != null &&
+              fullName.givenName != null &&
+              fullName.familyName != null) {
             final displayName = '${fullName.givenName} ${fullName.familyName}';
             await firebaseUser.updateDisplayName(displayName);
           }

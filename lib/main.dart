@@ -6,7 +6,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'app.dart';
 
 Future<void> main() async {
-  const String env = String.fromEnvironment(EnvironmentConfig.envName, defaultValue: EnvironmentConfig.prod);
+  const String env = String.fromEnvironment(EnvironmentConfig.envName,
+      defaultValue: EnvironmentConfig.prod);
   await setUpMain(env);
   runApp(const ProviderScope(child: MyApp()));
 }

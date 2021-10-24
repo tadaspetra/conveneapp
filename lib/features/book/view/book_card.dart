@@ -132,8 +132,10 @@ class BookCard extends ConsumerWidget {
                             );
                             return;
                           }
-                          final data =
-                              ref.read(authStateNotifierProvider).userStream.value;
+                          final data = ref
+                              .read(authStateNotifierProvider)
+                              .userStream
+                              .value;
                           ref
                               .read(currentBooksController(data!.uid).notifier)
                               .updateBook(

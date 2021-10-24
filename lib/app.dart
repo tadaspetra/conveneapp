@@ -13,16 +13,12 @@ class AppNavigator extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-
     return ref.watch(authStateNotifierProvider).userStream.when(data: (user) {
       if (user != null) return Dashboard(user: user);
-
       return AuthPage(
           appleSignInAvailable:
               ref.read(authStateNotifierProvider).isAppleSignIn);
     }, error: (e, es, previousData) {
-        
       return Text(e.toString());
     }, loading: (_) {
       return const LoadingPage();
