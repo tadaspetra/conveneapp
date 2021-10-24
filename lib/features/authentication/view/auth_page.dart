@@ -1,19 +1,17 @@
-import 'package:conveneapp/apis/firebase/auth.dart';
-import 'package:conveneapp/apis/firebase/user.dart';
 import 'package:conveneapp/core/button.dart';
 import 'package:conveneapp/core/text.dart';
+import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/theme/palette.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
-class AuthPage extends StatelessWidget {
+class AuthPage extends ConsumerWidget {
   final bool appleSignInAvailable;
   const AuthPage({Key? key, required this.appleSignInAvailable}) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
       body: Center(
         child: Column(
@@ -46,12 +44,16 @@ class AuthPage extends StatelessWidget {
             if (appleSignInAvailable)
               AppleSignInButton(
                 onPressed: () async {
-                  User user = await AuthApi().signInWithApple();
-                  await UserApi().addUser(
-                    uid: user.uid,
-                    email: user.email,
-                    name: user.displayName,
-                  );
+                  // User user = await AuthApi().signInWithApple();
+                  // await UserApi().addUser(
+                  //   uid: user.uid,
+                  //   email: user.email,
+                  //   name: user.displayName,
+                  // );
+                  final result = await ref.read(authApiProvider).signInWithApple();
+                  result.fold((l) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.message)));
+                  }, (r) {});
                 },
               ),
             const Spacer()
@@ -62,27 +64,19 @@ class AuthPage extends StatelessWidget {
   }
 }
 
-class GoogleButton extends StatelessWidget {
+class GoogleButton extends ConsumerWidget {
   const GoogleButton({
     Key? key,
   }) : super(key: key);
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return BigButton(
       onPressed: () async {
-        try {
-          UserCredential user = await AuthApi().signIn();
-          await UserApi().addUser(
-            uid: user.user!.uid,
-            email: user.user!.email!,
-            name: user.user!.displayName,
-          );
-        } on PlatformException catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.message.toString())));
-        } catch (e) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(e.toString())));
-        }
+        final result = await ref.read(authApiProvider).signIn();
+        result.fold((l) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.message)));
+        }, (r) {});
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),

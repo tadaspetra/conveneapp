@@ -1,4 +1,3 @@
-import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/user.dart';
 import 'package:conveneapp/features/book/controller/book_controller.dart';
@@ -99,7 +98,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
         ),
         actions: [
           IconButton(
-            onPressed: () => AuthApi().signOut(),
+            onPressed: () async => await ref.read(authApiProvider).signOut(),
             icon: const Icon(
               Icons.logout,
             ),
