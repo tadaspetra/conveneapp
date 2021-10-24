@@ -124,7 +124,7 @@ class AuthApiImpl implements AuthApi {
 }
 
 /// - should only be accessed in testing
-/// - this extraction is need inorder to test the functionality of the other parts
+/// - this extraction is needed in order to test the functionality of the other parts
 /// - below are non-mockable function
 @visibleForTesting
 class GoogleAuthApi {
