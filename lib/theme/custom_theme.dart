@@ -18,13 +18,10 @@ class CustomTheme {
         color: Palette.niceWhite,
         iconTheme: IconThemeData(color: Palette.niceBlack),
       ),
-
-     textSelectionTheme: TextSelectionThemeData(
-       cursorColor: Palette.niceBlack,
-       selectionHandleColor: Palette.niceBlack,
-       selectionColor: Palette.niceBlack.withOpacity(0.2)
-     ),
-    
+      textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Palette.niceBlack,
+          selectionHandleColor: Palette.niceBlack,
+          selectionColor: Palette.niceBlack.withOpacity(0.2)),
       textTheme: theme.primaryTextTheme
           .copyWith(
             button: theme.primaryTextTheme.button?.copyWith(

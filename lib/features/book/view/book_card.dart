@@ -13,8 +13,6 @@ class BookCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-
-
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
       padding: const EdgeInsets.all(10.0),
@@ -24,7 +22,7 @@ class BookCard extends ConsumerWidget {
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom:  8.0,  right: 10.0 , left: 5),
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 10.0, left: 5),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,

@@ -85,6 +85,9 @@ class _DashboardState extends ConsumerState<Dashboard> {
                           return BookSlidable(book: value[index], userId: widget.user.uid);
                         }),
                   ),
+                  const SizedBox(
+                    height: 100,
+                  ),
                 ]),
               );
             },
