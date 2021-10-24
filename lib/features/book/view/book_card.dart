@@ -1,18 +1,16 @@
 import 'package:conveneapp/core/text.dart';
-
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class BookCard extends ConsumerWidget {
+class BookCard extends StatelessWidget {
   final BookModel book;
   const BookCard({Key? key, required this.book}) : super(key: key);
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
       padding: const EdgeInsets.all(10.0),

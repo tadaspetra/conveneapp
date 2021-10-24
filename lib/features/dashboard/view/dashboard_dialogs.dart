@@ -78,6 +78,7 @@ Future<String?> updateDialog(BuildContext context, BookModel book) {
           children: [
             TextFormField(
               controller: currentPage,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   isDense: true,
                   border: const OutlineInputBorder(
