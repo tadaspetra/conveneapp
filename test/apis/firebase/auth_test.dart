@@ -1,7 +1,6 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 
@@ -16,7 +15,7 @@ void main() {
   late MockUser user;
   late AuthApiImpl authApiImpl;
   late MockGoogleAuthApi googleAuthApi;
-  late MockGoogleSignInAuthentication authentication;
+
   late MockUserCredential userCredential;
   late MockAuthCredential authCredential;
 
@@ -26,7 +25,6 @@ void main() {
     googleSignIn = MockGoogleSignIn();
     user = MockUser();
     googleAuthApi = MockGoogleAuthApi();
-    authentication = MockGoogleSignInAuthentication();
     userCredential = MockUserCredential();
     authCredential = MockAuthCredential();
     authApiImpl = AuthApiImpl(
