@@ -1,5 +1,5 @@
 import 'package:conveneapp/core/text.dart';
-import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
+
 import 'package:conveneapp/features/book/controller/book_controller.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/theme/palette.dart';
@@ -7,13 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../top_level_providers.dart';
+
 class BookCard extends ConsumerWidget {
   final BookModel book;
   const BookCard({Key? key, required this.book}) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TextEditingController currentPage = TextEditingController(text: book.currentPage.toString());
+    TextEditingController currentPage =
+        TextEditingController(text: book.currentPage.toString());
 
     bool isStringANumber(String? string) {
       // Null or empty string is not a number
@@ -67,7 +70,8 @@ class BookCard extends ConsumerWidget {
                 ),
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+              padding:
+                  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -113,28 +117,29 @@ class BookCard extends ConsumerWidget {
                     child: TextField(
                         textAlign: TextAlign.center,
                         controller: currentPage,
-                        decoration: const InputDecoration.collapsed(hintText: "#"),
+                        decoration:
+                            const InputDecoration.collapsed(hintText: "#"),
                         style: const TextStyle(
-                            decoration: TextDecoration.underline, decorationColor: Palette.niceDarkGrey),
+                            decoration: TextDecoration.underline,
+                            decorationColor: Palette.niceDarkGrey),
                         onSubmitted: (string) {
                           if (!isStringANumber(string)) {
                             ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(
-                                content: Text("You need to enter a number for Current Page value"),
+                                content: Text(
+                                    "You need to enter a number for Current Page value"),
                               ),
                             );
                             return;
                           }
-                          ref.read(currentUserController).when(data: (data) {
-                            ref
-                                .read(currentBooksController(data.uid).notifier)
-                                .updateBook(book: book.copyWith(currentPage: int.parse(currentPage.text)));
-                            return data.uid;
-                          }, loading: (user) {
-                            return currentPage.text;
-                          }, error: (err, stack, user) {
-                            return "0";
-                          });
+                          final data =
+                              ref.read(authStateNotifierProvider).userStream.value;
+                          ref
+                              .read(currentBooksController(data!.uid).notifier)
+                              .updateBook(
+                                  book: book.copyWith(
+                                      currentPage:
+                                          int.parse(currentPage.text)));
                         }),
                   ),
                 ],

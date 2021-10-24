@@ -1,5 +1,4 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
-import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/user.dart';
 import 'package:conveneapp/features/book/controller/book_controller.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
@@ -7,6 +6,7 @@ import 'package:conveneapp/features/book/view/book_card.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
 import 'package:conveneapp/features/search/view/search.dart';
 import 'package:conveneapp/theme/palette.dart';
+import 'package:conveneapp/top_level_providers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -200,20 +200,13 @@ class _DashboardState extends ConsumerState<Dashboard> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () async {
+            final data =
+                              ref.read(authStateNotifierProvider).userStream.value;
           var bookToAdd = await Navigator.push(
               context, MaterialPageRoute(builder: (context) => const SearchPage(), fullscreenDialog: true));
           if (bookToAdd is SearchBookModel) {
-            ref.read(currentUserController).when(
-              data: (data) async {
-                ref.read(currentBooksController(data.uid).notifier).addBook(book: bookToAdd);
-              },
-              loading: (user) {
-                return const Text("loading");
-              },
-              error: (error, stack, user) {
-                return const Text("error");
-              },
-            );
+              ref.read(currentBooksController(data!.uid).notifier).addBook(book: bookToAdd);
+
           }
         },
         label: Row(
