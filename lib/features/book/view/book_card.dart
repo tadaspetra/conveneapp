@@ -1,9 +1,9 @@
 import 'package:conveneapp/core/text.dart';
-import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
-import 'package:conveneapp/features/book/controller/book_controller.dart';
+
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,32 +13,85 @@ class BookCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    TextEditingController currentPage = TextEditingController(text: book.currentPage.toString());
 
-    bool isStringANumber(String? string) {
-      // Null or empty string is not a number
-      if (string == null || string.isEmpty) {
-        return false;
-      }
-
-      // Try to parse input string to number.
-      // Both integer and double work.
-      // Use int.tryParse if you want to check integer only.
-      // Use double.tryParse if you want to check double only.
-      final number = num.tryParse(string);
-
-      if (number == null) {
-        return false;
-      }
-
-      return true;
-    }
 
     return Container(
-      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5),
+      margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
       padding: const EdgeInsets.all(10.0),
+      decoration:
+          BoxDecoration(color: Theme.of(context).cardColor, borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Row(
         children: [
+          Expanded(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom:  8.0,  right: 10.0 , left: 5),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Text(
+                        book.currentPage.toString(),
+                        style: const TextStyle(fontWeight: FontWeight.bold, decorationColor: Palette.niceDarkGrey),
+                      ),
+                      const Text(
+                        ' pages read',
+                      ),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  Flexible(child: CustomText(text: book.title)),
+                  if (book.authors.isNotEmpty)
+                    Flexible(
+                        child: Padding(
+                      padding: const EdgeInsets.only(top: 8.0),
+                      child: Text(
+                        book.authors[0],
+                        style: const TextStyle(color: Palette.niceDarkGrey),
+                      ),
+                    )),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  Stack(
+                    alignment: Alignment.center,
+                    children: [
+                      SizedBox(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: const LinearProgressIndicator(
+                            value: 1,
+                            color: Palette.niceDarkGrey,
+                          ),
+                        ),
+                        width: 250,
+                        height: 12,
+                      ),
+                      SizedBox(
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(4),
+                          child: LinearProgressIndicator(
+                            backgroundColor: Palette.niceDarkGrey,
+                            value: book.currentPage / book.pageCount,
+                            // strokeWidth: 6,
+                            color: Palette.niceBlack,
+                          ),
+                        ),
+                        width: 250,
+                        height: 12,
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
           (book.coverImage == null)
               //if object gets created with no cover image we set to "noimage"
               ? Container()
@@ -65,82 +118,6 @@ class BookCard extends ConsumerWidget {
                     ),
                   ),
                 ),
-          Expanded(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Flexible(child: CustomText(text: book.title)),
-                  if (book.authors.isNotEmpty)
-                    Flexible(
-                        child: Padding(
-                      padding: const EdgeInsets.only(top: 8.0),
-                      child: Text(book.authors[0]),
-                    )),
-                ],
-              ),
-            ),
-          ),
-          Expanded(
-              child: Row(
-            mainAxisAlignment: MainAxisAlignment.end,
-            children: [
-              Stack(
-                alignment: Alignment.center,
-                children: [
-                  const SizedBox(
-                    child: CircularProgressIndicator(
-                      value: 1,
-                      strokeWidth: 6,
-                      color: Palette.niceDarkGrey,
-                    ),
-                    width: 60,
-                    height: 60,
-                  ),
-                  SizedBox(
-                    child: CircularProgressIndicator(
-                      value: book.currentPage / book.pageCount,
-                      strokeWidth: 6,
-                      color: Palette.niceBlack,
-                    ),
-                    width: 60,
-                    height: 60,
-                  ),
-                  SizedBox(
-                    width: 40,
-                    child: TextField(
-                        textAlign: TextAlign.center,
-                        controller: currentPage,
-                        decoration: const InputDecoration.collapsed(hintText: "#"),
-                        style: const TextStyle(
-                            decoration: TextDecoration.underline, decorationColor: Palette.niceDarkGrey),
-                        onSubmitted: (string) {
-                          if (!isStringANumber(string)) {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(
-                                content: Text("You need to enter a number for Current Page value"),
-                              ),
-                            );
-                            return;
-                          }
-                          ref.read(currentUserController).when(data: (data) {
-                            ref
-                                .read(currentBooksController(data.uid).notifier)
-                                .updateBook(book: book.copyWith(currentPage: int.parse(currentPage.text)));
-                            return data.uid;
-                          }, loading: (user) {
-                            return currentPage.text;
-                          }, error: (err, stack, user) {
-                            return "0";
-                          });
-                        }),
-                  ),
-                ],
-              )
-            ],
-          )),
         ],
       ),
     );

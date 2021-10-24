@@ -1,15 +1,13 @@
-import 'package:conveneapp/apis/firebase/auth.dart';
+import 'package:conveneapp/core/button.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/user.dart';
 import 'package:conveneapp/features/book/controller/book_controller.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
-import 'package:conveneapp/features/book/view/book_card.dart';
+import 'package:conveneapp/features/book/view/book_slidable.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
 import 'package:conveneapp/features/search/view/search.dart';
-import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 
 class Dashboard extends ConsumerStatefulWidget {
   final LocalUser user;
@@ -25,86 +23,33 @@ class _DashboardState extends ConsumerState<Dashboard> {
     super.initState();
   }
 
-  Future<bool?> deleteDialog(BuildContext context) {
-    return showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Delete Book'),
-          content: const Text('Are you sure you want to delete this book?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              child: Text(
-                'Yes',
-                style: TextStyle(color: Palette.niceRed),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-              child: const Text(
-                'No',
-                style: TextStyle(color: Palette.niceBlack),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
-  Future<bool?> finishDialog(BuildContext context) {
-    return showDialog<bool>(
-      context: context,
-      builder: (context) {
-        return AlertDialog(
-          title: const Text('Finish Book'),
-          content: const Text('Continue adding book to your history?'),
-          actions: [
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(true);
-              },
-              child: Text(
-                'Yes',
-                style: TextStyle(color: Palette.niceBlue),
-              ),
-            ),
-            TextButton(
-              onPressed: () {
-                Navigator.of(context).pop(false);
-              },
-              child: const Text(
-                'No',
-                style: TextStyle(color: Palette.niceBlack),
-              ),
-            ),
-          ],
-        );
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(
-          "Hi ${widget.user.name}",
-          style: const TextStyle(color: Colors.black),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () => AuthApi().signOut(),
-            icon: const Icon(
-              Icons.logout,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(71.0),
+        child: AppBar(
+          flexibleSpace: Container(),
+          title: Padding(
+            padding: const EdgeInsets.only(top: 15),
+            child: Text(
+              "Hi, ${widget.user.name}!",
+              style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),
             ),
-          )
-        ],
+          ),
+          elevation: 0,
+          centerTitle: false,
+          actions: [
+            Padding(
+              padding: const EdgeInsets.only(right: 10, top: 15),
+              child: CircleAvatar(
+                backgroundColor: Colors.blue.shade900,
+                radius: 24,
+                child: Text(widget.user.name!.substring(0, 1)),
+              ),
+            ),
+          ],
+        ),
       ),
       body: CustomScrollView(
         slivers: [
@@ -121,114 +66,51 @@ class _DashboardState extends ConsumerState<Dashboard> {
             },
             data: (List<BookModel> value) {
               return SliverList(
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return Slidable(
-                      key: ValueKey(value[index]),
-                      child: BookCard(
-                        book: value[index],
-                      ),
-                      startActionPane: ActionPane(
-                        motion: const ScrollMotion(),
-                        dismissible: DismissiblePane(
-                          closeOnCancel: true,
-                          onDismissed: () {
-                            ref.read(currentBooksController(widget.user.uid).notifier).finishBook(book: value[index]);
-                          },
-                          confirmDismiss: () async {
-                            bool? returnValue = await finishDialog(context);
-
-                            return returnValue!;
-                          },
-                        ),
-                        children: [
-                          SlidableAction(
-                            onPressed: (context) async {
-                              bool? returnValue = await finishDialog(context);
-                              if (returnValue == true) {
-                                ref
-                                    .read(currentBooksController(widget.user.uid).notifier)
-                                    .finishBook(book: value[index]);
-                              }
-                            },
-                            backgroundColor: Palette.niceBlue,
-                            foregroundColor: Palette.niceWhite,
-                            icon: Icons.check,
-                            label: 'Finish',
-                          ),
-                        ],
-                      ),
-                      endActionPane: ActionPane(
-                        motion: const ScrollMotion(),
-                        dismissible: DismissiblePane(
-                          closeOnCancel: true,
-                          onDismissed: () {
-                            ref.read(currentBooksController(widget.user.uid).notifier).deleteBook(book: value[index]);
-                          },
-                          confirmDismiss: () async {
-                            bool? returnValue = await deleteDialog(context);
-
-                            return returnValue!;
-                          },
-                        ),
-                        children: [
-                          SlidableAction(
-                            onPressed: (context) async {
-                              bool? returnValue = await deleteDialog(context);
-                              if (returnValue == true) {
-                                ref
-                                    .read(currentBooksController(widget.user.uid).notifier)
-                                    .deleteBook(book: value[index]);
-                              }
-                            },
-                            backgroundColor: Palette.niceRed,
-                            foregroundColor: Palette.niceWhite,
-                            icon: Icons.delete,
-                            label: 'Delete',
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                  childCount: value.length,
-                ),
+                delegate: SliverChildListDelegate([
+                  const Padding(
+                    padding: EdgeInsets.only(top: 15, bottom: 5, left: 15, right: 20),
+                    child: Text(
+                      'You are currently reading',
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                    ),
+                  ),
+                  MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.builder(
+                        itemCount: value.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, index) {
+                          return BookSlidable(book: value[index], userId: widget.user.uid);
+                        }),
+                  ),
+                ]),
               );
             },
           )
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () async {
-          var bookToAdd = await Navigator.push(
-              context, MaterialPageRoute(builder: (context) => const SearchPage(), fullscreenDialog: true));
-          if (bookToAdd is SearchBookModel) {
-            ref.read(currentUserController).when(
-              data: (data) async {
-                ref.read(currentBooksController(data.uid).notifier).addBook(book: bookToAdd);
-              },
-              loading: (user) {
-                return const Text("loading");
-              },
-              error: (error, stack, user) {
-                return const Text("error");
-              },
-            );
-          }
-        },
-        label: Row(
-          children: const [
-            Icon(Icons.book_outlined),
-            SizedBox(
-              width: 10,
-            ),
-            Text(
-              "Add a Book",
-              style: TextStyle(fontWeight: FontWeight.w400),
-            ),
-          ],
-        ),
-      ),
+      floatingActionButton: BigButton(
+          child: const Text("Add personal book"),
+          onPressed: () async {
+            var bookToAdd = await Navigator.push(
+                context, MaterialPageRoute(builder: (context) => const SearchPage(), fullscreenDialog: true));
+            if (bookToAdd is SearchBookModel) {
+              ref.read(currentUserController).when(
+                data: (data) async {
+                  ref.read(currentBooksController(data.uid).notifier).addBook(book: bookToAdd);
+                },
+                loading: (user) {
+                  return const Text("loading");
+                },
+                error: (error, stack, user) {
+                  return const Text("error");
+                },
+              );
+            }
+          }),
     );
   }
 }
