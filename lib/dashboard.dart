@@ -109,17 +109,14 @@ class _DashboardState extends ConsumerState<Dashboard> {
       body: CustomScrollView(
         slivers: [
           ref.watch(currentBooksController(widget.user.uid)).when(
-            error: (Object error, StackTrace? stackTrace,
-                AsyncData<List<BookModel>>? bookList) {
+            error: (Object error, StackTrace? stackTrace, AsyncData<List<BookModel>>? bookList) {
               return SliverList(
-                delegate: SliverChildListDelegate(
-                    [const Text("Error retrieving books")]),
+                delegate: SliverChildListDelegate([const Text("Error retrieving books")]),
               );
             },
             loading: (AsyncValue<List<BookModel>>? bookList) {
               return SliverList(
-                delegate: SliverChildListDelegate(
-                    [const Center(child: CircularProgressIndicator())]),
+                delegate: SliverChildListDelegate([const Center(child: CircularProgressIndicator())]),
               );
             },
             data: (List<BookModel> value) {
@@ -136,10 +133,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
                         dismissible: DismissiblePane(
                           closeOnCancel: true,
                           onDismissed: () {
-                            ref
-                                .read(currentBooksController(widget.user.uid)
-                                    .notifier)
-                                .finishBook(book: value[index]);
+                            ref.read(currentBooksController(widget.user.uid).notifier).finishBook(book: value[index]);
                           },
                           confirmDismiss: () async {
                             bool? returnValue = await finishDialog(context);
@@ -153,9 +147,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
                               bool? returnValue = await finishDialog(context);
                               if (returnValue == true) {
                                 ref
-                                    .read(
-                                        currentBooksController(widget.user.uid)
-                                            .notifier)
+                                    .read(currentBooksController(widget.user.uid).notifier)
                                     .finishBook(book: value[index]);
                               }
                             },
@@ -171,10 +163,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
                         dismissible: DismissiblePane(
                           closeOnCancel: true,
                           onDismissed: () {
-                            ref
-                                .read(currentBooksController(widget.user.uid)
-                                    .notifier)
-                                .deleteBook(book: value[index]);
+                            ref.read(currentBooksController(widget.user.uid).notifier).deleteBook(book: value[index]);
                           },
                           confirmDismiss: () async {
                             bool? returnValue = await deleteDialog(context);
@@ -188,9 +177,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
                               bool? returnValue = await deleteDialog(context);
                               if (returnValue == true) {
                                 ref
-                                    .read(
-                                        currentBooksController(widget.user.uid)
-                                            .notifier)
+                                    .read(currentBooksController(widget.user.uid).notifier)
                                     .deleteBook(book: value[index]);
                               }
                             },
@@ -215,14 +202,9 @@ class _DashboardState extends ConsumerState<Dashboard> {
         onPressed: () async {
           final data = ref.read(authStateNotifierProvider).userStream.value;
           var bookToAdd = await Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) => const SearchPage(),
-                  fullscreenDialog: true));
+              context, MaterialPageRoute(builder: (context) => const SearchPage(), fullscreenDialog: true));
           if (bookToAdd is SearchBookModel) {
-            ref
-                .read(currentBooksController(data!.uid).notifier)
-                .addBook(book: bookToAdd);
+            ref.read(currentBooksController(data!.uid).notifier).addBook(book: bookToAdd);
           }
         },
         label: Row(

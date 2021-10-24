@@ -67,14 +67,11 @@ class BookModel {
       pageCount: map[pageCountKey] ?? 0,
       coverImage: map[coverImageKey],
       currentPage: map[currentPageKey] ?? 0,
-      dateCompleted: map[dateCompletedKey] != null
-          ? DateTime.fromMillisecondsSinceEpoch(map[dateCompletedKey])
-          : null,
+      dateCompleted: map[dateCompletedKey] != null ? DateTime.fromMillisecondsSinceEpoch(map[dateCompletedKey]) : null,
     );
   }
 
   String toJson() => json.encode(toMap());
 
-  factory BookModel.fromJson(String source) =>
-      BookModel.fromMap(json.decode(source));
+  factory BookModel.fromJson(String source) => BookModel.fromMap(json.decode(source));
 }

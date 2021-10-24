@@ -4,8 +4,8 @@ import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final currentBooksController = StateNotifierProvider.family<CurrentBookList,
-    AsyncValue<List<BookModel>>, String>((ref, uid) {
+final currentBooksController =
+    StateNotifierProvider.family<CurrentBookList, AsyncValue<List<BookModel>>, String>((ref, uid) {
   return CurrentBookList(ref.read, uid);
 });
 

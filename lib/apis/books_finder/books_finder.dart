@@ -16,9 +16,7 @@ class BooksFinderApi {
           title: book.info.title,
           authors: book.info.authors,
           pageCount: book.info.pageCount,
-          coverImage: book.info.imageLinks.isEmpty
-              ? null
-              : book.info.imageLinks["thumbnail"].toString(),
+          coverImage: book.info.imageLinks.isEmpty ? null : book.info.imageLinks["thumbnail"].toString(),
         ),
       );
     }

@@ -29,8 +29,7 @@ class CustomTheme {
             displayColor: Palette.niceBlack,
             bodyColor: Palette.niceBlack,
           ),
-      colorScheme:
-          ColorScheme.fromSwatch().copyWith(secondary: Palette.niceBlack),
+      colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Palette.niceBlack),
     );
   }
 }

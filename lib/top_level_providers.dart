@@ -4,8 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
-final firebaseAuthProvider =
-    Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
+final firebaseAuthProvider = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
 
 final authStateChangesProvider = StreamProvider<LocalUser?>(
   (ref) => ref.watch(firebaseAuthProvider).authStateChanges().map((user) {
@@ -18,11 +17,9 @@ final authStateChangesProvider = StreamProvider<LocalUser?>(
   }),
 );
 
-final authStateNotifierProvider =
-    StateNotifierProvider<AuthStateControllerNotifier, AuthState>((ref) {
+final authStateNotifierProvider = StateNotifierProvider<AuthStateControllerNotifier, AuthState>((ref) {
   final firebaseAuthChanges = ref.watch(authStateChangesProvider);
-  return AuthStateControllerNotifier(
-      AuthState(userStream: firebaseAuthChanges, isAppleSignIn: false));
+  return AuthStateControllerNotifier(AuthState(userStream: firebaseAuthChanges, isAppleSignIn: false));
 });
 
 class AuthStateControllerNotifier extends StateNotifier<AuthState> {
@@ -56,16 +53,13 @@ class AuthState {
   }
 
   @override
-  String toString() =>
-      'AuthState(userStream: $userStream, isAppleSignIn: $isAppleSignIn)';
+  String toString() => 'AuthState(userStream: $userStream, isAppleSignIn: $isAppleSignIn)';
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is AuthState &&
-        other.userStream == userStream &&
-        other.isAppleSignIn == isAppleSignIn;
+    return other is AuthState && other.userStream == userStream && other.isAppleSignIn == isAppleSignIn;
   }
 
   @override
