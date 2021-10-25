@@ -6,23 +6,23 @@
 /// {@endtemplate}
 abstract class BaseException implements Exception {
   final String message;
-  final String className;
+  final Type classType;
 
-  BaseException({required this.message, required this.className});
+  BaseException({required this.message, required this.classType});
   @override
   String toString() {
-    return '$className Error | $message';
+    return '${(classType).toString()} Error | $message';
   }
 
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) return true;
 
-    return other is BaseException && other.message == message && other.className == className;
+    return other is BaseException && other.message == message && other.classType == classType;
   }
 
   @override
-  int get hashCode => message.hashCode ^ className.hashCode;
+  int get hashCode => message.hashCode ^ classType.hashCode;
 }
 
 /// **AuthException**
@@ -30,5 +30,5 @@ abstract class BaseException implements Exception {
 /// Contains Exception Related to `AuthApi`
 /// {@macro base_exception}
 class AuthException extends BaseException {
-  AuthException(String message) : super(className: 'AuthException', message: message);
+  AuthException(String message) : super(classType: AuthException, message: message);
 }

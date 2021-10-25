@@ -1,3 +1,4 @@
+import 'package:conveneapp/core/constants/exception_messages.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -10,39 +11,40 @@ import 'package:conveneapp/core/errors/errors.dart';
 import 'package:conveneapp/core/type_defs/type_defs.dart';
 
 /// TODO: Better to move this in a constants file called `error_messages`
-const _authExceptionMessage = "We have trouble in connection you to the app!. Please try again.";
 
 abstract class AuthApi {
   Stream<User?> currentUser();
 
   /// - signIn with google
-  CtfUnit signIn();
+  FutureEitherVoid signIn();
 
   /// - SignIn with apple
-  CtfUnit signInWithApple();
+  FutureEitherVoid signInWithApple();
   Future<void> signOut();
 }
 
 /// - Implementations for `AuthApi`
 /// - HACK: Must use any `DI` to completely defer third party dependencies
 // TODO :  depend custom/internal classes rather than depending on third pary classes
-class AuthApiImpl implements AuthApi {
+class AuthApiFirebase implements AuthApi {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;
   final UserApi _userApi;
   final GoogleAuthApi _googleAuthApi;
-  AuthApiImpl({FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignIn, UserApi? userApi, GoogleAuthApi? googleAuthApi})
+  AuthApiFirebase(
+      {FirebaseAuth? firebaseAuth, GoogleSignIn? googleSignIn, UserApi? userApi, GoogleAuthApi? googleAuthApi})
       : _googleSignIn = googleSignIn ?? GoogleSignIn(),
         _firebaseAuth = firebaseAuth ?? FirebaseAuth.instance,
         _userApi = userApi ?? UserApi(),
         _googleAuthApi = googleAuthApi ?? GoogleAuthApi();
+
   @override
   Stream<User?> currentUser() {
     return _firebaseAuth.authStateChanges();
   }
 
   @override
-  CtfUnit signIn() async {
+  FutureEitherVoid signIn() async {
     // Trigger the authentication flow
     try {
       final googleUser = await _googleAuthApi.signInWithGoogle();
@@ -52,19 +54,19 @@ class AuthApiImpl implements AuthApi {
         final user = userCredential.user;
         if (user != null) {
           await _userApi.addUser(uid: user.uid, email: user.email, name: user.displayName);
-          return right(unit);
+          return right(null);
         } else {
-          throw AuthException(_authExceptionMessage);
+          throw AuthException(authExceptionMessage);
         }
       } else {
         throw AuthException('Sign in aborted by user');
       }
     } on FirebaseAuthException catch (e) {
-      return left(AuthFailure(e.message ?? _authExceptionMessage));
+      return left(AuthFailure(e.message ?? authExceptionMessage));
     } on BaseException catch (e) {
       return left(AuthFailure(e.message));
     } on Exception catch (_) {
-      return left(AuthFailure(_authExceptionMessage));
+      return left(AuthFailure(authExceptionMessage));
     }
   }
 
@@ -78,7 +80,7 @@ class AuthApiImpl implements AuthApi {
   }
 
   @override
-  CtfUnit signInWithApple() async {
+  FutureEitherVoid signInWithApple() async {
     try {
       const scopes = FirebaseConstants.appleSignInScopes;
       // 1. perform the sign-in request
@@ -104,9 +106,9 @@ class AuthApiImpl implements AuthApi {
 
           /// - Adds the user's document directly after the account creating
           await _userApi.addUser(uid: firebaseUser.uid, email: firebaseUser.email, name: firebaseUser.displayName);
-          return right(unit);
+          return right(null);
         case AuthorizationStatus.error:
-          throw AuthException(result.error?.localizedFailureReason ?? _authExceptionMessage);
+          throw AuthException(result.error?.localizedFailureReason ?? authExceptionMessage);
 
         case AuthorizationStatus.cancelled:
           throw AuthException('Sign in aborted by user');
@@ -114,11 +116,11 @@ class AuthApiImpl implements AuthApi {
           throw UnimplementedError();
       }
     } on FirebaseAuthException catch (e) {
-      return left(AuthFailure(e.message ?? _authExceptionMessage));
+      return left(AuthFailure(e.message ?? authExceptionMessage));
     } on BaseException catch (e) {
       return left(AuthFailure(e.message));
     } on Exception catch (_) {
-      return left(AuthFailure(_authExceptionMessage));
+      return left(AuthFailure(authExceptionMessage));
     }
   }
 }

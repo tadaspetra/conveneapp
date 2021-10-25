@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const String nullUid = "nouser";
 const String nullEmail = "nouser";
-final authApiProvider = Provider<AuthApi>((ref) => AuthApiImpl());
+final authApiProvider = Provider<AuthApi>((ref) => AuthApiFirebase());
 
 final currentUserController = StreamProvider<LocalUser>((ref) {
   final AuthApi authApi = ref.watch(authApiProvider);

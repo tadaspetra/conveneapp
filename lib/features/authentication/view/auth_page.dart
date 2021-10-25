@@ -44,16 +44,10 @@ class AuthPage extends ConsumerWidget {
             if (appleSignInAvailable)
               AppleSignInButton(
                 onPressed: () async {
-                  // User user = await AuthApi().signInWithApple();
-                  // await UserApi().addUser(
-                  //   uid: user.uid,
-                  //   email: user.email,
-                  //   name: user.displayName,
-                  // );
                   final result = await ref.read(authApiProvider).signInWithApple();
-                  result.fold((l) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.message)));
-                  }, (r) {});
+                  result.fold((failure) {
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(failure.message)));
+                  }, (_) {});
                 },
               ),
             const Spacer()
@@ -74,9 +68,11 @@ class GoogleButton extends ConsumerWidget {
     return BigButton(
       onPressed: () async {
         final result = await ref.read(authApiProvider).signIn();
-        result.fold((l) {
-          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(l.message)));
-        }, (r) {});
+
+        ///- create extensions to handle this if there is no use for the right(result)
+        result.fold((failure) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(failure.message)));
+        }, (_) {});
       },
       child: Padding(
         padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
