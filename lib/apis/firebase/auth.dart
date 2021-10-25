@@ -2,6 +2,7 @@ import 'package:conveneapp/core/constants/exception_messages.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
@@ -10,7 +11,7 @@ import 'package:conveneapp/core/constants/firebase_constants.dart';
 import 'package:conveneapp/core/errors/errors.dart';
 import 'package:conveneapp/core/type_defs/type_defs.dart';
 
-/// TODO: Better to move this in a constants file called `error_messages`
+final authApiProvider = Provider<AuthApi>((ref) => AuthApiFirebase());
 
 abstract class AuthApi {
   Stream<User?> currentUser();
@@ -24,8 +25,6 @@ abstract class AuthApi {
 }
 
 /// - Implementations for `AuthApi`
-/// - HACK: Must use any `DI` to completely defer third party dependencies
-// TODO :  depend custom/internal classes rather than depending on third pary classes
 class AuthApiFirebase implements AuthApi {
   final FirebaseAuth _firebaseAuth;
   final GoogleSignIn _googleSignIn;

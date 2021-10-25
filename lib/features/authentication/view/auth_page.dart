@@ -1,6 +1,6 @@
+import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/core/button.dart';
 import 'package:conveneapp/core/text.dart';
-import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -68,8 +68,6 @@ class GoogleButton extends ConsumerWidget {
     return BigButton(
       onPressed: () async {
         final result = await ref.read(authApiProvider).signIn();
-
-        ///- create extensions to handle this if there is no use for the right(result)
         result.fold((failure) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(failure.message)));
         }, (_) {});

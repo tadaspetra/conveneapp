@@ -1,3 +1,4 @@
+import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/user.dart';
 import 'package:conveneapp/features/book/controller/book_controller.dart';
