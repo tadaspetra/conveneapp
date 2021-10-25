@@ -8,7 +8,7 @@ const String nullEmail = "nouser";
 final authApiProvider = Provider<AuthApi>((ref) => AuthApiImpl());
 
 final currentUserController = StreamProvider<LocalUser>((ref) {
-  final AuthApi authApi = ref.read(authApiProvider);
+  final AuthApi authApi = ref.watch(authApiProvider);
   return authApi.currentUser().map((user) => LocalUser(
         uid: user?.uid ?? nullUid,
         email: user?.email ?? nullEmail,
