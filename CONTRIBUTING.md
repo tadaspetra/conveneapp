@@ -3,15 +3,36 @@
 When contributing to this repository, please first discuss the change you wish to make via "proposal" issue,
 or on the discord: https://discord.gg/H3vFPpEkN5
 
-Please note we have a code of conduct, please follow it in all your interactions with the project.
+
+## How to Contribute
+1. Pick and issue to work on, assign it to yourself (or ask one of the collaborators to assign to you), and move it to "in progress".
+2. Add in your changes following the project conventions
+3. Add or update any tests
+4. Create a pull request
+
+Other ways to contribute include, but are not limited to: 
+* Reporting Bugs
+* Figma Design
+* Reviewing Code
+* Writing Documentation
+* GitHub/Discord Organization
+* CICD Workflow
+* Marketing & Copywriting
+
+Note: It is recommended to not make pull requests huge. If you want to implement a huge feature, break it down into multiple issues, and approach it one at a time
+
+## Propose Changes
+If there is not already an issue that you want to work on, create a `proposal` issue. Then reach out to one of the collaborators
+for it to get approved and turned into a `new feature` issue. Then follow the "How to Contribute" section to make changes.
 
 ## Pull Request Process
 
 1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
    build.
 2. Update the README.md with details of changes to the interface, and how the app works.
-3. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
-   do not have permission to do that, you may request the second reviewer to merge it for you.
+3. Ensure that all the github actions pass.
+4. You may merge the Pull Request in once you have the sign-off of one other developers, or if you 
+   do not have permission to do that, you may request a collaborator to merge it for you.
 
 ## Code of Conduct
 
