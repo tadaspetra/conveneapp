@@ -27,8 +27,7 @@ for it to get approved and turned into a `new feature` issue. Then follow the "H
 
 ## Pull Request Process
 
-1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
-   build.
+1. Ensure any install or build dependencies are removed before creating a pull request.
 2. Update the README.md with details of changes to the interface, and how the app works.
 3. Ensure that all the github actions pass.
 4. You may merge the Pull Request in once you have the sign-off of one other developers, or if you 
