@@ -3,9 +3,6 @@ import 'dart:developer';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conveneapp/config_reader.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 /// - this contains the developement environment type `dev`,`prod` and `staging`
 /// if we add in the future.
@@ -27,8 +24,7 @@ class EnvironmentConfig {
 Future<void> setUpMain(String env) async {
   if (env == EnvironmentConfig.dev) {
     log('dev');
-    WidgetsFlutterBinding.ensureInitialized();
-    await Firebase.initializeApp();
+
     final ConfigReader configReader = ConfigReader();
     await configReader.initializeConfigReader();
     await FirebaseAuth.instance.useAuthEmulator(

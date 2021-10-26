@@ -1,11 +1,14 @@
 import 'package:conveneapp/environment_config.dart';
 import 'package:conveneapp/theme/custom_theme.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'app.dart';
 
 Future<void> main() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    await Firebase.initializeApp();
   const String env = String.fromEnvironment(EnvironmentConfig.envName, defaultValue: EnvironmentConfig.prod);
   await setUpMain(env);
   runApp(const ProviderScope(child: MyApp()));
