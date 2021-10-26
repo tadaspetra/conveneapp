@@ -6,10 +6,11 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:conveneapp/main.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   testWidgets('empty test for generating coverage', (WidgetTester tester) async {
-    await tester.pumpWidget(const MyApp());
+    await tester.pumpWidget(const ProviderScope(child :MyApp()));
   });
 }
