@@ -28,9 +28,15 @@ void main() {
     googleAuthApi = MockGoogleAuthApi();
     userCredential = MockUserCredential();
     authCredential = MockAuthCredential();
+
     authApiImpl = AuthApiFirebase(
-        firebaseAuth: firebaseAuth, userApi: userApi, googleSignIn: googleSignIn, googleAuthApi: googleAuthApi);
+      firebaseAuth: firebaseAuth,
+      userApi: userApi,
+      googleSignIn: googleSignIn,
+      googleAuthApi: googleAuthApi,
+    );
   });
+
   AuthFailure _getAuthFailure(String message) {
     return AuthFailure(message);
   }
@@ -49,11 +55,13 @@ void main() {
 
       expect(authApiImpl.currentUser(), emitsInOrder([user]));
     });
+
     test('should return [null] when there is no user logged in', () {
       mockCurrentUser(null);
 
       expect(authApiImpl.currentUser(), emitsInOrder([null]));
     });
+
     test('should return stream of errors when an error is emitted', () {
       when(() => authApiImpl.currentUser()).thenAnswer((invocation) => Stream.error(_error));
 
@@ -65,6 +73,7 @@ void main() {
     const uid = 'uid';
     const name = 'name';
     const abortedMessage = 'Sign in aborted by user';
+
     test(
       '''should return [right(void)] when the user has be created/signed in and the 
       user document is created''',
@@ -80,6 +89,7 @@ void main() {
         expect(await authApiImpl.signIn(), equals(right(null)));
       },
     );
+
     test('''should return left(AuthFailure(We have trouble in 
     connection you to the app!. Please try again.))''', () async {
       when(() => googleAuthApi.signInWithGoogle()).thenAnswer((invocation) async => authCredential);
@@ -87,6 +97,7 @@ void main() {
 
       expect(await authApiImpl.signIn(), equals(left(_getAuthFailure(authExceptionMessage))));
     });
+
     test('should retrun left(AuthFailure(Sign in aborted by user) when the user cancels the flow))', () async {
       when(() => googleAuthApi.signInWithGoogle()).thenAnswer((invocation) async => null);
 
