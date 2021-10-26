@@ -68,6 +68,7 @@ void main() {
       expect(authApiImpl.currentUser(), emitsError(_error));
     });
   });
+
   group('signIn', () {
     const email = 'email';
     const uid = 'uid';
