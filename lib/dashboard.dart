@@ -99,7 +99,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
         ),
         actions: [
           IconButton(
-            onPressed: () => AuthApi().signOut(),
+            onPressed: () async => await ref.read(authApiProvider).signOut(),
             icon: const Icon(
               Icons.logout,
             ),
