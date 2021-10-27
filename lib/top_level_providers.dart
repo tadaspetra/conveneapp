@@ -1,13 +1,12 @@
+import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/features/authentication/model/user.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
-final firebaseAuthProvider = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
-
 final authStateChangesProvider = StreamProvider<LocalUser?>(
-  (ref) => ref.watch(firebaseAuthProvider).authStateChanges().map((user) {
+  (ref) => ref.watch(authApiProvider).currentUser().map((user) {
     if (user == null) return null;
     return LocalUser(
       uid: user.uid,
