@@ -1,3 +1,4 @@
+import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/core/button.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/user.dart';
@@ -18,6 +19,8 @@ class Dashboard extends ConsumerStatefulWidget {
 }
 
 class _DashboardState extends ConsumerState<Dashboard> {
+  final GlobalKey<ScaffoldState> _scaffoldkey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
@@ -26,6 +29,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldkey,
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(71.0),
         child: AppBar(
@@ -40,12 +44,17 @@ class _DashboardState extends ConsumerState<Dashboard> {
           elevation: 0,
           centerTitle: false,
           actions: [
-            Padding(
-              padding: const EdgeInsets.only(right: 10, top: 15),
-              child: CircleAvatar(
-                backgroundColor: Colors.blue.shade900,
-                radius: 24,
-                child: Text(widget.user.name!.substring(0, 1)),
+            GestureDetector(
+              onTap: () {
+                _scaffoldkey.currentState!.openEndDrawer();
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(right: 10, top: 15),
+                child: CircleAvatar(
+                  backgroundColor: Colors.blue.shade900,
+                  radius: 24,
+                  child: Text(widget.user.name!.substring(0, 1)),
+                ),
               ),
             ),
           ],
@@ -114,6 +123,18 @@ class _DashboardState extends ConsumerState<Dashboard> {
               );
             }
           }),
+      endDrawer: Drawer(
+          child: ListView(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.logout),
+            title: const Text('Logout'),
+            onTap: () async {
+              await ref.read(authApiProvider).signOut();
+            },
+          ),
+        ],
+      )),
     );
   }
 }
