@@ -29,7 +29,7 @@ void main() {
     });
 
     test('should return [192.168.8.131] when [ip] is available in the [configs/test_emulator_config.json]', () async {
-      await reader.initializeConfigReader();
+      await reader.initializeConfigReader(validAssetPath);
       expect(reader.getIp, configIp);
     });
 
