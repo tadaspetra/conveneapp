@@ -1,7 +1,8 @@
 import 'dart:convert';
-import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
+import 'package:conveneapp/core/type_defs/type_defs.dart';
 
 /// - contains the initalization for the firebase emulator suite
 ///- Added only for mobile platforms
@@ -10,9 +11,10 @@ import 'package:flutter/services.dart';
 /// - HACK: must be added via a provider later when having different endpoints
 class ConfigReader {
   final Map<String, dynamic> _config = {};
-  Future<void> initializeConfigReader() async {
+
+  FutureVoid initializeConfigReader([String path = 'configs/emulator_config.json']) async {
     try {
-      final configOptions = await rootBundle.loadString('configs/emulator_config.json');
+      final configOptions = await rootBundle.loadString(path);
       final jsonValue = jsonDecode(configOptions) as Map<String, dynamic>;
       _config.addAll(jsonValue);
     } catch (_) {
@@ -34,10 +36,11 @@ class ConfigReader {
 
   ///- builds platform specific hosts
   String _buildIp() {
-    return Platform.isAndroid ? '10.0.2.2' : 'localhost';
+    return defaultTargetPlatform == TargetPlatform.android ? '10.0.2.2' : 'localhost';
   }
 }
 
+@visibleForTesting
 class NoEmulatorConfigException implements Exception {
   const NoEmulatorConfigException();
   @override
