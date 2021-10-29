@@ -29,41 +29,41 @@ const _error = 'error';
 const _firebaseExceptionCode = 'firebase-error';
 
 void main() {
-  late MockUserApi userApi;
-  late MockFirebaseAuth firebaseAuth;
-  late MockGoogleSignIn googleSignIn;
-  late MockUser user;
+  late MockUserApi mockUserApi;
+  late MockFirebaseAuth mockFirebaseAuth;
+  late MockGoogleSignIn mockGoogleSignIn;
+  late MockUser mockUser;
   late AuthApiFirebase authApiFirebase;
-  late MockGoogleAuthApi googleAuthApi;
+  late MockGoogleAuthApi mockGoogleAuthApi;
 
-  late MockUserCredential userCredential;
-  late MockAuthCredential authCredential;
-  late MockAppleAuthApi appleAuthApi;
-  late MockAuthorizationResult authorizationResult;
-  late MockAppleIdCredential appleIdCredential;
-  late MockPersonNameComponents personNameComponents;
-  late MockNsError nsError;
+  late MockUserCredential mockUserCredential;
+  late MockAuthCredential mockAuthCredential;
+  late MockAppleAuthApi mockAppleAuthApi;
+  late MockAuthorizationResult mockAuthorizationResult;
+  late MockAppleIdCredential mockAppleIdCredential;
+  late MockPersonNameComponents mockPersonNameComponents;
+  late MockNsError mockNsError;
 
   setUp(() {
-    userApi = MockUserApi();
-    firebaseAuth = MockFirebaseAuth();
-    googleSignIn = MockGoogleSignIn();
-    user = MockUser();
-    googleAuthApi = MockGoogleAuthApi();
-    userCredential = MockUserCredential();
-    authCredential = MockAuthCredential();
-    appleAuthApi = MockAppleAuthApi();
-    authorizationResult = MockAuthorizationResult();
-    appleIdCredential = MockAppleIdCredential();
-    personNameComponents = MockPersonNameComponents();
-    nsError = MockNsError();
+    mockUserApi = MockUserApi();
+    mockFirebaseAuth = MockFirebaseAuth();
+    mockGoogleSignIn = MockGoogleSignIn();
+    mockUser = MockUser();
+    mockGoogleAuthApi = MockGoogleAuthApi();
+    mockUserCredential = MockUserCredential();
+    mockAuthCredential = MockAuthCredential();
+    mockAppleAuthApi = MockAppleAuthApi();
+    mockAuthorizationResult = MockAuthorizationResult();
+    mockAppleIdCredential = MockAppleIdCredential();
+    mockPersonNameComponents = MockPersonNameComponents();
+    mockNsError = MockNsError();
 
     authApiFirebase = AuthApiFirebase(
-        firebaseAuth: firebaseAuth,
-        userApi: userApi,
-        googleSignIn: googleSignIn,
-        googleAuthApi: googleAuthApi,
-        appleAuthApi: appleAuthApi);
+        firebaseAuth: mockFirebaseAuth,
+        userApi: mockUserApi,
+        googleSignIn: mockGoogleSignIn,
+        googleAuthApi: mockGoogleAuthApi,
+        appleAuthApi: mockAppleAuthApi);
   });
 
   const email = 'email';
@@ -76,7 +76,7 @@ void main() {
 
   group('currentUser', () {
     void mockCurrentUser(MockUser? user) {
-      when(() => firebaseAuth.authStateChanges()).thenAnswer(
+      when(() => mockFirebaseAuth.authStateChanges()).thenAnswer(
         (invocation) => Stream.fromIterable([
           user,
         ]),
@@ -84,9 +84,9 @@ void main() {
     }
 
     test('should return [User] when a user has logged in', () {
-      mockCurrentUser(user);
+      mockCurrentUser(mockUser);
 
-      expect(authApiFirebase.currentUser(), emitsInOrder([user]));
+      expect(authApiFirebase.currentUser(), emitsInOrder([mockUser]));
     });
 
     test('should return [null] when there is no user logged in', () {
@@ -105,7 +105,7 @@ void main() {
   group('signIn', () {
     const abortedMessage = 'Sign in aborted by user';
     void mockSignGoogle() {
-      when(() => googleAuthApi.signInWithGoogle()).thenAnswer((invocation) async => authCredential);
+      when(() => mockGoogleAuthApi.signInWithGoogle()).thenAnswer((invocation) async => mockAuthCredential);
     }
 
     test(
@@ -113,27 +113,29 @@ void main() {
       user document is created''',
       () async {
         mockSignGoogle();
-        when(() => firebaseAuth.signInWithCredential(authCredential)).thenAnswer((invocation) async => userCredential);
-        when(() => userCredential.user).thenReturn(user);
-        when(() => user.email).thenReturn(email);
-        when(() => user.uid).thenReturn(uid);
-        when(() => user.displayName).thenReturn(name);
-        when(() => userApi.addUser(uid: uid, email: email, name: name)).thenAnswer((invocation) async {});
+        when(() => mockFirebaseAuth.signInWithCredential(mockAuthCredential))
+            .thenAnswer((invocation) async => mockUserCredential);
+        when(() => mockUserCredential.user).thenReturn(mockUser);
+        when(() => mockUser.email).thenReturn(email);
+        when(() => mockUser.uid).thenReturn(uid);
+        when(() => mockUser.displayName).thenReturn(name);
+        when(() => mockUserApi.addUser(uid: uid, email: email, name: name)).thenAnswer((invocation) async {});
 
         expect(await authApiFirebase.signIn(), equals(right(null)));
       },
     );
 
     test('''should return left(AuthFailure(We have trouble in 
-    connecting you to the app!. Please try again.))''', () async {
+    connecting you to the app!. Please try again.)) when [UserCredential.user] is null''', () async {
       mockSignGoogle();
-      when(() => firebaseAuth.signInWithCredential(authCredential)).thenAnswer((invocation) async => userCredential);
+      when(() => mockFirebaseAuth.signInWithCredential(mockAuthCredential))
+          .thenAnswer((invocation) async => mockUserCredential);
 
       expect(await authApiFirebase.signIn(), equals(left(_getAuthFailure(authExceptionMessage))));
     });
 
     test('should retrun left(AuthFailure(Sign in aborted by user) when the user cancels the flow))', () async {
-      when(() => googleAuthApi.signInWithGoogle()).thenAnswer((invocation) async => null);
+      when(() => mockGoogleAuthApi.signInWithGoogle()).thenAnswer((invocation) async => null);
 
       expect(await authApiFirebase.signIn(), equals(left(_getAuthFailure(abortedMessage))));
     });
@@ -141,7 +143,7 @@ void main() {
     test('''should return [left(AuthFailure(AuthFailure(error))] 
     when [FirebaseAuthException] is thrown and [e.message] is not null''', () async {
       mockSignGoogle();
-      when(() => firebaseAuth.signInWithCredential(authCredential)).thenAnswer(
+      when(() => mockFirebaseAuth.signInWithCredential(mockAuthCredential)).thenAnswer(
         (invocation) async => throw FirebaseAuthException(
           code: _firebaseExceptionCode,
           message: _error,
@@ -156,7 +158,7 @@ void main() {
     when [FirebaseAuthException] is thrown and [e.message] is [null]
     ''', () async {
       mockSignGoogle();
-      when(() => firebaseAuth.signInWithCredential(authCredential)).thenAnswer(
+      when(() => mockFirebaseAuth.signInWithCredential(mockAuthCredential)).thenAnswer(
         (invocation) async => throw FirebaseAuthException(
           code: _firebaseExceptionCode,
         ),
@@ -166,9 +168,9 @@ void main() {
     });
 
     test('''should return [left(AuthFailure(AuthFailure(We have trouble in 
-        connecting you to the app!. Please try again.)))] when [Exception] is throw''', () async {
+        connecting you to the app!. Please try again.)))] when [Exception] is thrown''', () async {
       mockSignGoogle();
-      when(() => firebaseAuth.signInWithCredential(authCredential)).thenAnswer(
+      when(() => mockFirebaseAuth.signInWithCredential(mockAuthCredential)).thenAnswer(
         (invocation) async => throw Exception(),
       );
 
@@ -179,11 +181,11 @@ void main() {
   group('authApiProvider', () {
     test('should return typeOf [AuthApi] when provider is called', () {
       final container = ProviderContainer(overrides: [
-        firebaseAuthProvider.overrideWithValue(firebaseAuth),
-        googleSignInProvider.overrideWithValue(googleSignIn),
-        userApiProvider.overrideWithValue(userApi),
-        googleAuthApiProvider.overrideWithValue(googleAuthApi),
-        appleAuthApiProvider.overrideWithValue(appleAuthApi)
+        firebaseAuthProvider.overrideWithValue(mockFirebaseAuth),
+        googleSignInProvider.overrideWithValue(mockGoogleSignIn),
+        userApiProvider.overrideWithValue(mockUserApi),
+        googleAuthApiProvider.overrideWithValue(mockGoogleAuthApi),
+        appleAuthApiProvider.overrideWithValue(mockAppleAuthApi)
       ]);
       expect(container.read(authApiProvider), isA<AuthApi>());
     });
@@ -191,8 +193,8 @@ void main() {
 
   group('signOut', () {
     test('should return [right(null)] when the user has been signed out', () async {
-      when(() => googleSignIn.signOut()).thenAnswer((invocation) async {});
-      when(() => firebaseAuth.signOut()).thenAnswer((invocation) async {});
+      when(() => mockGoogleSignIn.signOut()).thenAnswer((invocation) async {});
+      when(() => mockFirebaseAuth.signOut()).thenAnswer((invocation) async {});
 
       expect(await authApiFirebase.signOut(), equals(right(null)));
     });
@@ -200,7 +202,7 @@ void main() {
     test('''should return left(AuthFailure(Unknown error occured
      when trying to sign out you from the app))
          when an exception is thrown''', () async {
-      when(() => googleSignIn.signOut()).thenAnswer((invocation) async => throw Exception());
+      when(() => mockGoogleSignIn.signOut()).thenAnswer((invocation) async => throw Exception());
 
       expect(await authApiFirebase.signOut(), equals(left(_getAuthFailure(signOutExceptionMessage))));
     });
@@ -208,29 +210,30 @@ void main() {
 
   group('signInWithApple', () {
     void mockAutorizationResult() {
-      when(() => appleAuthApi.signInWithApple()).thenAnswer((invocation) async => authorizationResult);
+      when(() => mockAppleAuthApi.signInWithApple()).thenAnswer((invocation) async => mockAuthorizationResult);
     }
 
     group('AuthorizationStatus.authorized', () {
       setUp(() {
-        registerFallbackValue(authCredential);
+        registerFallbackValue(mockAuthCredential);
       });
+
       test('should return [right(null)] when user is signedIn and', () async {
         mockAutorizationResult();
-        when(() => authorizationResult.status).thenReturn(AuthorizationStatus.authorized);
-        when(() => authorizationResult.credential).thenReturn(appleIdCredential);
-        when(() => appleIdCredential.identityToken).thenReturn(Uint8List.fromList([]));
-        when(() => appleIdCredential.authorizationCode).thenReturn(Uint8List.fromList([]));
-        when(() => appleIdCredential.fullName).thenReturn(personNameComponents);
+        when(() => mockAuthorizationResult.status).thenReturn(AuthorizationStatus.authorized);
+        when(() => mockAuthorizationResult.credential).thenReturn(mockAppleIdCredential);
+        when(() => mockAppleIdCredential.identityToken).thenReturn(Uint8List.fromList([]));
+        when(() => mockAppleIdCredential.authorizationCode).thenReturn(Uint8List.fromList([]));
+        when(() => mockAppleIdCredential.fullName).thenReturn(mockPersonNameComponents);
 
-        when(() => firebaseAuth.signInWithCredential(any())).thenAnswer((invocation) async => userCredential);
-        when(() => personNameComponents.givenName).thenReturn(name);
-        when(() => personNameComponents.familyName).thenReturn(name);
-        when(() => userCredential.user).thenReturn(user);
-        when(() => user.uid).thenReturn(uid);
-        when(() => user.email).thenReturn(email);
-        when(() => user.updateDisplayName(any<String>())).thenAnswer((invocation) async {});
-        when(() => userApi.addUser(
+        when(() => mockFirebaseAuth.signInWithCredential(any())).thenAnswer((invocation) async => mockUserCredential);
+        when(() => mockPersonNameComponents.givenName).thenReturn(name);
+        when(() => mockPersonNameComponents.familyName).thenReturn(name);
+        when(() => mockUserCredential.user).thenReturn(mockUser);
+        when(() => mockUser.uid).thenReturn(uid);
+        when(() => mockUser.email).thenReturn(email);
+        when(() => mockUser.updateDisplayName(any<String>())).thenAnswer((invocation) async {});
+        when(() => mockUserApi.addUser(
             uid: any<String>(named: 'uid'),
             email: any<String>(named: 'email'),
             name: any<String>(named: 'name'))).thenAnswer((invocation) async {});
@@ -242,16 +245,17 @@ void main() {
     group('AuthorizationStatus.error', () {
       test('should return [left(error)] when [Ns.localizedFailureReason] is null', () async {
         mockAutorizationResult();
-        when(() => authorizationResult.status).thenReturn(AuthorizationStatus.error);
-        when(() => authorizationResult.error).thenReturn(nsError);
-        when(() => nsError.localizedFailureReason).thenReturn(_error);
+        when(() => mockAuthorizationResult.status).thenReturn(AuthorizationStatus.error);
+        when(() => mockAuthorizationResult.error).thenReturn(mockNsError);
+        when(() => mockNsError.localizedFailureReason).thenReturn(_error);
 
         expect(await authApiFirebase.signInWithApple(), equals(left(_getAuthFailure(_error))));
       });
+
       test('''should return [left(We have trouble in connecting you to the app!. Please try again.)] 
       when [Ns.localizedFailureReason] is not null''', () async {
         mockAutorizationResult();
-        when(() => authorizationResult.status).thenReturn(AuthorizationStatus.error);
+        when(() => mockAuthorizationResult.status).thenReturn(AuthorizationStatus.error);
 
         expect(await authApiFirebase.signInWithApple(), equals(left(_getAuthFailure(authExceptionMessage))));
       });
@@ -260,7 +264,7 @@ void main() {
     group('AuthorizationStatus.cancelled', () {
       test('should return [left(Sign in aborted by user)] when user cancels the flow', () async {
         mockAutorizationResult();
-        when(() => authorizationResult.status).thenReturn(AuthorizationStatus.cancelled);
+        when(() => mockAuthorizationResult.status).thenReturn(AuthorizationStatus.cancelled);
 
         expect(await authApiFirebase.signInWithApple(), equals(left(_getAuthFailure('Sign in aborted by user'))));
       });
@@ -269,7 +273,7 @@ void main() {
     test(
         'should return [left(AuthFailure(error))] when [FirebaseException] is thrown with [FirebaseAuthException.message] is not null',
         () async {
-      when(() => appleAuthApi.signInWithApple())
+      when(() => mockAppleAuthApi.signInWithApple())
           .thenAnswer((invocation) async => throw FirebaseAuthException(code: _firebaseExceptionCode, message: _error));
 
       expect(await authApiFirebase.signInWithApple(), equals(left(_getAuthFailure(_error))));
@@ -278,7 +282,7 @@ void main() {
     test(
         'should reuturn left(AuthFailure(We have trouble in connecting you to the app!. Please try again.)) when [FirebaseAuthException] is thrown with [FirebaseAuthException.message] is null',
         () async {
-      when(() => appleAuthApi.signInWithApple())
+      when(() => mockAppleAuthApi.signInWithApple())
           .thenAnswer((invocation) async => throw FirebaseAuthException(code: _firebaseExceptionCode));
 
       expect(await authApiFirebase.signInWithApple(), equals(left(_getAuthFailure(authExceptionMessage))));
@@ -287,7 +291,7 @@ void main() {
     test(
         'should reuturn left(AuthFailure(We have trouble in connecting you to the app!. Please try again.)) when [Exception] is thrown',
         () async {
-      when(() => appleAuthApi.signInWithApple()).thenAnswer((invocation) async => throw Exception());
+      when(() => mockAppleAuthApi.signInWithApple()).thenAnswer((invocation) async => throw Exception());
 
       expect(await authApiFirebase.signInWithApple(), equals(left(_getAuthFailure(authExceptionMessage))));
     });
