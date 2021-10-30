@@ -7,6 +7,7 @@ import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/features/book/view/book_slidable.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
 import 'package:conveneapp/features/search/view/search.dart';
+import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -51,7 +52,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
               child: Padding(
                 padding: const EdgeInsets.only(right: 10, top: 15),
                 child: CircleAvatar(
-                  backgroundColor: Colors.blue.shade900,
+                  backgroundColor: Palette.niceBlack,
                   radius: 24,
                   child: Text(widget.user.name!.substring(0, 1)),
                 ),
