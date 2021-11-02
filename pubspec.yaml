@@ -36,11 +36,12 @@ dependencies:
   the_apple_sign_in: ^1.1.1
 
 dev_dependencies:
+  mocktail_image_network: ^0.2.0
+  mocktail: ^0.2.0 
   flutter_launcher_icons: ^0.9.2
   flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
-  mocktail: ^0.2.0
 
 flutter_icons:
   android: true

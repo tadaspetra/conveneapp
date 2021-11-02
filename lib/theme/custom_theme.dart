@@ -7,6 +7,7 @@ class CustomTheme {
     final theme = Theme.of(context);
     return ThemeData(
       primaryColor: Palette.niceBlack,
+      cardColor: Palette.niceGrey,
       scaffoldBackgroundColor: Palette.niceWhite,
       primaryTextTheme: theme.primaryTextTheme.apply(
         displayColor: Palette.niceBlack,
@@ -17,6 +18,10 @@ class CustomTheme {
         color: Palette.niceWhite,
         iconTheme: IconThemeData(color: Palette.niceBlack),
       ),
+      textSelectionTheme: TextSelectionThemeData(
+          cursorColor: Palette.niceBlack,
+          selectionHandleColor: Palette.niceBlack,
+          selectionColor: Palette.niceBlack.withOpacity(0.2)),
       textTheme: theme.primaryTextTheme
           .copyWith(
             button: theme.primaryTextTheme.button?.copyWith(
