@@ -25,3 +25,4 @@ doc/api/
 /configs/emulator_config.json
 ./history
 .flutter-plugins-dependencies
+/coverage

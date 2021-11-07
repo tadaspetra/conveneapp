@@ -1,5 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conveneapp/features/authentication/model/user.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+final userApiProvider = Provider<UserApi>((ref) => UserApi());
 
 final CollectionReference users = FirebaseFirestore.instance.collection('users');
 
