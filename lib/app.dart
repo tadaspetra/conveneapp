@@ -50,7 +50,8 @@ class _AppState extends ConsumerState<AppNavigator> {
                     return AuthPage(
                       appleSignInAvailable: snapshot.data ?? false,
                     );
-                  } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
                     return const LoadingPage();
                   }
                   throw ("WE STILL HAVE PROBLEMS");
@@ -61,13 +62,14 @@ class _AppState extends ConsumerState<AppNavigator> {
                 data: (data) {
                   return Dashboard(user: data);
                 },
-                loading: (user) {
+                loading: () {
                   return const LoadingPage();
                 },
-                error: (error, stack, user) {
+                error: (error, stack) {
                   return FutureBuilder(
                     future: _appleSignInAvailable,
-                    builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                    builder:
+                        (BuildContext context, AsyncSnapshot<bool> snapshot) {
                       if (snapshot.hasError) {
                         throw ("WE HAVE PROBLEMS");
                       }
@@ -75,7 +77,8 @@ class _AppState extends ConsumerState<AppNavigator> {
                         return AuthPage(
                           appleSignInAvailable: snapshot.data ?? false,
                         );
-                      } else if (snapshot.connectionState == ConnectionState.waiting) {
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
                         return const LoadingPage();
                       }
                       throw ("WE STILL HAVE PROBLEMS");

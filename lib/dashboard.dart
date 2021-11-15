@@ -39,7 +39,10 @@ class _DashboardState extends ConsumerState<Dashboard> {
             padding: const EdgeInsets.only(top: 15),
             child: Text(
               "Hi, ${widget.user.name}!",
-              style: const TextStyle(color: Colors.black, fontWeight: FontWeight.w500, fontSize: 20),
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w500,
+                  fontSize: 20),
             ),
           ),
           elevation: 0,
@@ -64,21 +67,24 @@ class _DashboardState extends ConsumerState<Dashboard> {
       body: CustomScrollView(
         slivers: [
           ref.watch(currentBooksController(widget.user.uid)).when(
-            error: (Object error, StackTrace? stackTrace, AsyncData<List<BookModel>>? bookList) {
+            error: (Object error, StackTrace? stackTrace) {
               return SliverList(
-                delegate: SliverChildListDelegate([const Text("Error retrieving books")]),
+                delegate: SliverChildListDelegate(
+                    [const Text("Error retrieving books")]),
               );
             },
-            loading: (AsyncValue<List<BookModel>>? bookList) {
+            loading: () {
               return SliverList(
-                delegate: SliverChildListDelegate([const Center(child: CircularProgressIndicator())]),
+                delegate: SliverChildListDelegate(
+                    [const Center(child: CircularProgressIndicator())]),
               );
             },
             data: (List<BookModel> value) {
               return SliverList(
                 delegate: SliverChildListDelegate([
                   const Padding(
-                    padding: EdgeInsets.only(top: 15, bottom: 5, left: 15, right: 20),
+                    padding: EdgeInsets.only(
+                        top: 15, bottom: 5, left: 15, right: 20),
                     child: Text(
                       'You are currently reading',
                       style: TextStyle(color: Colors.black, fontSize: 18),
@@ -92,7 +98,8 @@ class _DashboardState extends ConsumerState<Dashboard> {
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, index) {
-                          return BookSlidable(book: value[index], userId: widget.user.uid);
+                          return BookSlidable(
+                              book: value[index], userId: widget.user.uid);
                         }),
                   ),
                   const SizedBox(
@@ -109,16 +116,21 @@ class _DashboardState extends ConsumerState<Dashboard> {
           child: const Text("Add personal book"),
           onPressed: () async {
             var bookToAdd = await Navigator.push(
-                context, MaterialPageRoute(builder: (context) => const SearchPage(), fullscreenDialog: true));
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const SearchPage(),
+                    fullscreenDialog: true));
             if (bookToAdd is SearchBookModel) {
               ref.read(currentUserController).when(
                 data: (data) async {
-                  ref.read(currentBooksController(data.uid).notifier).addBook(book: bookToAdd);
+                  ref
+                      .read(currentBooksController(data.uid).notifier)
+                      .addBook(book: bookToAdd);
                 },
-                loading: (user) {
+                loading: () {
                   return const Text("loading");
                 },
-                error: (error, stack, user) {
+                error: (error, stack) {
                   return const Text("error");
                 },
               );
