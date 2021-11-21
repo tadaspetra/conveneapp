@@ -23,10 +23,11 @@ class AuthPage extends ConsumerWidget {
               height: 50,
             ),
             const Spacer(),
-            const Padding(
-              padding: EdgeInsets.all(30.0),
+            Padding(
+              padding: const EdgeInsets.all(30.0),
               child: Image(
-                image: AssetImage("assets/reading.png"),
+                image: const AssetImage("assets/reading.png"),
+                height: (MediaQuery.of(context).size.height * 0.3),
               ),
             ),
             const Spacer(
