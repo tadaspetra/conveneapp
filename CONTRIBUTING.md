@@ -1,14 +1,18 @@
 # Contributing
 
-When contributing to this repository, please first discuss the change you wish to make via "proposal" issue,
-or on the discord: https://discord.gg/H3vFPpEkN5
-
+When contributing to this repository, please first discuss the change you wish to make via "proposal" issue, or on the discord: https://discord.gg/H3vFPpEkN5
 
 ## How to Contribute
-1. Pick and issue to work on, assign it to yourself (or ask one of the collaborators to assign to you), and move it to "in progress".
+If it is your first time working on open source take a look at the INTRODUCTION.md file.
+
+### Workflow
+1. Pick and issue to work on, ask Tadas to assign it to you, and move it to "in progress".
+1. Fork the Repository
 2. Add in your changes following the project conventions
 3. Add or update any tests
 4. Create a pull request
+1. Get PR accepted
+1. Merge
 
 Other ways to contribute include, but are not limited to: 
 * Reporting Bugs
@@ -19,7 +23,9 @@ Other ways to contribute include, but are not limited to:
 * CICD Workflow
 * Marketing & Copywriting
 
-Note: It is recommended to not make pull requests huge. If you want to implement a huge feature, break it down into multiple issues, and approach it one at a time
+Rules: 
+- It is recommended to not make pull requests huge. If you want to implement a huge feature, break it down into multiple issues, and approach it one at a time
+- If your code is blocking other people work, need to give daily updates as a comment on the issue, or it will be assigned to someone else.
 
 ## Propose Changes
 If there is not already an issue that you want to work on, create a `proposal` issue. Then reach out to one of the collaborators
@@ -33,74 +39,11 @@ for it to get approved and turned into a `new feature` issue. Then follow the "H
 4. You may merge the Pull Request in once you have the sign-off of one other developers, or if you 
    do not have permission to do that, you may request a collaborator to merge it for you.
 
-## Code of Conduct
+## Code Reviews
 
-### Our Pledge
+Code reviewers will be expected to assign themselves to any code reviews that they deem capable of reviewing. Once you selected the code to review, assign yourself as a reviewer and you will have 24 hours to complete the code review.
 
-In the interest of fostering an open and welcoming environment, we as
-contributors and maintainers pledge to making participation in our project and
-our community a harassment-free experience for everyone, regardless of age, body
-size, disability, ethnicity, gender identity and expression, level of experience,
-nationality, personal appearance, race, religion, or sexual identity and
-orientation.
-
-### Our Standards
-
-Examples of behavior that contributes to creating a positive environment
-include:
-
-* Using welcoming and inclusive language
-* Being respectful of differing viewpoints and experiences
-* Gracefully accepting constructive criticism
-* Focusing on what is best for the community
-* Showing empathy towards other community members
-
-Examples of unacceptable behavior by participants include:
-
-* The use of sexualized language or imagery and unwelcome sexual attention or
-advances
-* Trolling, insulting/derogatory comments, and personal or political attacks
-* Public or private harassment
-* Publishing others' private information, such as a physical or electronic
-  address, without explicit permission
-* Other conduct which could reasonably be considered inappropriate in a
-  professional setting
-
-### Our Responsibilities
-
-Project maintainers are responsible for clarifying the standards of acceptable
-behavior and are expected to take appropriate and fair corrective action in
-response to any instances of unacceptable behavior.
-
-Project maintainers have the right and responsibility to remove, edit, or
-reject comments, commits, code, wiki edits, issues, and other contributions
-that are not aligned to this Code of Conduct, or to ban temporarily or
-permanently any contributor for other behaviors that they deem inappropriate,
-threatening, offensive, or harmful.
-
-### Scope
-
-This Code of Conduct applies both within project spaces and in public spaces
-when an individual is representing the project or its community. Examples of
-representing a project or community include using an official project e-mail
-address, posting via an official social media account, or acting as an appointed
-representative at an online or offline event. Representation of a project may be
-further defined and clarified by project maintainers.
-
-### Enforcement
-
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by contacting the project team at tadas@tadaspetra.com. All
-complaints will be reviewed and investigated and will result in a response that
-is deemed necessary and appropriate to the circumstances. The project team is
-obligated to maintain confidentiality with regard to the reporter of an incident.
-Further details of specific enforcement policies may be posted separately.
-
-Project maintainers who do not follow or enforce the Code of Conduct in good
-faith may face temporary or permanent repercussions as determined by other
-members of the project's leadership.
-
-### Attribution
-
-This Code of Conduct is adapted from the [Contributor Covenant][homepage], version 1.4,
-available at [http://contributor-covenant.org/version/1/4][version]
+## Testing Guidelines
+* Aim for 70% test coverage
+* Test everything that makes sense to test (Ex. No need to test if a StatefulWidget holds state)
+* All new PRs should have tests updated if necessary, if they are not reviewer should make that an action item 
