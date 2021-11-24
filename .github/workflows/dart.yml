@@ -41,11 +41,11 @@ jobs:
         run: flutter analyze
 
       - name: Run Tests
-        run: flutter test --no-pub --coverage
+        run: flutter test --no-pub --coverage --test-randomize-ordering-seed random
 
       - name: Check Code Coverage
         uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
         with:
           path: "./coverage/lcov.info"
-          min_coverage: 0 #This will increase up to 70%
+          min_coverage: 31 #This will increase up to 70%
 
