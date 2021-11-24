@@ -1,5 +1,5 @@
 import 'package:conveneapp/core/loading.dart';
-import 'package:conveneapp/dashboard.dart';
+import 'package:conveneapp/features/dashboard/view/dashboard.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/auth_state.dart';
 import 'package:conveneapp/features/authentication/view/auth_page.dart';
@@ -50,7 +50,8 @@ class _AppState extends ConsumerState<AppNavigator> {
                     return AuthPage(
                       appleSignInAvailable: snapshot.data ?? false,
                     );
-                  } else if (snapshot.connectionState == ConnectionState.waiting) {
+                  } else if (snapshot.connectionState ==
+                      ConnectionState.waiting) {
                     return const LoadingPage();
                   }
                   throw ("WE STILL HAVE PROBLEMS");
@@ -67,7 +68,8 @@ class _AppState extends ConsumerState<AppNavigator> {
                 error: (error, stack) {
                   return FutureBuilder(
                     future: _appleSignInAvailable,
-                    builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
+                    builder:
+                        (BuildContext context, AsyncSnapshot<bool> snapshot) {
                       if (snapshot.hasError) {
                         throw ("WE HAVE PROBLEMS");
                       }
@@ -75,7 +77,8 @@ class _AppState extends ConsumerState<AppNavigator> {
                         return AuthPage(
                           appleSignInAvailable: snapshot.data ?? false,
                         );
-                      } else if (snapshot.connectionState == ConnectionState.waiting) {
+                      } else if (snapshot.connectionState ==
+                          ConnectionState.waiting) {
                         return const LoadingPage();
                       }
                       throw ("WE STILL HAVE PROBLEMS");

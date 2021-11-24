@@ -14,7 +14,7 @@ Fixes # (issue)
 - [ ] 🧹 Code refactor
 - [ ] ✅ Build configuration change
 - [ ] 📝 Documentation
-- [ ] 🗑️ Cho
+- [ ] 🗑️ Chore
 
 ## Pull request checklist
 
