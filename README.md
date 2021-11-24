@@ -1,8 +1,15 @@
-# Convene Handbook
+# Convene - The Next Unicorn Start Up
 
 Thank you all for joining this project! I'm excited to see what we can build here. This readme will outline some ideas for how we can make this work, but remember, this is all up to change, and if you have any ideas on how to do something better I would love to hear them!
 
 Most of the communication happens on discord, so feel free to join: https://discord.gg/H3vFPpEkN5
+
+## About Convene
+[![Convene Video](https://user-images.githubusercontent.com/60107328/143050412-fa2470a3-f85b-4a91-826a-ba5958c5fa81.png)](https://youtu.be/J6LPx-n3xrU)
+Click on this "video" to find out more!
+
+## App Architecture
+![architecture](https://user-images.githubusercontent.com/60107328/143261705-be6a4fbd-c533-4217-90cc-d5adbef55bd2.PNG)
 
 ## Convene Roadmap
 
@@ -20,8 +27,6 @@ Short answer is we will figure it out as we go, but I have created a starting po
 ### Newcomers
 For people new to open source, look at INTRODUCTION.md
 To learn how to contribute, look at CONTRIBUTING.md
-
-
 
 ## Points Breakdown
 If this project ever becomes profitable, 40% of shares will be distributed among the contributes based on contributions made.
