@@ -6,8 +6,10 @@ import 'package:conveneapp/core/constants/constants.dart';
 import 'package:conveneapp/core/errors/failures.dart';
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
@@ -24,6 +26,16 @@ class MockAppleIdCredential extends Mock implements AppleIdCredential {}
 class MockPersonNameComponents extends Mock implements PersonNameComponents {}
 
 class MockNsError extends Mock implements NsError {}
+
+mixin LegacyEqulity {
+  @override
+  bool operator ==(dynamic other) => false;
+
+  @override
+  int get hashCode => 0;
+}
+
+class MockGoogleSignInAccount extends Mock with LegacyEqulity implements GoogleSignInAccount {}
 
 const _error = 'error';
 const _firebaseExceptionCode = 'firebase-error';
@@ -43,6 +55,8 @@ void main() {
   late MockAppleIdCredential mockAppleIdCredential;
   late MockPersonNameComponents mockPersonNameComponents;
   late MockNsError mockNsError;
+  late MockGoogleSignInAccount mockGoogleSignInAccount;
+  late MockGoogleSignInAuthentication mockGoogleSignInAuthentication;
 
   setUp(() {
     mockUserApi = MockUserApi();
@@ -56,7 +70,9 @@ void main() {
     mockAuthorizationResult = MockAuthorizationResult();
     mockAppleIdCredential = MockAppleIdCredential();
     mockPersonNameComponents = MockPersonNameComponents();
+    mockGoogleSignInAccount = MockGoogleSignInAccount();
     mockNsError = MockNsError();
+    mockGoogleSignInAuthentication = MockGoogleSignInAuthentication();
 
     authApiFirebase = AuthApiFirebase(
         firebaseAuth: mockFirebaseAuth,
@@ -288,6 +304,64 @@ void main() {
       when(() => mockAppleAuthApi.signInWithApple()).thenAnswer((invocation) async => throw Exception());
 
       expect(await authApiFirebase.signInWithApple(), equals(left(_getAuthFailure(authExceptionMessage))));
+    });
+  });
+
+  group('GoogleAuthApi', () {
+    late GoogleAuthApi googleAuthApi;
+
+    setUp(() {
+      googleAuthApi = GoogleAuthApi(googleSignIn: mockGoogleSignIn);
+    });
+
+    const accessToken = 'acessToken';
+    const idToken = 'idToken';
+
+    test('should return [OAuthCredential] when the user has completed auth flow', () async {
+      when(() => mockGoogleSignIn.signIn()).thenAnswer((_) async => mockGoogleSignInAccount);
+      when(() => mockGoogleSignInAccount.authentication).thenAnswer((_) async => mockGoogleSignInAuthentication);
+      when(() => mockGoogleSignInAuthentication.accessToken).thenAnswer((_) => accessToken);
+      when(() => mockGoogleSignInAuthentication.accessToken).thenAnswer((_) => idToken);
+
+      final result = await googleAuthApi.signInWithGoogle();
+
+      expect(result, isA<OAuthCredential>());
+    });
+
+    test('should return [null] when user has aborted the flow', () async {
+      when(() => mockGoogleSignIn.signIn()).thenAnswer((_) async => null);
+
+      final result = await googleAuthApi.signInWithGoogle();
+
+      expect(result, isNull);
+    });
+  });
+
+  group('AppleAuthApi', () {
+    late AppleAuthApi appleAuthApi;
+
+    const channel = MethodChannel('net.beerstorm/apple_sign_in');
+
+    setUp(() {
+      TestWidgetsFlutterBinding.ensureInitialized();
+      channel.setMockMethodCallHandler((call) async {
+        if (call.method == 'performRequests') {
+          return {
+            'status': 'authorized',
+            'credentialType': 'ASAuthorizationAppleIDCredential',
+            'credential': {'email': email}
+          };
+        }
+        return null;
+      });
+
+      appleAuthApi = AppleAuthApi();
+    });
+
+    test('should return [AuthorizationResult.authorized] when AppleSignIn Flow was successfult', () async {
+      final result = await appleAuthApi.signInWithApple();
+
+      expect(result.status, AuthorizationStatus.authorized);
     });
   });
 }

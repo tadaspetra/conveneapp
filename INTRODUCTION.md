@@ -193,6 +193,7 @@ Adding the host as `0.0.0.0` will set the emulators to your network ip ex. (192.
 
 #### Setting it in the Flutter Project
 
+
 - create a folder `configs` in the `root` of the project with a file called `emulator_config.json`. You can skip this step if u have not changed `hosts` or `ports`
 
 ```json
@@ -209,6 +210,7 @@ Adding the host as `0.0.0.0` will set the emulators to your network ip ex. (192.
 
 ## Starting the app
 
+
 - If you are using `vscode` as your editor goto your debug panel , you will see two new launch configs
 
   1. `Conveneapp Production` this points to your original firebase project so running this will not connect to your firebase emulators
@@ -217,5 +219,7 @@ Adding the host as `0.0.0.0` will set the emulators to your network ip ex. (192.
 - If your are using other editors to make use of the firebase emulators your have to add the following as arguments for your `--dart-define=ENV=DEV`
 - If you are using terminal `flutter run --dart-define=ENV=DEV`
 
+
 If you start the app without the provided args this will point to your production database.
+
 
