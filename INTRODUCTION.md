@@ -3,10 +3,12 @@
 - [Setting the project up locally](#setting-the-project-up-locally)
 - [pub get](#pub-get)
 - [Creating an upload keystore](#Creating-an-upload-keystore)
-- [Creating a firebase Project](#horizontal-rule)
-- [Setting Up Authentication in Firebase ](#Setting-up-authentication-in-firebase)
-- [Downloading the Firebase CLI](#links)
-- [Seeting Up the emulators](#images)
+- [Setting up a firebase Project](#Setting-up-firebase)
+    - [Setting Up Authentication in Firebase ](#Setting-up-authentication-in-firebase)
+- [Setting up Firebase Emulators ](#Setting-up-Firebase-Emulators)
+    -   [Terminal](#Terminal)
+    -   [Setting it in the Flutter Project](#Setting-it-in-the-Flutter-Project)
+- [Starting the app](#Starting-the-app)
 
 ---
 <br />
@@ -204,7 +206,7 @@ Adding the host as `0.0.0.0` will set the emulators to your network ip ex. (192.
 - `auth_port` your authentication port in the `firebase.json`, remove this if u have not changed your default ports.
 - `firestore_port` your firestore port in the `firebase.json`. remove this if u have to changed the default ports
 
-#### Starting the app
+## Starting the app
 
 - If you are using `vscode` as your editor goto your debug panel , you will see two new launch configs
 
