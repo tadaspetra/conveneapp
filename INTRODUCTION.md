@@ -2,7 +2,7 @@
 - [Forking the project](#forking-the-project)
 - [Setting the project up locally](#setting-the-project-up-locally)
 - [pub get](#pub-get)
-- [Creating an upload keystore](#emphasis)
+- [Creating an upload keystore](#Creating-an-upload-keystore)
 - [Creating a firebase Project](#horizontal-rule)
 - [Enabling firebase](#lists)
 - [Downloading the Firebase CLI](#links)
@@ -24,11 +24,14 @@ after its done cloning the repo, open the folder in vs code or your preferred co
 
 
 ## Creating an upload keystore
+OFFICIAL DOC ON HOW TO DO IT [HERE](https://docs.flutter.dev/deployment/android#signing-the-app)
 
 To create an upload keystore, you'll need to have [Java](https://www.java.com/download/ie_manual.jsp) downloaded and in your path. 
 in your terminal/powershell you need to run the following command
 :
-On Mac/Linux
+<br />
+On Mac/Linux: 
+<br />
 ```
   keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
 ```
@@ -36,60 +39,47 @@ On Windows:
 ```
   keytool -genkey -v -keystore c:\Users\USER_NAME\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
 ```
-#### AND REMEMBER TO CHANGE THE c:\Users\USER_NAME\upload-keystore.jks TO YOUR PREFERRED LOCATION
+#### AND REMEMBER TO CHANGE THE c:\Users\USER_NAME\upload-keystore.jks TO YOUR PREFERRED LOCATION 
+<br />
+<br />
 
-## Horizontal Rule
-A horizontal rule gives a visible line break.  You can create one by putting three or more hypens, asterisks, or underscores (-, *, _).
+Now when its done, you are going to create a `key.properties` file in the android folder of the convene app project and here is what to type:
+```
+storePassword='YOUR UPLOAD KEYSTORE PASSWORD'
+keyPassword='THE KEY PASSWORD'
+keyAlias=upload
+storeFile='LOCATION OF THE KEYSTORE FILE YOU JUST CREATED'
+```
+After that, you're gonna simply go the `/android/app/build.gradle` in the project and Find the buildTypes block:
+```
+   buildTypes {
+       release {
+           // TODO: Add your own signing config for the release build.
+           // Signing with the debug keys for now,
+           // so `flutter run --release` works.
+           signingConfig signingConfigs.debug
+       }
+   }
+   ``` 
+   and change it to:
+   ```
+      signingConfigs {
+       release {
+           keyAlias keystoreProperties['keyAlias']
+           keyPassword keystoreProperties['keyPassword']
+           storeFile keystoreProperties['storeFile'] ? file(keystoreProperties['storeFile']) : null
+           storePassword keystoreProperties['storePassword']
+       }
+   }
+   buildTypes {
+       release {
+           signingConfig signingConfigs.release
+       }
+   }
+   ``` 
+And when you're done with that, run the project. It will throw many errors at you, but don't worry. This is because we're not done yet.
 
-For what it's worth, I prefer dashes...
-
-<!-- 
-    Example
-
-    ---
-    ***
-    ___
--->
-
-> **TODO** Create a horizontal rule
-
----
-
-## Lists
-
-Create unordered lists using '-', '*', '+, 
-<!-- 
-    Example with each 
-
-    - item
-    * item
-    + item
-    - sdfsd
--->
-
-You can create sublists by indenting
-<!-- 
-    Example
-
-    - item
-    - subitem
--->
-
-Create ordered lists using a number prefix
-
-<!-- 
-    Example
-
-    1. item 1
-    2. item 2
-    3. item 3 
--->
-
-> **TODO** Create an unordered list of your 5 favorite TV Shows 
-
-> **TODO** Create an ordered list of your top 5 Movies 
-
----
+## Setting up firebase
 
 ## Links
 
