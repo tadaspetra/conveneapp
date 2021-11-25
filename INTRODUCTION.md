@@ -29,7 +29,7 @@ To setup the project locally, we are going to use [Github Desktop](https://deskt
 <br />
 
 ## pub get
-after its done cloning the repo, open the folder in vs code or your preferred code editor, and run a ``` flutter pub get``` to get download all the dependencies the project uses.
+After its done cloning the repo, open the folder in vs code or your preferred code editor, and run a ``` flutter pub get``` to get download all the dependencies the project uses.
 <br />
 <br>
 <br />
@@ -102,13 +102,14 @@ And when you're done with that, run the project. It will throw many errors at yo
  
 To enable a feature, press on the feature in the left navbar under the build section, then clicking on 'Get Started' Or 'Create Database' respectively
 
+And when you're done, run a ```.\gradlew signingReport``` (Windows) or a ```./gradlew signingReport```(Mac/Linux) in the ``` android``` folder in the convene app project terminal, and copy both the SHA-1 and SHA-256 keys from the top part. After that, go to the firebase project settings from the firebase console and scroll till you find ```Your Apps```. There, choose your app and then click on ``` Add fingerprint ```, paste the keys there one after other respectively.
 <br />
 <br> 
 
 ### Setting up authentication in firebase
 
 <br>
-after you enable the authentication feature in your firebase project, you're going to enable Google sign in if youre developing on android, and both google and apple if youre developing on ios
+After you enable the authentication feature in your firebase project, you're going to enable Google sign in if youre developing on android, and both google and apple if youre developing on ios
 <br>
 <br>
 
