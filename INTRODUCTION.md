@@ -23,35 +23,20 @@ To setup the project locally, we are going to use [Github Desktop](https://deskt
 after its done cloning the repo, open the folder in vs code or your preferred code editor, and run a ``` flutter pub get``` to get download all the dependencies the project uses.
 
 
-## Emphasis
+## Creating an upload keystore
 
-Add emphasis with asterisks '*' and underscores '_'
-Two before and after (no spaces) a section of texts makes it bold 
-
-<!--
-    Example
-
-    **Bold Text with asterisks**
-    __Bold Text with underscores__
--->
-
-One before and after (no spaces) a section of texts makes it bold 
-
-<!-- 
-    Example
-
-    *Italicized Text with asterisks*
-    _Italicized Text with underscores_
---> 
-You can also put Bold and Italicized text inline by surrounding a group of words.
-
-<!-- 
-    Example
-
-    This text is **bold** and this text is *italicized* 
--->
-
-> **TODO**. Create a bold sentence, an italicized sentence, and a sentence with both bold and italicized text inline
+To create an upload keystore, you'll need to have [Java](https://www.java.com/download/ie_manual.jsp) downloaded and in your path. 
+in your terminal/powershell you need to run the following command
+:
+On Mac/Linux
+```
+  keytool -genkey -v -keystore ~/upload-keystore.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+```
+On Windows:
+```
+  keytool -genkey -v -keystore c:\Users\USER_NAME\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+```
+#### AND REMEMBER TO CHANGE THE c:\Users\USER_NAME\upload-keystore.jks TO YOUR PREFERRED LOCATION
 
 ## Horizontal Rule
 A horizontal rule gives a visible line break.  You can create one by putting three or more hypens, asterisks, or underscores (-, *, _).
@@ -108,28 +93,6 @@ Create ordered lists using a number prefix
 
 ## Links
 
-Create a link by surrounding it with angle bracket
-<!-- 
-    Example
-
-    <http://www.jamesqquick.com> 
--->
-
-Create a link with text by surrounding text with brackets, [], and link immediately following with parenthesis ()
-
-<!-- 
-    Example
-
-    [James Q Quick](http://www.jamesqquick.com) 
--->
-
-> **TODO** Create a link to your website, twitter, or github. with no text
-
-> **TODO** Create a link with text to your website, twitter, or github
-
-What if you needed to reuse a link several times?  Well, you could copy and paste that link each time.  That means, if you need to update the link, you will have to do it each time its used.  There's a better way!
-
-Create reference style links by defining your link with the a 'key' inside of brackets, colon, space, and the link
 
 <!-- 
     Example
