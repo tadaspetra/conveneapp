@@ -9,19 +9,27 @@
 - [Seeting Up the emulators](#images)
 
 ---
+<br />
+
 ## Forking the project
 Forking the project is like making your own copy of the project.
 To fork the project you are going to to go the main github [here](https://github.com/tadaspetra/conveneapp)
 then clicking on the fork button on the top right
 It should redirect you to the page of your fork.
 <br />
+<br>
+<br />
 
 ## Setting the project up locally
 To setup the project locally, we are going to use [Github Desktop](https://desktop.github.com/). So after you've downloaded github desktop, login into your GitHub account. Then press on file (top left) and clone repository. Click on the fork you just made and select the path of where you want to install it in the bottom textfield
-
+<br />
+<br>
+<br />
 ## pub get
 after its done cloning the repo, open the folder in vs code or your preferred code editor, and run a ``` flutter pub get``` to get download all the dependencies the project uses.
-
+<br />
+<br>
+<br />
 
 ## Creating an upload keystore
 OFFICIAL DOC ON HOW TO DO IT [HERE](https://docs.flutter.dev/deployment/android#signing-the-app)
@@ -39,7 +47,7 @@ On Windows:
 ```
   keytool -genkey -v -keystore c:\Users\USER_NAME\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
 ```
-#### AND REMEMBER TO CHANGE THE c:\Users\USER_NAME\upload-keystore.jks TO YOUR PREFERRED LOCATION 
+#### AND REMEMBER TO CHANGE THE C:\Users\USER_NAME\upload-keystore.jks TO YOUR PREFERRED LOCATION 
 <br />
 <br />
 
@@ -78,8 +86,11 @@ After that, you're gonna simply go the `/android/app/build.gradle` in the projec
    }
    ``` 
 And when you're done with that, run the project. It will throw many errors at you, but don't worry. This is because we're not done yet.
-
+<br />
+<br>
+<br />
 ## Setting up firebase
+
 
 ## Links
 
