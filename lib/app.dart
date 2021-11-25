@@ -1,5 +1,5 @@
 import 'package:conveneapp/core/loading.dart';
-import 'package:conveneapp/dashboard.dart';
+import 'package:conveneapp/features/dashboard/view/dashboard.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/auth_state.dart';
 import 'package:conveneapp/features/authentication/view/auth_page.dart';
