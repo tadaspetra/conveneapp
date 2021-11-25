@@ -25,3 +25,18 @@ abstract class Failure {
 class AuthFailure extends Failure {
   AuthFailure(String message) : super(message: message);
 }
+
+/// **BookFailure**
+///
+/// {@macro failure}
+///
+/// Used by the books api
+class BookFailure extends Failure {
+  BookFailure([String message = 'Un-known error occured please try again']) : super(message: message);
+  factory BookFailure.fromCode(String code) {
+    if (code == 'permission_denied') {
+      return BookFailure("Seems like you don't have to correct permissions. Permission Denied");
+    }
+    return BookFailure();
+  }
+}

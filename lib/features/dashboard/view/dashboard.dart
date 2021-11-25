@@ -1,9 +1,7 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/core/button.dart';
-import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/user.dart';
 import 'package:conveneapp/features/book/controller/book_controller.dart';
-import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/features/book/view/book_slidable.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
 import 'package:conveneapp/features/search/view/search.dart';
@@ -63,7 +61,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
       ),
       body: CustomScrollView(
         slivers: [
-          ref.watch(currentBooksController(widget.user.uid)).when(
+          ref.watch(currentBooksController).when(
             error: (Object error, StackTrace? stackTrace) {
               return SliverList(
                 delegate: SliverChildListDelegate([const Text("Error retrieving books")]),
@@ -74,7 +72,7 @@ class _DashboardState extends ConsumerState<Dashboard> {
                 delegate: SliverChildListDelegate([const Center(child: CircularProgressIndicator())]),
               );
             },
-            data: (List<BookModel> value) {
+            data: (CurrentBookListState value) {
               return SliverList(
                 delegate: SliverChildListDelegate([
                   const Padding(
@@ -88,11 +86,11 @@ class _DashboardState extends ConsumerState<Dashboard> {
                     context: context,
                     removeTop: true,
                     child: ListView.builder(
-                        itemCount: value.length,
+                        itemCount: value.books.length,
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (BuildContext context, index) {
-                          return BookSlidable(book: value[index], userId: widget.user.uid);
+                          return BookSlidable(book: value.books[index], userId: widget.user.uid);
                         }),
                   ),
                   const SizedBox(
@@ -108,20 +106,10 @@ class _DashboardState extends ConsumerState<Dashboard> {
       floatingActionButton: BigButton(
           child: const Text("Add personal book"),
           onPressed: () async {
-            var bookToAdd = await Navigator.push(
+            final bookToAdd = await Navigator.push(
                 context, MaterialPageRoute(builder: (context) => const SearchPage(), fullscreenDialog: true));
             if (bookToAdd is SearchBookModel) {
-              ref.read(currentUserController).when(
-                data: (data) async {
-                  ref.read(currentBooksController(data.uid).notifier).addBook(book: bookToAdd);
-                },
-                loading: () {
-                  return const Text("loading");
-                },
-                error: (error, stack) {
-                  return const Text("error");
-                },
-              );
+              await ref.read(currentBooksController.notifier).addBook(book: bookToAdd);
             }
           }),
       endDrawer: Drawer(

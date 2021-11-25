@@ -1,7 +1,8 @@
 import 'package:conveneapp/features/authentication/model/user.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 
-final bookModel = BookModel(
+// TODO: @varunbhalerao56 please refactor this, use the one in the test helper
+const bookModel = BookModel(
     id: "123",
     title: "Test Book",
     authors: ['Test Author'],

@@ -25,7 +25,7 @@ void main() {
 
   testWidgets('Should display BookCard when BookModel is passed', (WidgetTester tester) async {
     await mockNetworkImages(() async {
-      await tester.pumpWidget(MaterialApp(home: Scaffold(body: BookCard(book: bookModel))));
+      await tester.pumpWidget(const MaterialApp(home: Scaffold(body: BookCard(book: bookModel))));
 
       expect(find.byType(Image), findsOneWidget);
       expect(find.text('89'), findsOneWidget);
