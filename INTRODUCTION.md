@@ -4,7 +4,7 @@
 - [pub get](#pub-get)
 - [Creating an upload keystore](#Creating-an-upload-keystore)
 - [Creating a firebase Project](#horizontal-rule)
-- [Enabling firebase](#lists)
+- [Setting Up Authentication in Firebase ](#Setting-up-authentication-in-firebase)
 - [Downloading the Firebase CLI](#links)
 - [Seeting Up the emulators](#images)
 
@@ -25,6 +25,7 @@ To setup the project locally, we are going to use [Github Desktop](https://deskt
 <br />
 <br>
 <br />
+
 ## pub get
 after its done cloning the repo, open the folder in vs code or your preferred code editor, and run a ``` flutter pub get``` to get download all the dependencies the project uses.
 <br />
@@ -89,8 +90,25 @@ And when you're done with that, run the project. It will throw many errors at yo
 <br />
 <br>
 <br />
-## Setting up firebase
 
+## Setting up firebase
+ 
+ To set up firebase, were going to create a new firebae project by going to [firebase console](https://console.firebase.google.com/u/0/) and creating a new project. When we're done creating the firebase project, youre gonna enable the following features:
+ 
+ * Firestore Database
+ * Authentication
+ 
+To enable a feature, press on the feature in the left navbar under the build section, then clicking on 'Get Started' Or 'Create Database' respectively
+
+<br />
+<br> 
+
+### Setting up authentication in firebase
+
+<br>
+after you enable the authentication feature in your firebase project, you're going to enable Google sign in if youre developing on android, and both google and apple if youre developing on ios
+<br>
+<br>
 
 ## Links
 
@@ -250,37 +268,6 @@ You can also align (Center, left, right) the text in a column by using colons (:
 
 ---
 
-## Custom HTML
-
-Since MarkDown gets automatically converted to HTML, you can add raw HTML directly to your MarkDown.
-
-
-```html 
-<p>Sample HTML Div</p>
-```
-
-Creates this 
-
-<p>Sample HTML Div</p>
-
-> **TODO** If you are comfortable with HTML, add some raw HTML.
-
----
-
-## Custom CSS
-
-You can also add custom CSS to your MarkDown to add additional styling to your document. You can also include CSS by including a style tag.
-
-```html
-    <style>
-        body {
-            color:red;
-        }
-    </style>
-```
-> **TODO** If you are comfortable with CSS, give your page some style.
-
----
 
 ## Additional Resources
 - [Markdown Cheat Sheet - Adam P on Github](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#images)
