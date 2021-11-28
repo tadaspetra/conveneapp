@@ -57,32 +57,7 @@ class _AppState extends ConsumerState<AppNavigator> {
                 },
               );
             case AuthState.authenticated:
-              return ref.watch(currentUserController).when(
-                data: (data) {
-                  return Dashboard(user: data);
-                },
-                loading: () {
-                  return const LoadingPage();
-                },
-                error: (error, stack) {
-                  return FutureBuilder(
-                    future: _appleSignInAvailable,
-                    builder: (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                      if (snapshot.hasError) {
-                        throw ("WE HAVE PROBLEMS");
-                      }
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return AuthPage(
-                          appleSignInAvailable: snapshot.data ?? false,
-                        );
-                      } else if (snapshot.connectionState == ConnectionState.waiting) {
-                        return const LoadingPage();
-                      }
-                      throw ("WE STILL HAVE PROBLEMS");
-                    },
-                  );
-                },
-              );
+              return const Dashboard();
           }
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingPage();

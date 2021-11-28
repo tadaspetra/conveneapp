@@ -9,8 +9,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class BookSlidable extends ConsumerWidget {
   final BookModel book;
-  final String userId;
-  const BookSlidable({Key? key, required this.book, required this.userId}) : super(key: key);
+
+  const BookSlidable({
+    Key? key,
+    required this.book,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

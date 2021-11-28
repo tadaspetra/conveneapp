@@ -34,7 +34,7 @@ const bookModel = BookModel(
   id: 'id',
   title: 'title',
   authors: ['authors'],
-  pageCount: 0,
+  pageCount: 100,
   coverImage: 'coverImage',
   currentPage: 0,
 );

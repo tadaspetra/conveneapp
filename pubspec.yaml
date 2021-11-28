@@ -43,6 +43,7 @@ dev_dependencies:
   flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
+  mockingjay: ^0.2.0-dev.3
 
 flutter_icons:
   android: true
