@@ -67,57 +67,7 @@ class Dashboard extends ConsumerWidget {
           ],
         ),
       ),
-      // - Error state is not needed since all the errors are properly handled by the
-      // notifier
-      body: ref.watch(currentBooksController).maybeMap(
-        orElse: () {
-          return const Center(
-            key: Key('dashBoard-loading'),
-            child: CircularProgressIndicator(),
-          );
-        },
-        data: (data) {
-          final books = data.value.books;
-          // - render a message when the books are empty,
-          // - user can be a new user or he doesnt have any books added
-          if (books.isEmpty) {
-            return const Center(child: Text('Looks like you aren’t reading any books currently'));
-          }
-          return CustomScrollView(
-            slivers: [
-              SliverList(
-                delegate: SliverChildListDelegate(
-                  [
-                    const Padding(
-                      padding: EdgeInsets.only(top: 15, bottom: 5, left: 15, right: 20),
-                      child: Text(
-                        'You are currently reading',
-                        style: TextStyle(color: Colors.black, fontSize: 18),
-                      ),
-                    ),
-                    MediaQuery.removePadding(
-                      context: context,
-                      removeTop: true,
-                      child: ListView.builder(
-                          itemCount: books.length,
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          itemBuilder: (BuildContext context, index) {
-                            return BookSlidable(
-                              book: books[index],
-                            );
-                          }),
-                    ),
-                    const SizedBox(
-                      height: 100,
-                    ),
-                  ],
-                ),
-              ),
-            ],
-          );
-        },
-      ),
+      body: const _DashBoardBody(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: BigButton(
           key: const Key('dashBoard-addPersonalBook'),
@@ -142,6 +92,85 @@ class Dashboard extends ConsumerWidget {
           ),
         ],
       )),
+    );
+  }
+}
+
+/// - Error state is not needed since all the errors are properly handled by the
+/// notifier
+class _DashBoardBody extends ConsumerWidget {
+  const _DashBoardBody({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    ref.listen<AsyncValue<CurrentBookListState>>(currentBooksController, (previous, next) {
+      next.mapOrNull(
+        data: (data) {
+          final state = data.value;
+          // show a snackbar when this is not null,
+          // will not be null if any transaction in the notifier had an error
+          if (state.failureMessage != null) {
+            ScaffoldMessenger.of(context)
+              ..hideCurrentSnackBar()
+              ..showSnackBar(SnackBar(
+                  content: Text(
+                state.failureMessage!,
+              )));
+          }
+        },
+      );
+    });
+    return ref.watch(currentBooksController).maybeMap(
+      orElse: () {
+        return const Center(
+          key: Key('dashBoard-loading'),
+          child: CircularProgressIndicator(),
+        );
+      },
+      data: (data) {
+        final books = data.value.books;
+        // - render a message when the books are empty,
+        // - user can be a new user or he doesnt have any books added
+        if (books.isEmpty) {
+          return const Center(
+              child: Text(
+            'Looks like you aren’t reading any books currently',
+          ));
+        }
+        return CustomScrollView(
+          slivers: [
+            SliverList(
+              delegate: SliverChildListDelegate(
+                [
+                  const Padding(
+                    padding: EdgeInsets.only(top: 15, bottom: 5, left: 15, right: 20),
+                    child: Text(
+                      'You are currently reading',
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                    ),
+                  ),
+                  MediaQuery.removePadding(
+                    context: context,
+                    removeTop: true,
+                    child: ListView.builder(
+                        itemCount: books.length,
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemBuilder: (BuildContext context, index) {
+                          return BookSlidable(
+                            book: books[index],
+                          );
+                        }),
+                  ),
+                  const SizedBox(
+                    height: 100,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

@@ -1,5 +1,6 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/apis/firebase/book.dart';
+import 'package:conveneapp/core/errors/errors.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/features/book/view/book_slidable.dart';
 import 'package:conveneapp/features/dashboard/view/dashboard.dart';
@@ -167,6 +168,20 @@ void main() {
         () => mockNavigator.push(any()),
         () => mockBookApi.addBook(any()),
       ]);
+    });
+
+    testWidgets('should display [SnackBar] when a failure occurs while adding a book', (tester) async {
+      mockCurrentUser();
+      mockCurrentBooks();
+      when(() => mockNavigator.push(any())).thenAnswer((_) async => searchBookModel);
+      when(() => mockBookApi.addBook(any())).thenAnswer((_) async => left(BookFailure()));
+
+      await tester.pumpWidget(renderDashBoard());
+      await tester.pump();
+      await tester.tap(find.byKey(dashBoardAddPersonalBookKey));
+      await tester.pump();
+
+      expect(find.text(BookFailure().message), findsOneWidget);
     });
   });
 }
