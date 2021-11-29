@@ -11,7 +11,7 @@
 - [Starting the app](#Starting-the-app)
 
 ---
-<br />
+<br>
 
 ## Forking the project
 Forking the project is like making your own copy of the project.
