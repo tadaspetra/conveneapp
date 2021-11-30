@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conveneapp/apis/firebase/firebase_api_providers.dart';
 import 'package:conveneapp/core/constants/constants.dart';
 import 'package:dartz/dartz.dart';
+import 'package:dartz/dartz_unsafe.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:conveneapp/core/errors/errors.dart';
@@ -31,6 +32,9 @@ abstract class BookApi {
 
   /// - returns all the books for the current user
   StreamList<BookModel> getCurrentBooks();
+
+  /// - returns all the books for the current user
+  Future<List<BookModel>> getHistoryBooks();
 }
 
 @visibleForTesting
@@ -97,6 +101,16 @@ class BookApiFirebase implements BookApi {
     return _currentUsersBooksReference.orderBy('title').snapshots().map((event) {
       return event.docs.map((e) => BookModel.fromMap(e.data()).copyWith(id: e.id)).toList();
     });
+  }
+
+  @override
+  Future<List<BookModel>> getHistoryBooks() async {
+    final books = await _currentUsersReference
+        .collection(FirebaseConstants.finishedBooksCollection)
+        .orderBy('dateCompleted', descending: true)
+        .get();
+
+    return books.docs.map((e) => BookModel.fromMap(e.data())).toList();
   }
 
   CollectionReference<Map<String, dynamic>> get _currentUsersBooksReference {

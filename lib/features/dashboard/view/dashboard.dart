@@ -3,6 +3,7 @@ import 'package:conveneapp/core/button.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/book/controller/book_controller.dart';
 import 'package:conveneapp/features/book/view/book_slidable.dart';
+import 'package:conveneapp/features/history/view/history_page.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
 import 'package:conveneapp/features/search/view/search.dart';
 import 'package:conveneapp/theme/palette.dart';
@@ -81,17 +82,25 @@ class Dashboard extends ConsumerWidget {
             }
           }),
       endDrawer: Drawer(
-          child: ListView(
-        children: [
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('Logout'),
-            onTap: () async {
-              await ref.read(authApiProvider).signOut();
-            },
-          ),
-        ],
-      )),
+        child: ListView(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.history),
+              title: const Text('History'),
+              onTap: () async {
+                await Navigator.push(context, HistoryPage.route);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () async {
+                await ref.read(authApiProvider).signOut();
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
