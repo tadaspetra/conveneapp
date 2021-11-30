@@ -70,7 +70,6 @@ class BookApiFirebase implements BookApi {
   FutureEitherVoid finishBook(BookModel book) async {
     try {
       await deleteBook(book);
-      // TODO: @tadaspetra Write the cloud funtion to excecute this
       await _currentUsersReference.collection(FirebaseConstants.finishedBooksCollection).add(
             book.copyWith(dateCompleted: DateTime.now(), currentPage: book.pageCount).toMap(),
           );
