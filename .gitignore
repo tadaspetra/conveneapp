@@ -26,3 +26,4 @@ doc/api/
 ./history
 .flutter-plugins-dependencies
 /coverage
+macos-test.sh

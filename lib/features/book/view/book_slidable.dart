@@ -9,8 +9,11 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 
 class BookSlidable extends ConsumerWidget {
   final BookModel book;
-  final String userId;
-  const BookSlidable({Key? key, required this.book, required this.userId}) : super(key: key);
+
+  const BookSlidable({
+    Key? key,
+    required this.book,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -29,7 +32,7 @@ class BookSlidable extends ConsumerWidget {
 
             if (returnValue != null) {
               ref
-                  .read(currentBooksController(userId).notifier)
+                  .read(currentBooksController.notifier)
                   .updateBook(book: book.copyWith(currentPage: int.parse(returnValue)));
             }
 
@@ -43,7 +46,7 @@ class BookSlidable extends ConsumerWidget {
 
               if (returnValue != null) {
                 ref
-                    .read(currentBooksController(userId).notifier)
+                    .read(currentBooksController.notifier)
                     .updateBook(book: book.copyWith(currentPage: int.parse(returnValue)));
               }
             },
@@ -56,7 +59,7 @@ class BookSlidable extends ConsumerWidget {
             onPressed: (context) async {
               bool? returnValue = await finishDialog(context);
               if (returnValue == true) {
-                ref.read(currentBooksController(userId).notifier).finishBook(book: book);
+                ref.read(currentBooksController.notifier).finishBook(book: book);
               }
             },
             backgroundColor: Palette.niceWhite,
@@ -71,7 +74,7 @@ class BookSlidable extends ConsumerWidget {
         dismissible: DismissiblePane(
           closeOnCancel: true,
           onDismissed: () {
-            ref.read(currentBooksController(userId).notifier).deleteBook(book: book);
+            ref.read(currentBooksController.notifier).deleteBook(book: book);
           },
           confirmDismiss: () async {
             bool? returnValue = await deleteDialog(context);
@@ -84,7 +87,7 @@ class BookSlidable extends ConsumerWidget {
             onPressed: (context) async {
               bool? returnValue = await deleteDialog(context);
               if (returnValue == true) {
-                ref.read(currentBooksController(userId).notifier).deleteBook(book: book);
+                ref.read(currentBooksController.notifier).deleteBook(book: book);
               }
             },
             backgroundColor: Palette.niceWhite,

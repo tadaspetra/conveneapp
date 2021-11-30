@@ -1,6 +1,7 @@
 import 'dart:typed_data';
 
 import 'package:conveneapp/apis/firebase/auth.dart';
+import 'package:conveneapp/apis/firebase/firebase_api_providers.dart';
 import 'package:conveneapp/apis/firebase/user.dart';
 import 'package:conveneapp/core/constants/constants.dart';
 import 'package:conveneapp/core/errors/failures.dart';
