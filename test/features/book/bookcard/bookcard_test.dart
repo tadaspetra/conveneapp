@@ -11,12 +11,11 @@ import 'bookcard_data.dart';
 void main() {
   testWidgets('Should display BookSlidable when BookModel and userId is passed', (WidgetTester tester) async {
     await mockNetworkImages(() async {
-      await tester.pumpWidget(ProviderScope(
+      await tester.pumpWidget(const ProviderScope(
           child: MaterialApp(
               home: Scaffold(
                   body: BookSlidable(
         book: bookModel,
-        userId: userModel.uid,
       )))));
 
       expect(find.byType(Slidable), findsOneWidget);
@@ -25,7 +24,7 @@ void main() {
 
   testWidgets('Should display BookCard when BookModel is passed', (WidgetTester tester) async {
     await mockNetworkImages(() async {
-      await tester.pumpWidget(MaterialApp(home: Scaffold(body: BookCard(book: bookModel))));
+      await tester.pumpWidget(const MaterialApp(home: Scaffold(body: BookCard(book: bookModel))));
 
       expect(find.byType(Image), findsOneWidget);
       expect(find.text('89'), findsOneWidget);

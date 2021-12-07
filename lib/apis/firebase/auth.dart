@@ -10,8 +10,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
-/// - Move this to a globals provider.dart file @RobertBrunhage @tadaspetra?
-final firebaseAuthProvider = Provider<FirebaseAuth>((ref) => FirebaseAuth.instance);
+import 'firebase_api_providers.dart';
+
 final googleSignInProvider = Provider<GoogleSignIn>((ref) => GoogleSignIn());
 
 final authApiProvider = Provider<AuthApi>(

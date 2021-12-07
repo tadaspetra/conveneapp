@@ -11,19 +11,19 @@
 - [Starting the app](#Starting-the-app)
 
 ---
-<br />
+<br>
 
 ## Forking the project
 Forking the project is like making your own copy of the project.
 To fork the project you are going to to go the main github [here](https://github.com/tadaspetra/conveneapp)
-then clicking on the fork button on the top right
+then clicking on the fork button on the top right.
 It should redirect you to the page of your fork.
 <br />
 <br>
 <br />
 
 ## Setting the project up locally
-To setup the project locally, we are going to use [Github Desktop](https://desktop.github.com/). So after you've downloaded github desktop, login into your GitHub account. Then press on file (top left) and clone repository. Click on the fork you just made and select the path of where you want to install it in the bottom textfield
+To setup the project locally, we are going to use [Github Desktop](https://desktop.github.com/). So after you've downloaded github desktop, login into your GitHub account. Then press on file (top left) and clone repository. Click on the fork you just made and select the path of where you want to install it in the bottom textfield.
 <br />
 <br>
 <br />
@@ -50,7 +50,7 @@ On Windows:
 ```
   keytool -genkey -v -keystore c:\Users\USER_NAME\upload-keystore.jks -storetype JKS -keyalg RSA -keysize 2048 -validity 10000 -alias upload
 ```
-#### AND REMEMBER TO CHANGE THE C:\Users\USER_NAME\upload-keystore.jks TO YOUR PREFERRED LOCATION 
+#### AND REMEMBER TO CHANGE THE C:\Users\USER_NAME\upload-keystore.jks TO YOUR PREFERRED LOCATION.
 <br />
 <br />
 
@@ -103,6 +103,7 @@ And when you're done with that, run the project. It will throw many errors at yo
 To enable a feature, press on the feature in the left navbar under the build section, then clicking on 'Get Started' Or 'Create Database' respectively
 
 And when you're done, run a ```.\gradlew signingReport``` (Windows) or a ```./gradlew signingReport```(Mac/Linux) in the ``` android``` folder in the convene app project terminal, and copy both the SHA-1 and SHA-256 keys from the first part. After that, go to the firebase project settings from the firebase console and scroll till you find ```Your Apps```. There, choose your app and then click on ``` Add fingerprint ```, paste the keys there one after another respectively.
+When you're done, download the ```google-services.json``` file by clicking on the google-services.json button. After downloading, you're gonna take the file and put it in the ```[project]\android\app``` folder.
 <br />
 <br> 
 

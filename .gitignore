@@ -27,3 +27,4 @@ doc/api/
 .flutter-plugins-dependencies
 /coverage
 *.lock
+macos-test.sh
