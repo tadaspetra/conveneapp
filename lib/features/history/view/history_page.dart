@@ -1,11 +1,13 @@
 import 'package:conveneapp/apis/firebase/book.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
+import 'package:conveneapp/features/history/view/history_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HistoryPage extends StatefulWidget {
   static final route = MaterialPageRoute(
     builder: (context) => const HistoryPage(),
+    fullscreenDialog: true,
   );
   const HistoryPage({Key? key}) : super(key: key);
 
@@ -38,7 +40,7 @@ class HistoryView extends ConsumerWidget {
             return ListView.builder(
               itemCount: booklist.data!.length,
               itemBuilder: (context, count) {
-                return Text(booklist.data![count].title);
+                return HistoryCard(book: booklist.data![count]);
               },
             );
           } else {

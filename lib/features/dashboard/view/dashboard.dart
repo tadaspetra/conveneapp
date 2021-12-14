@@ -87,8 +87,8 @@ class Dashboard extends ConsumerWidget {
             ListTile(
               leading: const Icon(Icons.history),
               title: const Text('History'),
-              onTap: () async {
-                await Navigator.push(context, HistoryPage.route);
+              onTap: () {
+                Navigator.push(context, HistoryPage.route);
               },
             ),
             ListTile(
