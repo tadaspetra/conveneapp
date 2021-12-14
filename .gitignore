@@ -26,4 +26,6 @@ doc/api/
 ./history
 .flutter-plugins-dependencies
 /coverage
+/ios/Podfile.lock
+pubspec.lock
 macos-test.sh
