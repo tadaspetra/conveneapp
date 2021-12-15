@@ -5,10 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HistoryPage extends StatefulWidget {
-  static final route = MaterialPageRoute(
-    builder: (context) => const HistoryPage(),
-    fullscreenDialog: true,
-  );
+  static MaterialPageRoute<dynamic> route() => MaterialPageRoute(
+        builder: (context) => const HistoryPage(),
+      );
   const HistoryPage({Key? key}) : super(key: key);
 
   @override

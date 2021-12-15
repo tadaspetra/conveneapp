@@ -191,7 +191,7 @@ void main() {
   });
 
   group('getCurrentBooks', () {
-    test('should return Books from the current users document ', () {
+    test('should return Books from the current users current books collection ', () {
       mockCurrentUser();
       mockCurrentUsersBookReference();
       when(() => mockCollectionReference.orderBy(any())).thenAnswer((_) => mockQuery);
@@ -205,6 +205,20 @@ void main() {
           emitsInOrder([
             [bookModel]
           ]));
+    });
+  });
+
+  group('getHistoryBooks', () {
+    test('should return Books from the current users finished books collection ', () async {
+      mockCurrentUser();
+      mockCurrentUsersBookReference();
+      when(() => mockCollectionReference.orderBy(any())).thenAnswer((_) => mockQuery);
+      when(() => mockQuery.get()).thenAnswer((_) => Future.value(mockQuerySnapshot));
+      when(() => mockQuerySnapshot.docs).thenAnswer((_) => [mockQueryDocumentSnapshot]);
+      when(() => mockQueryDocumentSnapshot.data()).thenAnswer((_) => bookModel.toMap());
+      when(() => mockQueryDocumentSnapshot.id).thenAnswer((_) => bookModel.id);
+
+      expectLater(await bookApiFirebase.getHistoryBooks(), bookModel);
     });
   });
 
