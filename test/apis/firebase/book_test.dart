@@ -218,7 +218,7 @@ void main() {
       when(() => mockQueryDocumentSnapshot.data()).thenAnswer((_) => bookModel.toMap());
       when(() => mockQueryDocumentSnapshot.id).thenAnswer((_) => bookModel.id);
 
-      expectLater(await bookApiFirebase.getHistoryBooks(), bookModel);
+      expect(bookApiFirebase.getHistoryBooks(), bookModel);
     });
   });
 
