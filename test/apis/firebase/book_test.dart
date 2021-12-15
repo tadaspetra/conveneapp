@@ -212,13 +212,13 @@ void main() {
     test('should return Books from the current users finished books collection ', () async {
       mockCurrentUser();
       mockCurrentUsersBookReference();
-      when(() => mockCollectionReference.orderBy(any())).thenAnswer((_) => mockQuery);
-      when(() => mockQuery.get()).thenAnswer((_) => Future.value(mockQuerySnapshot));
+      when(() => mockCollectionReference.orderBy('dateCompleted', descending: true)).thenAnswer((_) => mockQuery);
+      when(() => mockQuery.get()).thenAnswer((_) async => mockQuerySnapshot);
       when(() => mockQuerySnapshot.docs).thenAnswer((_) => [mockQueryDocumentSnapshot]);
       when(() => mockQueryDocumentSnapshot.data()).thenAnswer((_) => bookModel.toMap());
       when(() => mockQueryDocumentSnapshot.id).thenAnswer((_) => bookModel.id);
 
-      expect(bookApiFirebase.getHistoryBooks(), bookModel);
+      expect(await bookApiFirebase.getHistoryBooks(), [bookModel]);
     });
   });
 

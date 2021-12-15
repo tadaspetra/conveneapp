@@ -110,7 +110,7 @@ class BookApiFirebase implements BookApi {
         .orderBy('dateCompleted', descending: true)
         .get();
 
-    return books.docs.map((e) => BookModel.fromMap(e.data())).toList();
+    return books.docs.map((e) => BookModel.fromMap(e.data()).copyWith(id: e.id)).toList();
   }
 
   CollectionReference<Map<String, dynamic>> get _currentUsersBooksReference {
