@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
 
 class Palette {
   static const Color niceBlack = Color(0xff0c0c0c);

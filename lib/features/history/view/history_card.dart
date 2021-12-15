@@ -2,8 +2,6 @@ import 'package:conveneapp/core/text.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/painting.dart';
-import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 class HistoryCard extends StatelessWidget {
