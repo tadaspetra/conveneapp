@@ -2,10 +2,11 @@ import 'package:conveneapp/core/text.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
-class BookCard extends StatelessWidget {
+class HistoryCard extends StatelessWidget {
   final BookModel book;
-  const BookCard({Key? key, required this.book}) : super(key: key);
+  const HistoryCard({Key? key, required this.book}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -23,17 +24,18 @@ class BookCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    children: [
-                      Text(
-                        book.currentPage.toString(),
-                        style: const TextStyle(fontWeight: FontWeight.bold, decorationColor: Palette.niceDarkGrey),
-                      ),
-                      const Text(
-                        ' pages read',
-                      ),
-                    ],
-                  ),
+                  if (book.dateCompleted != null)
+                    Row(
+                      children: [
+                        const Text(
+                          'Finished on ',
+                        ),
+                        Text(
+                          DateFormat('MMMM d, yyyy').format(book.dateCompleted!),
+                          style: const TextStyle(fontWeight: FontWeight.bold, decorationColor: Palette.niceDarkGrey),
+                        ),
+                      ],
+                    ),
                   const SizedBox(
                     height: 20,
                   ),
@@ -48,39 +50,7 @@ class BookCard extends StatelessWidget {
                       ),
                     )),
                   const SizedBox(
-                    height: 10,
-                  ),
-                  const SizedBox(
-                    height: 5,
-                  ),
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      SizedBox(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: const LinearProgressIndicator(
-                            value: 1,
-                            color: Palette.niceDarkGrey,
-                          ),
-                        ),
-                        width: 250,
-                        height: 12,
-                      ),
-                      SizedBox(
-                        child: ClipRRect(
-                          borderRadius: BorderRadius.circular(4),
-                          child: LinearProgressIndicator(
-                            backgroundColor: Palette.niceDarkGrey,
-                            value: book.currentPage / book.pageCount,
-                            // strokeWidth: 6,
-                            color: Palette.niceBlack,
-                          ),
-                        ),
-                        width: 250,
-                        height: 12,
-                      ),
-                    ],
+                    height: 15,
                   ),
                 ],
               ),
