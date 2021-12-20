@@ -1,4 +1,3 @@
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
