@@ -50,10 +50,7 @@ class HistoryCard extends StatelessWidget {
                       ),
                     )),
                   const SizedBox(
-                    height: 10,
-                  ),
-                  const SizedBox(
-                    height: 5,
+                    height: 15,
                   ),
                 ],
               ),

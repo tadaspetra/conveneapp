@@ -32,8 +32,8 @@ abstract class BookApi {
   /// - returns all the books for the current user
   StreamList<BookModel> getCurrentBooks();
 
-  /// - returns all the books for the current user
-  Future<List<BookModel>> getHistoryBooks();
+  /// - returns all the history books for the current user
+  Future<Either<Failure, List<BookModel>>> getHistoryBooks();
 }
 
 @visibleForTesting
@@ -103,13 +103,17 @@ class BookApiFirebase implements BookApi {
   }
 
   @override
-  Future<List<BookModel>> getHistoryBooks() async {
-    final books = await _currentUsersReference
-        .collection(FirebaseConstants.finishedBooksCollection)
-        .orderBy('dateCompleted', descending: true)
-        .get();
+  Future<Either<Failure, List<BookModel>>> getHistoryBooks() async {
+    try {
+      final books = await _currentUsersReference
+          .collection(FirebaseConstants.finishedBooksCollection)
+          .orderBy('dateCompleted', descending: true)
+          .get();
 
-    return books.docs.map((e) => BookModel.fromMap(e.data()).copyWith(id: e.id)).toList();
+      return right(books.docs.map((e) => BookModel.fromMap(e.data()).copyWith(id: e.id)).toList());
+    } catch (e) {
+      return left(BookFailure());
+    }
   }
 
   CollectionReference<Map<String, dynamic>> get _currentUsersBooksReference {
