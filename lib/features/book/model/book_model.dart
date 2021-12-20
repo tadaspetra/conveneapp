@@ -9,6 +9,8 @@ class BookModel extends Equatable {
   final String? coverImage;
   final int currentPage;
   final DateTime? dateCompleted;
+  final double? rating;
+  final String? review;
 
   const BookModel({
     this.id = '',
@@ -18,6 +20,8 @@ class BookModel extends Equatable {
     required this.currentPage,
     this.coverImage,
     this.dateCompleted,
+    this.rating,
+    this.review,
   });
 
   BookModel copyWith({
@@ -28,6 +32,8 @@ class BookModel extends Equatable {
     String? coverImage,
     int? currentPage,
     DateTime? dateCompleted,
+    double? rating,
+    String? review,
   }) {
     return BookModel(
       id: id ?? this.id,
@@ -37,6 +43,8 @@ class BookModel extends Equatable {
       coverImage: coverImage ?? this.coverImage,
       currentPage: currentPage ?? this.currentPage,
       dateCompleted: dateCompleted ?? this.dateCompleted,
+      rating: rating ?? this.rating,
+      review: review ?? this.review,
     );
   }
 
@@ -48,6 +56,8 @@ class BookModel extends Equatable {
       'coverImage': coverImage,
       'currentPage': currentPage,
       'dateCompleted': dateCompleted?.millisecondsSinceEpoch,
+      'rating': rating,
+      'review': review,
     };
   }
 
@@ -55,10 +65,12 @@ class BookModel extends Equatable {
     return BookModel(
       title: map['title'],
       authors: List<String>.from(map['authors']),
-      pageCount: map['pageCount'],
+      pageCount: map['pageCount'] ?? 0,
       coverImage: map['coverImage'] as String?,
       currentPage: map['currentPage'],
       dateCompleted: map['dateCompleted'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dateCompleted']) : null,
+      rating: map['rating'],
+      review: map['review'],
     );
   }
 
@@ -72,6 +84,8 @@ class BookModel extends Equatable {
       coverImage,
       currentPage,
       dateCompleted,
+      rating,
+      review,
     ];
   }
 }

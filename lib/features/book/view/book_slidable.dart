@@ -2,6 +2,7 @@ import 'package:conveneapp/features/book/controller/book_controller.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/features/book/view/book_card.dart';
 import 'package:conveneapp/features/dashboard/view/dashboard_dialogs.dart';
+import 'package:conveneapp/features/dashboard/view/finish_book_page.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -57,10 +58,7 @@ class BookSlidable extends ConsumerWidget {
           ),
           SlidableAction(
             onPressed: (context) async {
-              bool? returnValue = await finishDialog(context);
-              if (returnValue == true) {
-                ref.read(currentBooksController.notifier).finishBook(book: book);
-              }
+              Navigator.push(context, FinishBookPage.route(book));
             },
             backgroundColor: Palette.niceWhite,
             foregroundColor: Palette.niceBlue,

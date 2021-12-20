@@ -81,17 +81,26 @@ class Dashboard extends ConsumerWidget {
             }
           }),
       endDrawer: Drawer(
-          child: ListView(
-        children: [
-          ListTile(
-            leading: const Icon(Icons.logout),
-            title: const Text('Logout'),
-            onTap: () async {
-              await ref.read(authApiProvider).signOut();
-            },
-          ),
-        ],
-      )),
+        child: ListView(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.history),
+              title: const Text('History'),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.push(context, HistoryPage.route());
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () async {
+                await ref.read(authApiProvider).signOut();
+              },
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -1,3 +1,4 @@
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
@@ -17,38 +18,6 @@ Future<bool?> deleteDialog(BuildContext context) {
             child: Text(
               'Yes',
               style: TextStyle(color: Palette.niceRed),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text(
-              'No',
-              style: TextStyle(color: Palette.niceBlack),
-            ),
-          ),
-        ],
-      );
-    },
-  );
-}
-
-Future<bool?> finishDialog(BuildContext context) {
-  return showDialog<bool>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Finish Book'),
-        content: const Text('Continue adding book to your history?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: Text(
-              'Yes',
-              style: TextStyle(color: Palette.niceBlue),
             ),
           ),
           TextButton(
