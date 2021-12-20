@@ -69,7 +69,7 @@ class HistoryCard extends StatelessWidget {
                   if (book.review != null)
                     Text(
                       book.review!,
-                    )
+                    ),
                 ],
               ),
             ),

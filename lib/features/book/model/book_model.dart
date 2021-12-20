@@ -67,7 +67,7 @@ class BookModel extends Equatable {
       authors: List<String>.from(map['authors']),
       pageCount: map['pageCount'] ?? 0,
       coverImage: map['coverImage'] as String?,
-      currentPage: map['currentPage'],
+      currentPage: map['currentPage'] ?? 0,
       dateCompleted: map['dateCompleted'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dateCompleted']) : null,
       rating: map['rating'],
       review: map['review'],
