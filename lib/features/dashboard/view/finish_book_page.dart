@@ -33,6 +33,7 @@ class _FinishBookPageState extends ConsumerState<FinishBookPage> {
   @override
   void dispose() {
     _reviewFocus.dispose();
+    _reviewController.dispose();
     super.dispose();
   }
 
@@ -120,11 +121,13 @@ class _FinishBookPageState extends ConsumerState<FinishBookPage> {
                   TextButton(
                     onPressed: () {
                       if (rating == null) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(content: Text("Need to give book a rating")));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Need to give book a rating")),
+                        );
                       } else if (_reviewController.text.isEmpty) {
-                        ScaffoldMessenger.of(context)
-                            .showSnackBar(const SnackBar(content: Text("Please add a review")));
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Please add a review")),
+                        );
                       } else {
                         ref.read(currentBooksController.notifier).finishBook(
                               book: widget.bookModel.copyWith(
