@@ -7,6 +7,14 @@
     <list default="true" id="371cabf8-661b-4391-911f-ae6eb2457dde" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/convenelogo.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/fullconvene.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/google.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/reading.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/reading.svg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/wordsconvene.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/authentication/view/auth_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/authentication/view/auth_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,9 +58,9 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="173" y="100" width="1602" height="820" key="AVDManager" timestamp="1639409596121">
+    <state x="173" y="100" width="1602" height="820" key="AVDManager" timestamp="1640215045225">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
-    <state x="173" y="100" width="1602" height="820" key="AVDManager/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1639409596121" />
+    <state x="173" y="100" width="1602" height="820" key="AVDManager/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1640215045225" />
   </component>
 </project>

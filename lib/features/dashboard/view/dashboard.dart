@@ -141,9 +141,21 @@ class _DashBoardBody extends ConsumerWidget {
         // - render a message when the books are empty,
         // - user can be a new user or he doesnt have any books added
         if (books.isEmpty) {
-          return const Center(
-              child: Text(
-            'Looks like you aren’t reading any books currently',
+          return Center(
+              child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Center(
+                child: Image(
+                  image: const AssetImage("assets/defaultstates/empty dashboard.png"),
+                  height: (MediaQuery.of(context).size.height * 0.3),
+                ),
+              ),
+              const SizedBox(height: 20),
+              const Text(
+                'Looks like you aren’t reading any books currently',
+              ),
+            ],
           ));
         }
         return CustomScrollView(
