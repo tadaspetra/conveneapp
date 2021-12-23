@@ -19,14 +19,13 @@ class AuthPage extends ConsumerWidget {
           children: [
             const Spacer(),
             const Image(
-              image: AssetImage("assets/wordsconvene.png"),
+              image: AssetImage("assets/branding/wordsconvene.png"),
               height: 50,
             ),
             const Spacer(),
-            Padding(
-              padding: const EdgeInsets.all(30.0),
+            Center(
               child: Image(
-                image: const AssetImage("assets/reading.png"),
+                image: const AssetImage("assets/defaultstates/login.png"),
                 height: (MediaQuery.of(context).size.height * 0.3),
               ),
             ),
@@ -80,7 +79,7 @@ class GoogleButton extends ConsumerWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
             Image(
-              image: AssetImage("assets/google.png"),
+              image: AssetImage("assets/other/google.png"),
               height: 20.0,
             ),
             Padding(

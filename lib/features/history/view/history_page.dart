@@ -37,9 +37,22 @@ class HistoryView extends ConsumerWidget {
             //trying to get the data if it is right
             List<BookModel> books = data.value.getOrElse(() => []);
             if (books.isEmpty) {
-              return const Text(
-                "There were no results for history",
-              );
+              return Center(
+                  child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Center(
+                    child: Image(
+                      image: const AssetImage("assets/defaultstates/empty history.png"),
+                      height: (MediaQuery.of(context).size.height * 0.3),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text(
+                    'Currently you have no history of books',
+                  ),
+                ],
+              ));
             } else {
               return ListView.builder(
                 itemCount: books.length,
