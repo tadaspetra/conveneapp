@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conveneapp/apis/firebase/book.dart';
 import 'package:conveneapp/apis/firebase/firebase_api_providers.dart';
 import 'package:conveneapp/core/errors/failures.dart';
+import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -218,7 +219,7 @@ void main() {
       when(() => mockQueryDocumentSnapshot.data()).thenAnswer((_) => bookModel.toMap());
       when(() => mockQueryDocumentSnapshot.id).thenAnswer((_) => bookModel.id);
 
-      expect(await bookApiFirebase.getHistoryBooks(), [bookModel]);
+      expect(await bookApiFirebase.getHistoryBooks(), isA<Right<Failure, List<BookModel>>>());
     });
   });
 

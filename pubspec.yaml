@@ -31,6 +31,7 @@ dependencies:
   equatable: ^2.0.3
   flutter:
     sdk: flutter
+  flutter_rating_bar: ^4.0.0
   flutter_riverpod: ^1.0.0
   flutter_slidable: ^1.0.0-dev.9
   google_sign_in: ^5.0.7

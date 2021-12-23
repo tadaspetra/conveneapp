@@ -2,6 +2,7 @@ import 'package:conveneapp/core/text.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:intl/intl.dart';
 
 class HistoryCard extends StatelessWidget {
@@ -16,6 +17,7 @@ class HistoryCard extends StatelessWidget {
       decoration:
           BoxDecoration(color: Theme.of(context).cardColor, borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: Padding(
@@ -50,8 +52,24 @@ class HistoryCard extends StatelessWidget {
                       ),
                     )),
                   const SizedBox(
-                    height: 15,
+                    height: 10,
                   ),
+                  if (book.rating != null)
+                    RatingBarIndicator(
+                      itemSize: 30,
+                      rating: book.rating!,
+                      itemBuilder: (context, _) => const Icon(
+                        Icons.star,
+                        color: Colors.amber,
+                      ),
+                    ),
+                  const SizedBox(
+                    height: 5,
+                  ),
+                  if (book.review != null)
+                    Text(
+                      book.review!,
+                    ),
                 ],
               ),
             ),
@@ -60,6 +78,7 @@ class HistoryCard extends StatelessWidget {
               //if object gets created with no cover image we set to "noimage"
               ? Container()
               : Container(
+                  margin: const EdgeInsets.only(top: 20),
                   decoration: const BoxDecoration(
                     boxShadow: [
                       BoxShadow(

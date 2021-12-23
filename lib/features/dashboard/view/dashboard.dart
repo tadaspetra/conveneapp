@@ -88,6 +88,7 @@ class Dashboard extends ConsumerWidget {
               leading: const Icon(Icons.history),
               title: const Text('History'),
               onTap: () {
+                Navigator.pop(context);
                 Navigator.push(context, HistoryPage.route());
               },
             ),

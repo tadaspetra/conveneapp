@@ -31,13 +31,14 @@ class MockDocumentReference extends Mock implements DocumentReference<Map<String
 class MockQuery extends Mock implements Query<Map<String, dynamic>> {}
 
 const bookModel = BookModel(
-  id: 'id',
-  title: 'title',
-  authors: ['authors'],
-  pageCount: 100,
-  coverImage: 'coverImage',
-  currentPage: 0,
-);
+    id: 'id',
+    title: 'title',
+    authors: ['authors'],
+    pageCount: 100,
+    coverImage: 'coverImage',
+    currentPage: 0,
+    rating: 3,
+    review: "good book");
 
 const searchBookModel = SearchBookModel(
   title: 'title',

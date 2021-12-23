@@ -34,38 +34,6 @@ Future<bool?> deleteDialog(BuildContext context) {
   );
 }
 
-Future<bool?> finishDialog(BuildContext context) {
-  return showDialog<bool>(
-    context: context,
-    builder: (context) {
-      return AlertDialog(
-        title: const Text('Finish Book'),
-        content: const Text('Continue adding book to your history?'),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(true);
-            },
-            child: Text(
-              'Yes',
-              style: TextStyle(color: Palette.niceBlue),
-            ),
-          ),
-          TextButton(
-            onPressed: () {
-              Navigator.of(context).pop(false);
-            },
-            child: const Text(
-              'No',
-              style: TextStyle(color: Palette.niceBlack),
-            ),
-          ),
-        ],
-      );
-    },
-  );
-}
-
 Future<String?> updateDialog(BuildContext context, BookModel book) {
   TextEditingController currentPage = TextEditingController(text: book.currentPage.toString());
   return showDialog<String>(
