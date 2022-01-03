@@ -3,6 +3,7 @@ import 'package:conveneapp/core/button.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/book/controller/book_controller.dart';
 import 'package:conveneapp/features/book/view/book_slidable.dart';
+import 'package:conveneapp/features/dashboard/controller/user_info_controller.dart';
 import 'package:conveneapp/features/history/view/history_page.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
 import 'package:conveneapp/features/search/view/search.dart';
@@ -74,7 +75,7 @@ class Dashboard extends ConsumerWidget {
           key: const Key('dashBoard-addPersonalBook'),
           child: const Text("Add personal book"),
           onPressed: () async {
-            final bookToAdd = await Navigator.push(context, SearchPage.route);
+            final bookToAdd = await Navigator.push(context, SearchPage.route());
             if (bookToAdd is SearchBookModel) {
               await ref.read(currentBooksController.notifier).addBook(
                     book: bookToAdd,
@@ -170,6 +171,18 @@ class _DashBoardBody extends ConsumerWidget {
                       'You are currently reading',
                       style: TextStyle(color: Colors.black, fontSize: 18),
                     ),
+                  ),
+                  ref.watch(userInfoController).maybeWhen(
+                    data: (user) {
+                      if (user.showTutorial) {
+                        return Text("SWIPE THE CARDS");
+                      } else {
+                        return Container();
+                      }
+                    },
+                    orElse: () {
+                      return Container();
+                    },
                   ),
                   MediaQuery.removePadding(
                     context: context,

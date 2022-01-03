@@ -6,10 +6,10 @@ import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
-  static final route = MaterialPageRoute(
-    builder: (context) => const SearchPage(),
-    fullscreenDialog: true,
-  );
+  static route() => MaterialPageRoute(
+        builder: (context) => const SearchPage(),
+        fullscreenDialog: true,
+      );
   const SearchPage({Key? key}) : super(key: key);
 
   @override

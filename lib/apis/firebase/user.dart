@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:conveneapp/features/authentication/model/user.dart';
+import 'package:conveneapp/features/authentication/model/user_info.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final userApiProvider = Provider<UserApi>((ref) => UserApi());
@@ -7,12 +7,15 @@ final userApiProvider = Provider<UserApi>((ref) => UserApi());
 final CollectionReference users = FirebaseFirestore.instance.collection('users');
 
 class UserApi {
-  Future<LocalUser> getUser({required String uid}) async {
-    DocumentSnapshot docSnapshot = await users.doc(uid).get();
-    return LocalUser(
-      uid: docSnapshot.id,
-      email: docSnapshot["email"],
-      name: docSnapshot["name"],
+  Stream<UserInfo> getUser({required String uid}) {
+    Stream<DocumentSnapshot> docSnapshot = users.doc(uid).snapshots();
+    return docSnapshot.map<UserInfo>(
+      (user) => UserInfo(
+        uid: user.id,
+        email: user["email"],
+        name: user["name"],
+        showTutorial: user['showTutorial'],
+      ),
     );
   }
 
@@ -20,6 +23,7 @@ class UserApi {
     await users.doc(uid).set({
       'email': email ?? FieldValue.delete(),
       'name': name ?? FieldValue.delete(),
+      'showTutorial': true,
     }, SetOptions(merge: true));
   }
 }
