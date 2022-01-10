@@ -1,4 +1,5 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
+import 'package:conveneapp/apis/firebase/user.dart';
 import 'package:conveneapp/core/button.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/book/controller/book_controller.dart';
@@ -165,17 +166,34 @@ class _DashBoardBody extends ConsumerWidget {
             SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 15, bottom: 5, left: 15, right: 20),
-                    child: Text(
-                      'You are currently reading',
-                      style: TextStyle(color: Colors.black, fontSize: 18),
-                    ),
-                  ),
                   ref.watch(userInfoController).maybeWhen(
                     data: (user) {
                       if (user.showTutorial) {
-                        return Text("SWIPE THE CARDS");
+                        return Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 4),
+                          decoration: BoxDecoration(
+                              color: Theme.of(context).cardColor,
+                              borderRadius: const BorderRadius.all(Radius.circular(20))),
+                          child: Row(
+                            children: [
+                              const Text(
+                                "Swipe The Cards Below",
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16,
+                                ),
+                              ),
+                              const Spacer(),
+                              IconButton(
+                                onPressed: () {
+                                  ref.read(userApiProvider).removeTutorial(uid: user.uid);
+                                },
+                                icon: const Icon(Icons.close),
+                              )
+                            ],
+                          ),
+                        );
                       } else {
                         return Container();
                       }
@@ -183,6 +201,13 @@ class _DashBoardBody extends ConsumerWidget {
                     orElse: () {
                       return Container();
                     },
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.only(top: 15, bottom: 5, left: 15, right: 20),
+                    child: Text(
+                      'You are currently reading',
+                      style: TextStyle(color: Colors.black, fontSize: 18),
+                    ),
                   ),
                   MediaQuery.removePadding(
                     context: context,

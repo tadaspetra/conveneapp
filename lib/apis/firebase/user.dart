@@ -20,10 +20,19 @@ class UserApi {
   }
 
   Future<void> addUser({required String uid, String? email, String? name}) async {
+    DocumentSnapshot documentSnapshot = await users.doc(uid).get();
+
+    if (documentSnapshot.exists) return;
     await users.doc(uid).set({
       'email': email ?? FieldValue.delete(),
       'name': name ?? FieldValue.delete(),
       'showTutorial': true,
     }, SetOptions(merge: true));
+  }
+
+  Future<void> removeTutorial({required String uid}) async {
+    await users.doc(uid).update({
+      'showTutorial': false,
+    });
   }
 }
