@@ -1,13 +1,14 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/features/authentication/model/auth_state.dart';
-import 'package:conveneapp/features/authentication/model/user.dart';
+import 'package:conveneapp/features/authentication/model/auth_user.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 const String nullUid = "nouser";
 const String nullEmail = "nouser";
 
-final currentUserController = StreamProvider<LocalUser>((ref) {
-  return AuthApi().currentUser().map((user) => LocalUser(
+final currentUserController = StreamProvider<AuthUser>((ref) {
+  final AuthApi authApi = ref.watch(authApiProvider);
+  return authApi.currentUser().map((user) => AuthUser(
         uid: user?.uid ?? nullUid,
         email: user?.email ?? nullEmail,
         name: user?.displayName,
@@ -24,10 +25,10 @@ final authStateController = Provider<AuthState>((ref) {
         return AuthState.authenticated;
       }
     },
-    loading: (user) {
+    loading: () {
       return AuthState.unknown;
     },
-    error: (err, stack, user) {
+    error: (err, stack) {
       return AuthState.notAuthenticated;
     },
   );

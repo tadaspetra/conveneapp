@@ -19,3 +19,13 @@ doc/api/
 *.js_
 *.js.deps
 *.js.map
+/.fvm
+/.vscode/settings.json
+.flutter-plugins
+/configs/emulator_config.json
+./history
+.flutter-plugins-dependencies
+/coverage
+/ios/Podfile.lock
+pubspec.lock
+macos-test.sh

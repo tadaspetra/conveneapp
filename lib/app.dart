@@ -1,5 +1,5 @@
 import 'package:conveneapp/core/loading.dart';
-import 'package:conveneapp/dashboard.dart';
+import 'package:conveneapp/features/dashboard/view/dashboard.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/auth_state.dart';
 import 'package:conveneapp/features/authentication/view/auth_page.dart';
@@ -50,42 +50,14 @@ class _AppState extends ConsumerState<AppNavigator> {
                     return AuthPage(
                       appleSignInAvailable: snapshot.data ?? false,
                     );
-                  } else if (snapshot.connectionState ==
-                      ConnectionState.waiting) {
+                  } else if (snapshot.connectionState == ConnectionState.waiting) {
                     return const LoadingPage();
                   }
                   throw ("WE STILL HAVE PROBLEMS");
                 },
               );
             case AuthState.authenticated:
-              return ref.watch(currentUserController).when(
-                data: (data) {
-                  return Dashboard(user: data);
-                },
-                loading: (user) {
-                  return const LoadingPage();
-                },
-                error: (error, stack, user) {
-                  return FutureBuilder(
-                    future: _appleSignInAvailable,
-                    builder:
-                        (BuildContext context, AsyncSnapshot<bool> snapshot) {
-                      if (snapshot.hasError) {
-                        throw ("WE HAVE PROBLEMS");
-                      }
-                      if (snapshot.connectionState == ConnectionState.done) {
-                        return AuthPage(
-                          appleSignInAvailable: snapshot.data ?? false,
-                        );
-                      } else if (snapshot.connectionState ==
-                          ConnectionState.waiting) {
-                        return const LoadingPage();
-                      }
-                      throw ("WE STILL HAVE PROBLEMS");
-                    },
-                  );
-                },
-              );
+              return const Dashboard();
           }
         } else if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingPage();

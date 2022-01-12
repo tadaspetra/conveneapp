@@ -35,13 +35,19 @@ jobs:
         run: flutter pub get
 
       - name: Check Format
-        run: flutter format --set-exit-if-changed .
+        run: flutter format --line-length=120 --set-exit-if-changed .
 
       - name: Analyze project source
         run: flutter analyze
 
       - name: Run Tests
-        run: flutter test
+        run: flutter test --no-pub --coverage
+
+      - name: Check Code Coverage
+        uses: VeryGoodOpenSource/very_good_coverage@v1.2.0
+        with:
+          path: "./coverage/lcov.info"
+          min_coverage: 0 #This will increase up to 70%
 
       - name: Build iOS App
         run: flutter build ios --no-codesign

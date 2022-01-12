@@ -47,6 +47,5 @@ class SearchBookModel {
 
   String toJson() => json.encode(toMap());
 
-  factory SearchBookModel.fromJson(String source) =>
-      SearchBookModel.fromMap(json.decode(source));
+  factory SearchBookModel.fromJson(String source) => SearchBookModel.fromMap(json.decode(source));
 }

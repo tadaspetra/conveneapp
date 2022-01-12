@@ -15,29 +15,37 @@ publish_to: "none" # Remove this line if you wish to publish to pub.dev
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.1.1+7
+version: 0.2.0+0
 
 environment:
-  sdk: ">=2.12.0 <3.0.0"
+  sdk: ">=2.13.0 <3.0.0"
 
 dependencies:
   books_finder: ^4.1.0
-  cloud_firestore: ^2.5.1
+  cloud_firestore: ^3.1.0
   cupertino_icons: ^1.0.2
-  firebase_analytics: ^8.3.2
-  firebase_auth: ^3.1.0
-  firebase_core: ^1.6.0
+  dartz: ^0.10.0
+  firebase_analytics: ^8.3.4
+  firebase_auth: ^3.2.0
+  firebase_core: ^1.10.0
+  equatable: ^2.0.3
   flutter:
     sdk: flutter
-  flutter_riverpod: ^1.0.0-dev.10
+  flutter_rating_bar: ^4.0.0
+  flutter_riverpod: ^1.0.0
   flutter_slidable: ^1.0.0-dev.9
   google_sign_in: ^5.0.7
+  intl: ^0.17.0
   the_apple_sign_in: ^1.1.1
 
 dev_dependencies:
+  mocktail_image_network: ^0.2.0
+  mocktail: ^0.2.0
   flutter_launcher_icons: ^0.9.2
+  flutter_lints: ^1.0.4
   flutter_test:
     sdk: flutter
+  mockingjay: ^0.2.0-dev.3
 
 flutter_icons:
   android: true
@@ -55,10 +63,10 @@ flutter:
   uses-material-design: true
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/fullconvene.png
-    - assets/wordsconvene.png
-    - assets/google.png
-    - assets/reading.png
+    - assets/branding/
+    - assets/defaultstates/
+    - assets/other/
+    - configs/
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
   # For details regarding adding assets from package dependencies, see

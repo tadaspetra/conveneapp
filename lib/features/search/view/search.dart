@@ -6,6 +6,10 @@ import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
 
 class SearchPage extends StatefulWidget {
+  static route() => MaterialPageRoute(
+        builder: (context) => const SearchPage(),
+        fullscreenDialog: true,
+      );
   const SearchPage({Key? key}) : super(key: key);
 
   @override
@@ -35,20 +39,23 @@ class _SearchPageState extends State<SearchPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 16.0),
                     child: TextField(
-                      decoration: const InputDecoration.collapsed(
-                          hintText: "Search Book"),
+                      decoration: const InputDecoration.collapsed(hintText: "Search Book"),
                       controller: bookController,
                       onSubmitted: (_) async {
-                        searchText = bookController.text;
-                        setState(() {});
+                        if (bookController.text.isNotEmpty) {
+                          searchText = bookController.text;
+                          setState(() {});
+                        }
                       },
                     ),
                   ),
                 ),
                 IconButton(
                   onPressed: () async {
-                    searchText = bookController.text;
-                    setState(() {});
+                    if (bookController.text.isNotEmpty) {
+                      searchText = bookController.text;
+                      setState(() {});
+                    }
                   },
                   icon: const Icon(Icons.search),
                 ),
@@ -58,6 +65,7 @@ class _SearchPageState extends State<SearchPage> {
           if (searchText == null)
             const DefaultView(
               text: "Enter something into search",
+              imagePath: "assets/defaultstates/search.png",
             )
           else
             SearchView(
@@ -71,15 +79,29 @@ class _SearchPageState extends State<SearchPage> {
 
 class DefaultView extends StatelessWidget {
   final String text;
-  const DefaultView({Key? key, required this.text}) : super(key: key);
+  final String imagePath;
+  const DefaultView({Key? key, required this.text, required this.imagePath}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Padding(
-        padding: const EdgeInsets.only(top: 100.0),
-        child: CustomText(
-          text: text,
+      child: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Center(
+              child: Image(
+                image: AssetImage(imagePath),
+                height: (MediaQuery.of(context).size.height * 0.3),
+              ),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            CustomText(
+              text: text,
+            ),
+          ],
         ),
       ),
     );
@@ -97,10 +119,9 @@ class SearchView extends StatelessWidget {
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: BooksFinderApi().searchBooks(search),
-      builder: (BuildContext context,
-          AsyncSnapshot<List<SearchBookModel>> booklist) {
+      builder: (BuildContext context, AsyncSnapshot<List<SearchBookModel>> booklist) {
         if (booklist.connectionState == ConnectionState.done) {
-          if (booklist.hasData) {
+          if (booklist.hasData && booklist.data!.isNotEmpty) {
             return Expanded(
               child: ListView.builder(
                 itemCount: booklist.data!.length,
@@ -117,6 +138,7 @@ class SearchView extends StatelessWidget {
           } else {
             return const DefaultView(
               text: "There were no results for this search",
+              imagePath: "assets/defaultstates/empty search.png",
             );
           }
         } else {
