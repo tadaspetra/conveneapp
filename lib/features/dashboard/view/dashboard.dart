@@ -27,6 +27,16 @@ class Dashboard extends ConsumerWidget {
             child: Builder(
               builder: (context) {
                 final displayName = ref.watch(currentUserController).asData?.value.name ?? '';
+                if (displayName == "") {
+                  return const Text(
+                    'Welcome',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 20,
+                    ),
+                  );
+                }
                 return Text(
                   "Hi, $displayName!",
                   style: const TextStyle(
@@ -59,7 +69,8 @@ class Dashboard extends ConsumerWidget {
                           if (userName != null) {
                             return Text(userName.substring(0, 1));
                           }
-                          return const Offstage();
+
+                          return const Icon(Icons.settings);
                         },
                       ),
                     ),
