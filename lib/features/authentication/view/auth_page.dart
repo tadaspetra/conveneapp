@@ -2,7 +2,7 @@ import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/core/button.dart';
 import 'package:conveneapp/core/text.dart';
 import 'package:conveneapp/theme/palette.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide ButtonStyle;
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
 
@@ -42,13 +42,17 @@ class AuthPage extends ConsumerWidget {
                 height: 20,
               ),
             if (appleSignInAvailable)
-              AppleSignInButton(
-                onPressed: () async {
-                  final result = await ref.read(authApiProvider).signInWithApple();
-                  result.fold((failure) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(failure.message)));
-                  }, (_) {});
-                },
+              SizedBox(
+                width: 300,
+                child: AppleSignInButton(
+                  style: ButtonStyle.whiteOutline,
+                  onPressed: () async {
+                    final result = await ref.read(authApiProvider).signInWithApple();
+                    result.fold((failure) {
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(failure.message)));
+                    }, (_) {});
+                  },
+                ),
               ),
             const Spacer()
           ],
