@@ -1,9 +1,10 @@
 import 'package:conveneapp/core/loading.dart';
-import 'package:conveneapp/features/dashboard/view/dashboard.dart';
 import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
 import 'package:conveneapp/features/authentication/model/auth_state.dart';
 import 'package:conveneapp/features/authentication/view/auth_page.dart';
+import 'package:conveneapp/features/dashboard/view/dashboard.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:the_apple_sign_in/the_apple_sign_in.dart';
@@ -35,6 +36,7 @@ class _AppState extends ConsumerState<AppNavigator> {
         }
 
         if (snapshot.connectionState == ConnectionState.done) {
+          FlutterError.onError = FirebaseCrashlytics.instance.recordFlutterError;
           AuthState currentAuthState = ref.watch(authStateController);
           switch (currentAuthState) {
             case AuthState.unknown:

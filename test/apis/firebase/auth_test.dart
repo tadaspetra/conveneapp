@@ -204,7 +204,9 @@ void main() {
 
   group('signOut', () {
     test('should return [right(null)] when the user has been signed out', () async {
-      when(() => mockGoogleSignIn.signOut()).thenAnswer((invocation) async {});
+      when(() => mockGoogleSignIn.signOut()).thenAnswer((invocation) async {
+        return null;
+      });
       when(() => mockFirebaseAuth.signOut()).thenAnswer((invocation) async {});
 
       expect(await authApiFirebase.signOut(), equals(right(null)));
