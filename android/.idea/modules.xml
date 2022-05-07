@@ -4,10 +4,12 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-824293458/android.cloud_firestore.iml" filepath="$PROJECT_DIR$/.idea/modules/-824293458/android.cloud_firestore.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1967088489/android.firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/1967088489/android.firebase_auth.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1428384227/android.firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/1428384227/android.firebase_core.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1559126326/android.google_sign_in.iml" filepath="$PROJECT_DIR$/.idea/modules/1559126326/android.google_sign_in.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1438335215/android.firebase_analytics.iml" filepath="$PROJECT_DIR$/.idea/modules/1438335215/android.firebase_analytics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-37941122/android.firebase_crashlytics.iml" filepath="$PROJECT_DIR$/.idea/modules/-37941122/android.firebase_crashlytics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/134514096/android.google_sign_in_android.iml" filepath="$PROJECT_DIR$/.idea/modules/134514096/android.google_sign_in_android.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/1209002580/io.flutter.plugins.firebase.auth.android.firebase_auth.iml" filepath="$PROJECT_DIR$/.idea/modules/1209002580/io.flutter.plugins.firebase.auth.android.firebase_auth.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-1346786382/io.flutter.plugins.firebase.cloudfirestore.android.cloud_firestore.iml" filepath="$PROJECT_DIR$/.idea/modules/-1346786382/io.flutter.plugins.firebase.cloudfirestore.android.cloud_firestore.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/-348428507/io.flutter.plugins.firebase.core.android.firebase_core.iml" filepath="$PROJECT_DIR$/.idea/modules/-348428507/io.flutter.plugins.firebase.core.android.firebase_core.iml" />
     </modules>
   </component>
 </project>
