@@ -48,6 +48,23 @@ android {
         versionCode flutterVersionCode.toInteger()
         versionName flutterVersionName
     }
+    flavorDimensions "app"
+    productFlavors {
+        dev {
+            dimension "app"
+            versionNameSuffix "-dev"
+            applicationId "com.convene.conveneapp.dev"
+        }
+        staging {
+            dimension "app"
+            versionNameSuffix "-staging"
+            applicationId "com.convene.conveneapp.staging"
+        }
+        prod {
+            dimension "app"
+            applicationId "com.convene.conveneapp"
+        }
+    }
 
     signingConfigs {
         release {

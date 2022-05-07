@@ -20,10 +20,13 @@ class EnvironmentConfig {
 
   /// - develomment enviroment
   static const String dev = "DEV";
+
+  /// - staging enviroment
+  static const String staging = "STAGING";
 }
 
 /// HACK: this can used to run logics depending on different environment
-/// - awaiting this in `prod` wont affect the performance of the app
+/// - awaiting this in `prod/staging` wont affect the performance of the app
 Future<void> setUpMain(String env) async {
   if (env == EnvironmentConfig.dev) {
     log('dev');
