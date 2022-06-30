@@ -7,14 +7,10 @@
     <list default="true" id="371cabf8-661b-4391-911f-ae6eb2457dde" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/convenelogo.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/fullconvene.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/google.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/reading.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/reading.svg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/wordsconvene.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/features/authentication/view/auth_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/authentication/view/auth_page.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/conveneapp.iml" beforeDir="false" afterPath="$PROJECT_DIR$/conveneapp.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner/Info.plist" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner/Info.plist" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/features/dashboard/view/dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/features/dashboard/view/dashboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/generated_plugin_registrant.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/generated_plugin_registrant.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +34,15 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.cidr.known.project.marker" value="true" />
+    <property name="cidr.known.project.marker" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
+    <property name="io.flutter.reload.alreadyRun" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
-  <component name="SpellCheckerSettings" BundledDictionaries="0" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" Dictionaries="0" CorrectionsLimit="5" DefaultDictionary="application-level" UseSingleDictionary="true" />
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -56,11 +55,5 @@
       <updated>1631544089000</updated>
     </task>
     <servers />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="173" y="100" width="1602" height="820" key="AVDManager" timestamp="1640215045225">
-      <screen x="0" y="0" width="1920" height="1040" />
-    </state>
-    <state x="173" y="100" width="1602" height="820" key="AVDManager/0.0.1920.1040/-1920.0.1920.1040@0.0.1920.1040" timestamp="1640215045225" />
   </component>
 </project>
