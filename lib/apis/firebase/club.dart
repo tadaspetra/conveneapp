@@ -22,6 +22,8 @@ abstract class ClubApi {
   /// - create a new book
   FutureEitherVoid addClub(ClubModel club);
 
+  FutureEither<ClubModel> getClub(String clubId);
+
   // /// - used to update the currentPage
   // FutureEitherVoid updateBook(BookModel book);
 
@@ -58,6 +60,18 @@ class ClubApiFirebase implements ClubApi {
         'name': club.name,
       });
       return right(Future<void>.value());
+    } on FirebaseException catch (e) {
+      return left(BookFailure.fromCode(e.code));
+    } on Exception catch (_) {
+      return left(BookFailure());
+    }
+  }
+
+  @override
+  FutureEither<ClubModel> getClub(String clubId) async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> doc = await _clubsReference.doc(clubId).get();
+      return right(ClubModel.fromMap(doc.data()!).copyWith(id: doc.id));
     } on FirebaseException catch (e) {
       return left(BookFailure.fromCode(e.code));
     } on Exception catch (_) {

@@ -6,7 +6,9 @@ import 'package:conveneapp/features/authentication/controller/auth_controller.da
 import 'package:conveneapp/features/book/controller/book_controller.dart';
 import 'package:conveneapp/features/book/view/book_slidable.dart';
 import 'package:conveneapp/features/club/controller/club_controller.dart';
+import 'package:conveneapp/features/club/model/club_model.dart';
 import 'package:conveneapp/features/club/view/club_card.dart';
+import 'package:conveneapp/features/club/view/club_page.dart';
 import 'package:conveneapp/features/create_club/view/create_club_page.dart';
 import 'package:conveneapp/features/dashboard/controller/user_info_controller.dart';
 import 'package:conveneapp/features/history/view/history_page.dart';
@@ -273,8 +275,17 @@ class _DashBoardBody extends ConsumerWidget {
                             shrinkWrap: true,
                             physics: const NeverScrollableScrollPhysics(),
                             itemBuilder: (BuildContext context, index) {
-                              return ClubCard(
-                                club: clubs[index],
+                              return GestureDetector(
+                                child: ClubCard(
+                                  club: clubs[index],
+                                ),
+                                onTap: () async {
+                                  ClubModel selectedClub =
+                                      await ref.read(currentClubsController.notifier).getClub(clubId: clubs[index].id);
+                                  if (selectedClub.name != "error") {
+                                    Navigator.push(context, ClubPage.route(selectedClub));
+                                  }
+                                },
                               );
                             }),
                       ),
@@ -364,8 +375,17 @@ class _DashBoardBody extends ConsumerWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           itemBuilder: (BuildContext context, index) {
-                            return ClubCard(
-                              club: clubs[index],
+                            return GestureDetector(
+                              child: ClubCard(
+                                club: clubs[index],
+                              ),
+                              onTap: () async {
+                                ClubModel selectedClub =
+                                    await ref.read(currentClubsController.notifier).getClub(clubId: clubs[index].id);
+                                if (selectedClub.name != "error") {
+                                  Navigator.push(context, ClubPage.route(selectedClub));
+                                }
+                              },
                             );
                           }),
                     ),
