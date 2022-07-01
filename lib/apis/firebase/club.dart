@@ -33,6 +33,8 @@ abstract class ClubApi {
   /// - returns all the books for the current user
   StreamList<PersonalClubModel> getCurrentClubs();
 
+  FutureEitherVoid addMember(ClubModel club, String memberId);
+
   // /// - returns all the history books for the current user
   // Future<Either<Failure, List<BookModel>>> getHistoryBooks();
 }
@@ -61,9 +63,9 @@ class ClubApiFirebase implements ClubApi {
       });
       return right(Future<void>.value());
     } on FirebaseException catch (e) {
-      return left(BookFailure.fromCode(e.code));
+      return left(ClubFailure.fromCode(e.code));
     } on Exception catch (_) {
-      return left(BookFailure());
+      return left(ClubFailure());
     }
   }
 
@@ -73,9 +75,28 @@ class ClubApiFirebase implements ClubApi {
       DocumentSnapshot<Map<String, dynamic>> doc = await _clubsReference.doc(clubId).get();
       return right(ClubModel.fromMap(doc.data()!).copyWith(id: doc.id));
     } on FirebaseException catch (e) {
-      return left(BookFailure.fromCode(e.code));
+      return left(ClubFailure.fromCode(e.code));
     } on Exception catch (_) {
-      return left(BookFailure());
+      return left(ClubFailure());
+    }
+  }
+
+  @override
+  FutureEitherVoid addMember(ClubModel club, String memberId) async {
+    try {
+      //if member already exists, arrayUnion will not add it again
+      await _clubsReference.doc(club.id).update({
+        'members': FieldValue.arrayUnion([memberId]),
+      });
+      //if already in club, will just overwrite and not a problem
+      await _currentUsersClubsReference.doc(club.id).set({
+        'name': club.name,
+      });
+      return right(Future<void>.value());
+    } on FirebaseException catch (e) {
+      return left(ClubFailure.fromCode(e.code));
+    } on Exception catch (_) {
+      return left(ClubFailure());
     }
   }
 
@@ -84,9 +105,9 @@ class ClubApiFirebase implements ClubApi {
   //   try {
   //     return right(await _currentUsersBooksReference.doc(book.id).delete());
   //   } on FirebaseException catch (e) {
-  //     return left(BookFailure.fromCode(e.code));
+  //     return left(ClubFailure.fromCode(e.code));
   //   } on Exception catch (_) {
-  //     return left(BookFailure());
+  //     return left(ClubFailure());
   //   }
   // }
 
@@ -99,9 +120,9 @@ class ClubApiFirebase implements ClubApi {
   //         );
   //     return right(Future<void>.value());
   //   } on FirebaseException catch (e) {
-  //     return left(BookFailure.fromCode(e.code));
+  //     return left(ClubFailure.fromCode(e.code));
   //   } on Exception catch (_) {
-  //     return left(BookFailure());
+  //     return left(ClubFailure());
   //   }
   // }
 
@@ -110,9 +131,9 @@ class ClubApiFirebase implements ClubApi {
   //   try {
   //     return right(_currentUsersBooksReference.doc(book.id).update({'currentPage': book.currentPage}));
   //   } on FirebaseException catch (e) {
-  //     return left(BookFailure.fromCode(e.code));
+  //     return left(ClubFailure.fromCode(e.code));
   //   } on Exception catch (_) {
-  //     return left(BookFailure());
+  //     return left(ClubFailure());
   //   }
   // }
 
@@ -133,7 +154,7 @@ class ClubApiFirebase implements ClubApi {
 
   //     return right(books.docs.map((e) => BookModel.fromMap(e.data()).copyWith(id: e.id)).toList());
   //   } catch (e) {
-  //     return left(BookFailure());
+  //     return left(ClubFailure());
   //   }
   // }
 
