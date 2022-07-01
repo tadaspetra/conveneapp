@@ -12,6 +12,7 @@ import 'package:conveneapp/features/club/view/club_page.dart';
 import 'package:conveneapp/features/create_club/view/create_club_page.dart';
 import 'package:conveneapp/features/dashboard/controller/user_info_controller.dart';
 import 'package:conveneapp/features/history/view/history_page.dart';
+import 'package:conveneapp/features/join_club/view/join_club.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
 import 'package:conveneapp/features/search/view/search.dart';
 import 'package:conveneapp/theme/palette.dart';
@@ -168,6 +169,7 @@ class Dashboard extends ConsumerWidget {
                 info: 'By joining a club, you can read books together with your friends',
                 onPressed: () async {
                   Navigator.pop(context);
+                  await Navigator.push(context, JoinClubPage.route());
                 },
               ),
               const SizedBox(height: 10),
