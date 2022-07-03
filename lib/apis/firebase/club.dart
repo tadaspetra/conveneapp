@@ -4,6 +4,7 @@ import 'package:conveneapp/core/constants/constants.dart';
 import 'package:conveneapp/core/errors/errors.dart';
 import 'package:conveneapp/core/extensions/extensions.dart';
 import 'package:conveneapp/core/type_defs/type_defs.dart';
+import 'package:conveneapp/features/club/model/club_book_model.dart';
 import 'package:conveneapp/features/club/model/club_model.dart';
 import 'package:conveneapp/features/club/model/personal_club_model.dart';
 import 'package:dartz/dartz.dart';
@@ -34,6 +35,8 @@ abstract class ClubApi {
   StreamList<PersonalClubModel> getCurrentClubs();
 
   FutureEitherVoid addMember(ClubModel club, String memberId);
+
+  FutureEitherVoid addBook(ClubModel club, ClubBookModel book);
 
   // /// - returns all the history books for the current user
   // Future<Either<Failure, List<BookModel>>> getHistoryBooks();
@@ -92,6 +95,22 @@ class ClubApiFirebase implements ClubApi {
       await _currentUsersClubsReference.doc(club.id).set({
         'name': club.name,
       });
+      return right(Future<void>.value());
+    } on FirebaseException catch (e) {
+      return left(ClubFailure.fromCode(e.code));
+    } on Exception catch (_) {
+      return left(ClubFailure());
+    }
+  }
+
+  @override
+  FutureEitherVoid addBook(ClubModel club, ClubBookModel book) async {
+    try {
+      //if member already exists, arrayUnion will not add it again
+      await _clubsReference.doc(club.id).update({
+        'currentBook': book.toMap(),
+      });
+      //todo: add to everybodies indiviual reading
       return right(Future<void>.value());
     } on FirebaseException catch (e) {
       return left(ClubFailure.fromCode(e.code));

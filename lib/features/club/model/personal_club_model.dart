@@ -1,5 +1,6 @@
 import 'package:equatable/equatable.dart';
 
+// within each users club list, doesn't require as many details
 class PersonalClubModel extends Equatable {
   /// - dont include id in the json converters
   final String id;

@@ -3,6 +3,7 @@ import 'dart:async';
 
 import 'package:conveneapp/apis/firebase/club.dart';
 import 'package:conveneapp/core/errors/failures.dart';
+import 'package:conveneapp/features/club/model/club_book_model.dart';
 import 'package:conveneapp/features/club/model/club_model.dart';
 import 'package:conveneapp/features/club/model/personal_club_model.dart';
 import 'package:dartz/dartz.dart';
@@ -50,6 +51,11 @@ class CurrentClubList extends StateNotifier<AsyncValue<CurrentClubListState>> {
 
   Future<void> addMember({required ClubModel club, required String memberId}) async {
     final result = await _clubApi.addMember(club, memberId);
+    _emitConditionalState(result);
+  }
+
+  Future<void> addBook({required ClubModel club, required ClubBookModel book}) async {
+    final result = await _clubApi.addBook(club, book);
     _emitConditionalState(result);
   }
   // Future<void> updateBook({required BookModel book}) async {

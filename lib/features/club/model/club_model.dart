@@ -1,3 +1,4 @@
+import 'package:conveneapp/features/club/model/club_book_model.dart';
 import 'package:equatable/equatable.dart';
 
 class ClubModel extends Equatable {
@@ -5,22 +6,26 @@ class ClubModel extends Equatable {
   final String id;
   final String name;
   final List<String> members;
+  final ClubBookModel? currentBook;
 
   const ClubModel({
     this.id = '',
     required this.name,
     required this.members,
+    this.currentBook,
   });
 
   ClubModel copyWith({
     String? id,
     String? name,
     List<String>? members,
+    ClubBookModel? currentBook,
   }) {
     return ClubModel(
       id: id ?? this.id,
       name: name ?? this.name,
       members: members ?? this.members,
+      currentBook: currentBook ?? this.currentBook,
     );
   }
 
@@ -28,6 +33,7 @@ class ClubModel extends Equatable {
     return {
       'name': name,
       'members': members,
+      'currentBook': currentBook?.toMap(),
     };
   }
 
@@ -35,6 +41,7 @@ class ClubModel extends Equatable {
     return ClubModel(
       name: map['name'],
       members: List<String>.from(map['members']),
+      currentBook: map['currentBook'] != null ? ClubBookModel.fromMap(map['currentBook']) : null,
     );
   }
 
@@ -44,6 +51,7 @@ class ClubModel extends Equatable {
       id,
       name,
       members,
+      currentBook,
     ];
   }
 }
