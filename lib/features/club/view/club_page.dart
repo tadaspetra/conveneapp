@@ -11,7 +11,7 @@ import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ClubPage extends ConsumerWidget {
+class ClubPage extends ConsumerStatefulWidget {
   final ClubModel club;
   const ClubPage({Key? key, required this.club}) : super(key: key);
 
@@ -19,15 +19,28 @@ class ClubPage extends ConsumerWidget {
         builder: (context) => ClubPage(club: club),
       );
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  _ClubState createState() => _ClubState();
+}
+
+class _ClubState extends ConsumerState<ClubPage> {
+  ClubBookModel? _currentBook;
+
+  @override
+  void initState() {
+    _currentBook = widget.club.currentBook;
+    super.initState();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(club.name, style: const TextStyle(color: Palette.niceBlack)),
+        title: Text(widget.club.name, style: const TextStyle(color: Palette.niceBlack)),
         actions: [
           IconButton(
             onPressed: () {
-              Navigator.push(context, MembersPage.route(club));
+              Navigator.push(context, MembersPage.route(widget.club));
             },
             icon: const Icon(Icons.people),
           ),
@@ -35,25 +48,30 @@ class ClubPage extends ConsumerWidget {
       ),
       body: Column(
         children: [
-          if (club.currentBook != null)
-            ClubBookCard(book: club.currentBook!)
+          if (_currentBook != null)
+            ClubBookCard(book: _currentBook!)
           else
             TextButton(
                 onPressed: () async {
                   final bookToAdd = await Navigator.push(context, SearchPage.route());
                   if (bookToAdd is SearchBookModel) {
+                    ClubBookModel clubBookToAdd = ClubBookModel(
+                      title: bookToAdd.title,
+                      authors: bookToAdd.authors,
+                      pageCount: bookToAdd.pageCount,
+                      coverImage: bookToAdd.coverImage,
+                      dueDate: DateTime.now().add(
+                        //todo: make this time configurable
+                        const Duration(days: 14),
+                      ),
+                    );
                     await ref.read(currentClubsController.notifier).addBook(
-                          club: club,
-                          book: ClubBookModel(
-                            title: bookToAdd.title,
-                            authors: bookToAdd.authors,
-                            pageCount: bookToAdd.pageCount,
-                            dueDate: DateTime.now().add(
-                              //todo: make this time configurable
-                              const Duration(days: 14),
-                            ),
-                          ),
+                          club: widget.club,
+                          book: clubBookToAdd,
                         );
+                    setState(() {
+                      _currentBook = clubBookToAdd;
+                    });
                   }
                 },
                 child: const Text("Select a book")),
