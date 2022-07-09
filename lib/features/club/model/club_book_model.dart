@@ -7,7 +7,7 @@ class ClubBookModel extends Equatable {
   final List<String> authors;
   final int pageCount;
   final String? coverImage;
-  final DateTime? dueDate;
+  final int? dueDate;
 
   const ClubBookModel({
     this.id = '',
@@ -24,7 +24,7 @@ class ClubBookModel extends Equatable {
     List<String>? authors,
     int? pageCount,
     String? coverImage,
-    DateTime? dueDate,
+    int? dueDate,
   }) {
     return ClubBookModel(
       id: id ?? this.id,
@@ -42,18 +42,17 @@ class ClubBookModel extends Equatable {
       'authors': authors,
       'pageCount': pageCount,
       'coverImage': coverImage,
-      'dueDate': dueDate?.millisecondsSinceEpoch,
+      'dueDate': dueDate,
     };
   }
 
   factory ClubBookModel.fromMap(Map<String, dynamic> map) {
     return ClubBookModel(
-      title: map['title'],
-      authors: List<String>.from(map['authors']),
-      pageCount: map['pageCount'] ?? 0,
-      coverImage: map['coverImage'] as String?,
-      dueDate: map['dueDate'] != null ? DateTime.fromMillisecondsSinceEpoch(map['dueDate']) : null,
-    );
+        title: map['title'],
+        authors: List<String>.from(map['authors']),
+        pageCount: map['pageCount'] ?? 0,
+        coverImage: map['coverImage'] as String?,
+        dueDate: map['dueDate']);
   }
 
   @override

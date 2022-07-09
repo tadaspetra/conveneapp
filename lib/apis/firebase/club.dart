@@ -13,7 +13,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final clubApiProvider = Provider<ClubApi>((ref) => ClubApiFirebase(
-    firebaseFirestore: ref.watch(firebaseFirestoreProvider), firebaseAuth: ref.watch(firebaseAuthProvider)));
+    firebaseFirestore: ref.watch(firebaseFirestoreProvider),
+    firebaseAuth: ref.watch(firebaseAuthProvider)));
 
 /// - all the transactions must be pointed to the current user's reference
 abstract class ClubApi {
@@ -60,7 +61,8 @@ class ClubApiFirebase implements ClubApi {
   @override
   FutureEitherVoid addClub(ClubModel club) async {
     try {
-      DocumentReference<Map<String, dynamic>> doc = await _clubsReference.add(club.toMap());
+      DocumentReference<Map<String, dynamic>> doc =
+          await _clubsReference.add(club.toMap());
       await _currentUsersClubsReference.doc(doc.id).set({
         'name': club.name,
       });
@@ -75,7 +77,8 @@ class ClubApiFirebase implements ClubApi {
   @override
   FutureEither<ClubModel> getClub(String clubId) async {
     try {
-      DocumentSnapshot<Map<String, dynamic>> doc = await _clubsReference.doc(clubId).get();
+      DocumentSnapshot<Map<String, dynamic>> doc =
+          await _clubsReference.doc(clubId).get();
       return right(ClubModel.fromMap(doc.data()!).copyWith(id: doc.id));
     } on FirebaseException catch (e) {
       return left(ClubFailure.fromCode(e.code));
@@ -110,7 +113,7 @@ class ClubApiFirebase implements ClubApi {
       await _clubsReference.doc(club.id).update({
         'currentBook': book.toMap(),
       });
-      //todo: add to everybodies indiviual reading
+      //TODO: add to everybodies indiviual reading
       return right(Future<void>.value());
     } on FirebaseException catch (e) {
       return left(ClubFailure.fromCode(e.code));
@@ -159,7 +162,9 @@ class ClubApiFirebase implements ClubApi {
   @override
   StreamList<PersonalClubModel> getCurrentClubs() {
     return _currentUsersClubsReference.orderBy('name').snapshots().map((event) {
-      return event.docs.map((e) => PersonalClubModel.fromMap(e.data()).copyWith(id: e.id)).toList();
+      return event.docs
+          .map((e) => PersonalClubModel.fromMap(e.data()).copyWith(id: e.id))
+          .toList();
     });
   }
 
@@ -182,11 +187,14 @@ class ClubApiFirebase implements ClubApi {
   }
 
   CollectionReference<Map<String, dynamic>> get _currentUsersClubsReference {
-    return _currentUsersReference.collection(FirebaseConstants.currentClubsCollection);
+    return _currentUsersReference
+        .collection(FirebaseConstants.currentClubsCollection);
   }
 
   /// - return the current users document reference in firestore
   DocumentReference<Map<String, dynamic>> get _currentUsersReference {
-    return _firebaseFirestore.collection(FirebaseConstants.usersCollection).doc(_firebaseAuth.currentUsersId);
+    return _firebaseFirestore
+        .collection(FirebaseConstants.usersCollection)
+        .doc(_firebaseAuth.currentUsersId);
   }
 }

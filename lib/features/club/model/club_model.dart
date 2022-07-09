@@ -41,7 +41,9 @@ class ClubModel extends Equatable {
     return ClubModel(
       name: map['name'],
       members: List<String>.from(map['members']),
-      currentBook: map['currentBook'] != null ? ClubBookModel.fromMap(map['currentBook']) : null,
+      currentBook: map['currentBook'] != null
+          ? ClubBookModel.fromMap(map['currentBook'])
+          : null,
     );
   }
 

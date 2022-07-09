@@ -1,5 +1,6 @@
 // A stateless widget displaying the club name in the app bar
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conveneapp/features/club/controller/club_controller.dart';
 import 'package:conveneapp/features/club/model/club_book_model.dart';
 import 'package:conveneapp/features/club/model/club_model.dart';
@@ -10,6 +11,8 @@ import 'package:conveneapp/features/search/view/search.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+const twoWeeksInSeconds = 14 * 24 * 60 * 60;
 
 class ClubPage extends ConsumerStatefulWidget {
   final ClubModel club;
@@ -36,7 +39,8 @@ class _ClubState extends ConsumerState<ClubPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(widget.club.name, style: const TextStyle(color: Palette.niceBlack)),
+        title: Text(widget.club.name,
+            style: const TextStyle(color: Palette.niceBlack)),
         actions: [
           IconButton(
             onPressed: () {
@@ -53,17 +57,16 @@ class _ClubState extends ConsumerState<ClubPage> {
           else
             TextButton(
                 onPressed: () async {
-                  final bookToAdd = await Navigator.push(context, SearchPage.route());
+                  final bookToAdd =
+                      await Navigator.push(context, SearchPage.route());
                   if (bookToAdd is SearchBookModel) {
                     ClubBookModel clubBookToAdd = ClubBookModel(
                       title: bookToAdd.title,
                       authors: bookToAdd.authors,
                       pageCount: bookToAdd.pageCount,
                       coverImage: bookToAdd.coverImage,
-                      dueDate: DateTime.now().add(
-                        //todo: make this time configurable
-                        const Duration(days: 14),
-                      ),
+                      dueDate: Timestamp.now().seconds +
+                          twoWeeksInSeconds, //TODO: make this so that it is configurable
                     );
                     await ref.read(currentClubsController.notifier).addBook(
                           club: widget.club,
