@@ -18,7 +18,8 @@ class CreateClubPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Create a Club", style: TextStyle(color: Palette.niceBlack)),
+        title: const Text("Create a Club",
+            style: TextStyle(color: Palette.niceBlack)),
       ),
       body: CreateClubView(),
     );
@@ -48,7 +49,8 @@ class CreateClubView extends ConsumerWidget {
               ),
             ),
             const Spacer(),
-            const Text("Your club will need a club name", style: TextStyle(fontSize: 20)),
+            const Text("Your club will need a club name",
+                style: TextStyle(fontSize: 20)),
             const SizedBox(height: 20),
             TextField(
               controller: nameController,
@@ -63,11 +65,13 @@ class CreateClubView extends ConsumerWidget {
             BigButton(
               child: const Text("Create"),
               onPressed: () async {
-                final userId = ref.watch(currentUserController).asData?.value.uid;
+                final userId =
+                    ref.watch(currentUserController).asData?.value.uid;
 
                 if (userId != null) {
                   await ref.read(currentClubsController.notifier).addClub(
-                        club: ClubModel(name: nameController.text, members: [userId]),
+                        club: ClubModel(
+                            name: nameController.text, members: [userId]),
                       );
                 }
                 Navigator.pop(context);

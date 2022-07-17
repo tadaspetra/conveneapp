@@ -12,13 +12,15 @@ class ClubBookCard extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 8),
       padding: const EdgeInsets.all(10.0),
-      decoration:
-          BoxDecoration(color: Theme.of(context).cardColor, borderRadius: const BorderRadius.all(Radius.circular(20))),
+      decoration: BoxDecoration(
+          color: Theme.of(context).cardColor,
+          borderRadius: const BorderRadius.all(Radius.circular(20))),
       child: Row(
         children: [
           Expanded(
             child: Padding(
-              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0, right: 10.0, left: 5),
+              padding: const EdgeInsets.only(
+                  top: 8.0, bottom: 8.0, right: 10.0, left: 5),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -36,6 +38,11 @@ class ClubBookCard extends StatelessWidget {
                   const SizedBox(
                     height: 10,
                   ),
+                  Flexible(
+                      child: CustomText(
+                          text: DateTime.fromMillisecondsSinceEpoch(
+                                  book.dueDate! * 1000)
+                              .toString())),
                   const SizedBox(
                     height: 5,
                   ),

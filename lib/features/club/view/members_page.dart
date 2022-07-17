@@ -26,7 +26,8 @@ class MembersPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: const Text("Members", style: TextStyle(color: Palette.niceBlack)),
+        title:
+            const Text("Members", style: TextStyle(color: Palette.niceBlack)),
         actions: [
           IconButton(
             onPressed: () {
