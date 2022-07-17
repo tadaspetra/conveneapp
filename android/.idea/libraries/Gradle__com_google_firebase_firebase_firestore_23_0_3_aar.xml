@@ -1,0 +1,15 @@
+<component name="libraryTable">
+  <library name="Gradle: com.google.firebase:firebase-firestore:23.0.3@aar">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4186c293950d73169b2437483bf0308/jetified-firebase-firestore-23.0.3/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4186c293950d73169b2437483bf0308/jetified-firebase-firestore-23.0.3/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e4186c293950d73169b2437483bf0308/jetified-firebase-firestore-23.0.3/AndroidManifest.xml" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-firestore/23.0.3/e0a35744124e1ac4a50f470d32e8cc5b19b78209/firebase-firestore-23.0.3-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.google.firebase/firebase-firestore/23.0.3/f00e9b79aebc756f913f5eacb38e81a58dca62e9/firebase-firestore-23.0.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

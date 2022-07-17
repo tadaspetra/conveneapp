@@ -1,6 +1,6 @@
 #!/bin/sh
 # This is a generated file; do not edit or check into version control.
-export "FLUTTER_ROOT=/Users/tadaspetraitis/resources/Support/flutter"
+export "FLUTTER_ROOT=/Users/tadaspetraitis/resources/support/flutter"
 export "FLUTTER_APPLICATION_PATH=/Users/tadaspetraitis/tadaspetra/github/conveneapp"
 export "COCOAPODS_PARALLEL_CODE_SIGN=true"
 export "FLUTTER_BUILD_DIR=build"
