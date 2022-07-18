@@ -39,6 +39,8 @@ abstract class ClubApi {
 
   FutureEitherVoid addBook(ClubModel club, ClubBookModel book);
 
+  FutureEitherVoid removeFromClub(ClubModel club, String memberId);
+
   // /// - returns all the history books for the current user
   // Future<Either<Failure, List<BookModel>>> getHistoryBooks();
 }
@@ -98,6 +100,23 @@ class ClubApiFirebase implements ClubApi {
       await _currentUsersClubsReference.doc(club.id).set({
         'name': club.name,
       });
+      return right(Future<void>.value());
+    } on FirebaseException catch (e) {
+      return left(ClubFailure.fromCode(e.code));
+    } on Exception catch (_) {
+      return left(ClubFailure());
+    }
+  }
+
+  @override
+  FutureEitherVoid removeFromClub(ClubModel club, String memberId) async {
+    try {
+      //if member already exists, arrayUnion will not add it again
+      await _clubsReference.doc(club.id).update({
+        'members': FieldValue.arrayRemove([memberId]),
+      });
+      //if already in club, will just overwrite and not a problem
+      await _currentUsersClubsReference.doc(club.id).delete();
       return right(Future<void>.value());
     } on FirebaseException catch (e) {
       return left(ClubFailure.fromCode(e.code));

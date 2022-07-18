@@ -56,6 +56,12 @@ class CurrentClubList extends StateNotifier<AsyncValue<CurrentClubListState>> {
     _emitConditionalState(result);
   }
 
+  Future<void> removeFromClub(
+      {required ClubModel club, required String memberId}) async {
+    final result = await _clubApi.removeFromClub(club, memberId);
+    _emitConditionalState(result);
+  }
+
   Future<void> addBook(
       {required ClubModel club, required ClubBookModel book}) async {
     final result = await _clubApi.addBook(club, book);

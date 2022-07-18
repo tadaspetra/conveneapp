@@ -1,6 +1,9 @@
 // A stateless widget displaying the club name in the app bar
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:conveneapp/apis/firebase/user.dart';
+import 'package:conveneapp/features/authentication/controller/auth_controller.dart';
+import 'package:conveneapp/features/authentication/model/user_info.dart';
 import 'package:conveneapp/features/club/controller/club_controller.dart';
 import 'package:conveneapp/features/club/model/club_book_model.dart';
 import 'package:conveneapp/features/club/model/club_model.dart';
@@ -108,8 +111,14 @@ class _ClubState extends ConsumerState<ClubPage> {
             style: const TextStyle(color: Palette.niceBlack)),
         actions: [
           IconButton(
-            onPressed: () {
-              Navigator.push(context, MembersPage.route(widget.club));
+            onPressed: () async {
+              List<UserInfo> members = [];
+              for (var member in widget.club.members) {
+                UserInfo user =
+                    await ref.watch(userApiProvider).getFutureUser(uid: member);
+                members.add(user);
+              }
+              Navigator.push(context, MembersPage.route(widget.club, members));
             },
             icon: const Icon(Icons.people),
           ),
@@ -181,6 +190,20 @@ class _ClubState extends ConsumerState<ClubPage> {
                 ),
               ],
             ),
+          Center(
+            child: TextButton(
+              onPressed: () async {
+                final userId =
+                    ref.watch(currentUserController).asData?.value.uid;
+                await ref.read(currentClubsController.notifier).removeFromClub(
+                      club: widget.club,
+                      memberId: userId!,
+                    );
+                Navigator.pop(context);
+              },
+              child: const Text("Leave Club"),
+            ),
+          )
         ],
       ),
     );
