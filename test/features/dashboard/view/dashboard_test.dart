@@ -1,6 +1,5 @@
 import 'package:conveneapp/apis/firebase/auth.dart';
 import 'package:conveneapp/apis/firebase/book.dart';
-import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/features/dashboard/view/dashboard.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
 import 'package:flutter/material.dart';
@@ -34,10 +33,10 @@ void main() {
     registerFallbackValue(FakeSearchBookModel());
   });
 
-  const dashBoardOpenDrawerKey = Key('dashBoard-openDrawer');
+  // const dashBoardOpenDrawerKey = Key('dashBoard-openDrawer');
+  // const dashBoardAddPersonalBookKey = Key('dashBoard-addPersonalBook');
+  // const dashBoardOpenMenuKey = Key('dashBoard-openMenu');
   const dashBoardLoadingKey = Key('dashBoard-loading');
-  const dashBoardAddPersonalBookKey = Key('dashBoard-addPersonalBook');
-  const dashBoardOpenMenuKey = Key('dashBoard-openMenu');
   const email = 'email@gmail.com';
   const uid = 'uid';
   const displayName = 'displayName';
@@ -49,9 +48,10 @@ void main() {
     when(() => mockUser.displayName).thenAnswer((_) => displayName);
   }
 
-  void mockCurrentBooks([List<BookModel> books = const []]) {
-    when(() => mockBookApi.getCurrentBooks()).thenAnswer((_) => Stream.value(books));
-  }
+  // TODO: fix
+  // void mockCurrentBooks([List<BookModel> books = const []]) {
+  //   when(() => mockBookApi.getCurrentBooks()).thenAnswer((_) => Stream.value(books));
+  // }
 
   Widget renderDashBoard([List<Override> overrides = const []]) {
     final _overrides = overrides.isNotEmpty
