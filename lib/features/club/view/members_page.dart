@@ -10,12 +10,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class MembersPage extends ConsumerWidget {
   final ClubModel club;
   final List<UserInfo> members;
-  const MembersPage({Key? key, required this.club, required this.members})
-      : super(key: key);
+  const MembersPage({Key? key, required this.club, required this.members}) : super(key: key);
 
-  static MaterialPageRoute<dynamic> route(
-          ClubModel club, List<UserInfo> members) =>
-      MaterialPageRoute(
+  static MaterialPageRoute<dynamic> route(ClubModel club, List<UserInfo> members) => MaterialPageRoute(
         builder: (context) => MembersPage(
           club: club,
           members: members,
@@ -34,8 +31,7 @@ class MembersPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title:
-            const Text("Members", style: TextStyle(color: Palette.niceBlack)),
+        title: const Text("Members", style: TextStyle(color: Palette.niceBlack)),
         actions: [
           IconButton(
             onPressed: () {

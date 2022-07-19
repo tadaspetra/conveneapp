@@ -45,10 +45,7 @@ class _ClubState extends ConsumerState<ClubPage> {
 
   Future<void> _selectDate() async {
     final DateTime? picked = await showDatePicker(
-        context: context,
-        initialDate: DateTime.now(),
-        firstDate: DateTime.now(),
-        lastDate: DateTime(2222));
+        context: context, initialDate: DateTime.now(), firstDate: DateTime.now(), lastDate: DateTime(2222));
 
     if (picked != null && picked != _selectedDate) {
       setState(() {
@@ -107,15 +104,13 @@ class _ClubState extends ConsumerState<ClubPage> {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title: Text(widget.club.name,
-            style: const TextStyle(color: Palette.niceBlack)),
+        title: Text(widget.club.name, style: const TextStyle(color: Palette.niceBlack)),
         actions: [
           IconButton(
             onPressed: () async {
               List<UserInfo> members = [];
               for (var member in widget.club.members) {
-                UserInfo user =
-                    await ref.watch(userApiProvider).getFutureUser(uid: member);
+                UserInfo user = await ref.watch(userApiProvider).getFutureUser(uid: member);
                 members.add(user);
               }
               Navigator.push(context, MembersPage.route(widget.club, members));
@@ -161,20 +156,16 @@ class _ClubState extends ConsumerState<ClubPage> {
                     Expanded(
                       child: TextButton(
                         onPressed: () async {
-                          final bookToAdd =
-                              await Navigator.push(context, SearchPage.route());
+                          final bookToAdd = await Navigator.push(context, SearchPage.route());
                           if (bookToAdd is SearchBookModel) {
                             ClubBookModel clubBookToAdd = ClubBookModel(
                               title: bookToAdd.title,
                               authors: bookToAdd.authors,
                               pageCount: bookToAdd.pageCount,
                               coverImage: bookToAdd.coverImage,
-                              dueDate:
-                                  Timestamp.fromDate(_selectedDate).seconds,
+                              dueDate: Timestamp.fromDate(_selectedDate).seconds,
                             );
-                            await ref
-                                .read(currentClubsController.notifier)
-                                .addBook(
+                            await ref.read(currentClubsController.notifier).addBook(
                                   club: widget.club,
                                   book: clubBookToAdd,
                                 );
@@ -193,15 +184,17 @@ class _ClubState extends ConsumerState<ClubPage> {
           Center(
             child: TextButton(
               onPressed: () async {
-                final userId =
-                    ref.watch(currentUserController).asData?.value.uid;
+                final userId = ref.watch(currentUserController).asData?.value.uid;
                 await ref.read(currentClubsController.notifier).removeFromClub(
                       club: widget.club,
                       memberId: userId!,
                     );
                 Navigator.pop(context);
               },
-              child: const Text("Leave Club"),
+              child: const Text(
+                "Leave Club",
+                style: TextStyle(color: Colors.redAccent),
+              ),
             ),
           )
         ],
