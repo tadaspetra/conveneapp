@@ -1,5 +1,6 @@
 // A stateless widget displaying the club name in the app bar
 
+import 'package:conveneapp/features/authentication/model/user_info.dart';
 import 'package:conveneapp/features/club/model/club_model.dart';
 import 'package:conveneapp/theme/palette.dart';
 import 'package:flutter/material.dart';
@@ -8,10 +9,14 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class MembersPage extends ConsumerWidget {
   final ClubModel club;
-  const MembersPage({Key? key, required this.club}) : super(key: key);
+  final List<UserInfo> members;
+  const MembersPage({Key? key, required this.club, required this.members}) : super(key: key);
 
-  static MaterialPageRoute<dynamic> route(ClubModel club) => MaterialPageRoute(
-        builder: (context) => MembersPage(club: club),
+  static MaterialPageRoute<dynamic> route(ClubModel club, List<UserInfo> members) => MaterialPageRoute(
+        builder: (context) => MembersPage(
+          club: club,
+          members: members,
+        ),
       );
 
   void _copyClubId(BuildContext context) {
@@ -26,8 +31,7 @@ class MembersPage extends ConsumerWidget {
     return Scaffold(
       appBar: AppBar(
         centerTitle: true,
-        title:
-            const Text("Members", style: TextStyle(color: Palette.niceBlack)),
+        title: const Text("Members", style: TextStyle(color: Palette.niceBlack)),
         actions: [
           IconButton(
             onPressed: () {
@@ -39,9 +43,21 @@ class MembersPage extends ConsumerWidget {
       ),
       body: Center(
         child: ListView.builder(
-          itemCount: club.members.length,
+          itemCount: members.length,
           itemBuilder: (context, index) {
-            return Text(club.members[index]);
+            return Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    members[index].name ?? '',
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text(members[index].email),
+                ],
+              ),
+            );
           },
         ),
       ),

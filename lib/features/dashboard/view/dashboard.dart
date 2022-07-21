@@ -91,7 +91,7 @@ class Dashboard extends ConsumerWidget {
       body: const _DashBoardBody(),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: BigButton(
-          key: const Key('dashBoard-addPersonalBook'),
+          key: const Key('dashBoard-openMenu'),
           child: const Text("New Reading Journey"),
           onPressed: () {
             bottomSheetActions(context, ref);
@@ -143,6 +143,7 @@ class Dashboard extends ConsumerWidget {
               ),
               InfoButton(
                 action: 'Add Personal Book',
+                key: const Key('dashBoard-addPersonalBook'),
                 info: 'Add a personal book to your dashboard, so you can track your reading',
                 onPressed: () async {
                   Navigator.pop(context);

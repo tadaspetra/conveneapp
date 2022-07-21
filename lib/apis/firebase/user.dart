@@ -12,10 +12,20 @@ class UserApi {
     return docSnapshot.map<UserInfo>(
       (user) => UserInfo(
         uid: user.id,
-        email: user["email"],
-        name: user["name"],
-        showTutorial: user['showTutorial'],
+        email: user["email"] ?? "no email",
+        name: user["name"] ?? "no name",
+        showTutorial: user['showTutorial'] ?? true,
       ),
+    );
+  }
+
+  Future<UserInfo> getFutureUser({required String uid}) async {
+    DocumentSnapshot docSnapshot = await users.doc(uid).get();
+    return UserInfo(
+      uid: docSnapshot.id,
+      email: (docSnapshot.data() as dynamic)["email"] ?? "no email",
+      name: (docSnapshot.data() as dynamic)["name"] ?? "no name",
+      showTutorial: docSnapshot['showTutorial'] == 'true' ? true : false,
     );
   }
 
