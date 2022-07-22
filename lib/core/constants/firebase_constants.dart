@@ -11,5 +11,9 @@ class FirebaseConstants {
   ];
   static const usersCollection = 'users';
   static const currentBooksCollection = 'currentBooks';
+  static const currentClubsCollection = 'currentClubs';
   static const finishedBooksCollection = 'finishedBooks';
+
+  static const clubsCollection = 'clubs';
+  static const clubMembersCollection = 'members';
 }

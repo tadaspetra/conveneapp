@@ -40,3 +40,15 @@ class BookFailure extends Failure {
     return BookFailure();
   }
 }
+
+/// **BookFailure**
+///
+/// {@macro failure}
+///
+/// Used by the books api
+class ClubFailure extends Failure {
+  ClubFailure([String message = 'Un-known error occured please try again']) : super(message: message);
+  factory ClubFailure.fromCode(String code) {
+    return ClubFailure();
+  }
+}

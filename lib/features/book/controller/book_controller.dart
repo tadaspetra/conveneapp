@@ -1,14 +1,14 @@
 // list of books being currently read by the user
 import 'dart:async';
 
-import 'package:dartz/dartz.dart';
+import 'package:conveneapp/apis/firebase/book.dart';
 import 'package:conveneapp/core/errors/failures.dart';
+import 'package:conveneapp/features/book/model/book_model.dart';
+import 'package:conveneapp/features/search/model/search_book_model.dart';
+import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import 'package:conveneapp/apis/firebase/book.dart';
-import 'package:conveneapp/features/book/model/book_model.dart';
-import 'package:conveneapp/features/search/model/search_book_model.dart';
 part 'book_state.dart';
 
 final currentBooksController =

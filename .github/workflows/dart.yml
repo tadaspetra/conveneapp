@@ -50,4 +50,4 @@ jobs:
           min_coverage: 0 #This will increase up to 70%
 
       - name: Build iOS App
-        run: flutter build ios --no-codesign
+        run: flutter build ios --no-codesign # --flavor staging

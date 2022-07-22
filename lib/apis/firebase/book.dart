@@ -1,14 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:conveneapp/apis/firebase/firebase_api_providers.dart';
 import 'package:conveneapp/core/constants/constants.dart';
-import 'package:dartz/dartz.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
 import 'package:conveneapp/core/errors/errors.dart';
+import 'package:conveneapp/core/extensions/extensions.dart';
 import 'package:conveneapp/core/type_defs/type_defs.dart';
 import 'package:conveneapp/features/book/model/book_model.dart';
 import 'package:conveneapp/features/search/model/search_book_model.dart';
-import 'package:conveneapp/core/extensions/extensions.dart';
+import 'package:dartz/dartz.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
